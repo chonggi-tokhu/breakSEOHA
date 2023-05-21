@@ -341,6 +341,20 @@
 <script src="./src/MartyEngine.js"></script>
 	    <script src="https://urobot2011.github.io/SaveMartin/MartyBot/chess/chess.js"></script>
     <script>
+	    	    window.onload = function(){
+    var {INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE, 
+        MARKER_TYPE, Markers, 
+        ARROW_TYPE, Arrows, 
+        PromotionDialog,
+        Accessibility
+    } = window['CHESSBOARD'];
+    game = new Chess();
+    Marty = new MartyEngine();
+
+    $martycolor.change(function(){
+        martycolor = $(this).val();
+        mycolor = martycolor == 'b' ? 'white' : 'black';
+    });
       
       var checkforgameover1;
       checkforgameover1 = false;
@@ -579,20 +593,7 @@ var MakeMove;
         chessprogressbar();
     }
 };
-	    window.onload = function(){
-    var {INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE, 
-        MARKER_TYPE, Markers, 
-        ARROW_TYPE, Arrows, 
-        PromotionDialog,
-        Accessibility
-    } = window['CHESSBOARD'];
-    game = new Chess();
-    Marty = new MartyEngine();
 
-    $martycolor.change(function(){
-        martycolor = $(this).val();
-        mycolor = martycolor == 'b' ? 'white' : 'black';
-    });
       document.getElementById("chesspiecesxxx").value = "wikipedia";
 
 
