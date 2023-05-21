@@ -340,6 +340,33 @@
 <script src="./src/MartyEngine.js"></script>
 	    <script src="https://urobot2011.github.io/SaveMartin/MartyBot/chess/chess.js"></script>
     <script>
+      board = new Chessboard(document.getElementById("myBoard"), {
+        position: game.fen(),
+        assetsUrl: "./lib/cm-chessboard/assets/",
+        style: {
+            cssClass: "green",
+            borderType: BORDER_TYPE.frame,
+            pieces: {
+                file: "staunty.svg"
+            }
+        },
+        orientation: COLOR.white,
+        extensions: [{
+            class: Markers,
+            props: {
+                autoMarkers: MARKER_TYPE.square
+            }
+        }, {
+            class: Arrows
+        }, {
+            class: PromotionDialog
+        }, {
+            class: Accessibility,
+            props: {
+                visuallyHidden: true
+            }
+        }]
+    });
       var checkforgameover1;
       checkforgameover1 = false;
       
