@@ -9,10 +9,14 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://urobot2011.github.io/SaveMartin/MartyBot/chessboardjs/css/chessboard-1.0.0.min.css">
-    <link rel="stylesheet" href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/chessboard.css">
-    <link rel="stylesheet" href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/extensions/markers/markers.css">
-    <link rel="stylesheet" href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/extensions/arrows/arrows.css">
-    <link rel="stylesheet" href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/extensions/promotion-dialog/promotion-dialog.css">
+    <link rel="stylesheet"
+        href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/chessboard.css">
+    <link rel="stylesheet"
+        href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/extensions/markers/markers.css">
+    <link rel="stylesheet"
+        href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/extensions/arrows/arrows.css">
+    <link rel="stylesheet"
+        href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/extensions/promotion-dialog/promotion-dialog.css">
     <style>
         .chessprogressbar {
             left: 18px;
@@ -69,51 +73,497 @@
     </p>
     <colourchange></colourchange>
     <div class="text-center" style="width: 400px">
-  <div class="row align-items-start">
-    <div class="col">
-      MartyBot L5
+        <div class="row align-items-start">
+            <div class="col">
+                MartyBot L5
+            </div>
+            <div class="col">
+                <!--One of three columns-->
+            </div>
+            <div class="col">
+                <!--One of three columns-->
+            </div>
+            <div class="container" style="position: relative;">
+                <div class="chessprogressbar">
+                    <ul>
+                        <li style="left: 0px;">
+                            <span class="progressbar" style="left: 0px;" progress="50" id="chessprogressbar"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="myBoard" style="width: 100%;position: relative;left: 30px;">
+                    <div style="width: 400px; height: 400px;"><svg width="100%" height="100%"
+                            class="cm-chessboard border-type-frame green" role="img" alt="W: Ke1 Qd1 Ra1 Rh1 Bc1 Bf1 Nb1 Ng1 a2 b2 c2 d2 e2 f2 g2 h2
+B: Ke8 Qd8 Ra8 Rh8 Bc8 Bf8 Nb8 Ng8 a7 b7 c7 d7 e7 f7 g7 h7">
+                            <g class="board input-enabled">
+                                <rect width="400" height="400" class="border"></rect>
+                                <rect x="16" y="16" width="368" height="368" class="border-inner"></rect>
+                                <rect x="16" y="338" width="46" height="46" class="square black" data-square="a1">
+                                </rect>
+                                <rect x="62" y="338" width="46" height="46" class="square white" data-square="b1">
+                                </rect>
+                                <rect x="108" y="338" width="46" height="46" class="square black" data-square="c1">
+                                </rect>
+                                <rect x="154" y="338" width="46" height="46" class="square white" data-square="d1">
+                                </rect>
+                                <rect x="200" y="338" width="46" height="46" class="square black" data-square="e1">
+                                </rect>
+                                <rect x="246" y="338" width="46" height="46" class="square white" data-square="f1">
+                                </rect>
+                                <rect x="292" y="338" width="46" height="46" class="square black" data-square="g1">
+                                </rect>
+                                <rect x="338" y="338" width="46" height="46" class="square white" data-square="h1">
+                                </rect>
+                                <rect x="16" y="292" width="46" height="46" class="square white" data-square="a2">
+                                </rect>
+                                <rect x="62" y="292" width="46" height="46" class="square black" data-square="b2">
+                                </rect>
+                                <rect x="108" y="292" width="46" height="46" class="square white" data-square="c2">
+                                </rect>
+                                <rect x="154" y="292" width="46" height="46" class="square black" data-square="d2">
+                                </rect>
+                                <rect x="200" y="292" width="46" height="46" class="square white" data-square="e2">
+                                </rect>
+                                <rect x="246" y="292" width="46" height="46" class="square black" data-square="f2">
+                                </rect>
+                                <rect x="292" y="292" width="46" height="46" class="square white" data-square="g2">
+                                </rect>
+                                <rect x="338" y="292" width="46" height="46" class="square black" data-square="h2">
+                                </rect>
+                                <rect x="16" y="246" width="46" height="46" class="square black" data-square="a3">
+                                </rect>
+                                <rect x="62" y="246" width="46" height="46" class="square white" data-square="b3">
+                                </rect>
+                                <rect x="108" y="246" width="46" height="46" class="square black" data-square="c3">
+                                </rect>
+                                <rect x="154" y="246" width="46" height="46" class="square white" data-square="d3">
+                                </rect>
+                                <rect x="200" y="246" width="46" height="46" class="square black" data-square="e3">
+                                </rect>
+                                <rect x="246" y="246" width="46" height="46" class="square white" data-square="f3">
+                                </rect>
+                                <rect x="292" y="246" width="46" height="46" class="square black" data-square="g3">
+                                </rect>
+                                <rect x="338" y="246" width="46" height="46" class="square white" data-square="h3">
+                                </rect>
+                                <rect x="16" y="200" width="46" height="46" class="square white" data-square="a4">
+                                </rect>
+                                <rect x="62" y="200" width="46" height="46" class="square black" data-square="b4">
+                                </rect>
+                                <rect x="108" y="200" width="46" height="46" class="square white" data-square="c4">
+                                </rect>
+                                <rect x="154" y="200" width="46" height="46" class="square black" data-square="d4">
+                                </rect>
+                                <rect x="200" y="200" width="46" height="46" class="square white" data-square="e4">
+                                </rect>
+                                <rect x="246" y="200" width="46" height="46" class="square black" data-square="f4">
+                                </rect>
+                                <rect x="292" y="200" width="46" height="46" class="square white" data-square="g4">
+                                </rect>
+                                <rect x="338" y="200" width="46" height="46" class="square black" data-square="h4">
+                                </rect>
+                                <rect x="16" y="154" width="46" height="46" class="square black" data-square="a5">
+                                </rect>
+                                <rect x="62" y="154" width="46" height="46" class="square white" data-square="b5">
+                                </rect>
+                                <rect x="108" y="154" width="46" height="46" class="square black" data-square="c5">
+                                </rect>
+                                <rect x="154" y="154" width="46" height="46" class="square white" data-square="d5">
+                                </rect>
+                                <rect x="200" y="154" width="46" height="46" class="square black" data-square="e5">
+                                </rect>
+                                <rect x="246" y="154" width="46" height="46" class="square white" data-square="f5">
+                                </rect>
+                                <rect x="292" y="154" width="46" height="46" class="square black" data-square="g5">
+                                </rect>
+                                <rect x="338" y="154" width="46" height="46" class="square white" data-square="h5">
+                                </rect>
+                                <rect x="16" y="108" width="46" height="46" class="square white" data-square="a6">
+                                </rect>
+                                <rect x="62" y="108" width="46" height="46" class="square black" data-square="b6">
+                                </rect>
+                                <rect x="108" y="108" width="46" height="46" class="square white" data-square="c6">
+                                </rect>
+                                <rect x="154" y="108" width="46" height="46" class="square black" data-square="d6">
+                                </rect>
+                                <rect x="200" y="108" width="46" height="46" class="square white" data-square="e6">
+                                </rect>
+                                <rect x="246" y="108" width="46" height="46" class="square black" data-square="f6">
+                                </rect>
+                                <rect x="292" y="108" width="46" height="46" class="square white" data-square="g6">
+                                </rect>
+                                <rect x="338" y="108" width="46" height="46" class="square black" data-square="h6">
+                                </rect>
+                                <rect x="16" y="62" width="46" height="46" class="square black" data-square="a7"></rect>
+                                <rect x="62" y="62" width="46" height="46" class="square white" data-square="b7"></rect>
+                                <rect x="108" y="62" width="46" height="46" class="square black" data-square="c7">
+                                </rect>
+                                <rect x="154" y="62" width="46" height="46" class="square white" data-square="d7">
+                                </rect>
+                                <rect x="200" y="62" width="46" height="46" class="square black" data-square="e7">
+                                </rect>
+                                <rect x="246" y="62" width="46" height="46" class="square white" data-square="f7">
+                                </rect>
+                                <rect x="292" y="62" width="46" height="46" class="square black" data-square="g7">
+                                </rect>
+                                <rect x="338" y="62" width="46" height="46" class="square white" data-square="h7">
+                                </rect>
+                                <rect x="16" y="16" width="46" height="46" class="square white" data-square="a8"></rect>
+                                <rect x="62" y="16" width="46" height="46" class="square black" data-square="b8"></rect>
+                                <rect x="108" y="16" width="46" height="46" class="square white" data-square="c8">
+                                </rect>
+                                <rect x="154" y="16" width="46" height="46" class="square black" data-square="d8">
+                                </rect>
+                                <rect x="200" y="16" width="46" height="46" class="square white" data-square="e8">
+                                </rect>
+                                <rect x="246" y="16" width="46" height="46" class="square black" data-square="f8">
+                                </rect>
+                                <rect x="292" y="16" width="46" height="46" class="square white" data-square="g8">
+                                </rect>
+                                <rect x="338" y="16" width="46" height="46" class="square black" data-square="h8">
+                                </rect>
+                            </g>
+                            <g class="coordinates" aria-hidden="true"><text class="coordinate file" x="35.55"
+                                    y="395.975" style="font-size: 11.5px">a</text><text class="coordinate file"
+                                    x="81.55" y="395.975" style="font-size: 11.5px">b</text><text
+                                    class="coordinate file" x="127.55" y="395.975"
+                                    style="font-size: 11.5px">c</text><text class="coordinate file"
+                                    x="173.54999999999998" y="395.975" style="font-size: 11.5px">d</text><text
+                                    class="coordinate file" x="219.54999999999998" y="395.975"
+                                    style="font-size: 11.5px">e</text><text class="coordinate file"
+                                    x="265.54999999999995" y="395.975" style="font-size: 11.5px">f</text><text
+                                    class="coordinate file" x="311.54999999999995" y="395.975"
+                                    style="font-size: 11.5px">g</text><text class="coordinate file"
+                                    x="357.54999999999995" y="395.975" style="font-size: 11.5px">h</text><text
+                                    class="coordinate rank" x="4.324324324324324" y="44.75"
+                                    style="font-size: 11.5px">8</text><text class="coordinate rank"
+                                    x="4.324324324324324" y="90.75" style="font-size: 11.5px">7</text><text
+                                    class="coordinate rank" x="4.324324324324324" y="136.75"
+                                    style="font-size: 11.5px">6</text><text class="coordinate rank"
+                                    x="4.324324324324324" y="182.75" style="font-size: 11.5px">5</text><text
+                                    class="coordinate rank" x="4.324324324324324" y="228.75"
+                                    style="font-size: 11.5px">4</text><text class="coordinate rank"
+                                    x="4.324324324324324" y="274.75" style="font-size: 11.5px">3</text><text
+                                    class="coordinate rank" x="4.324324324324324" y="320.75"
+                                    style="font-size: 11.5px">2</text><text class="coordinate rank"
+                                    x="4.324324324324324" y="366.75" style="font-size: 11.5px">1</text></g>
+                            <g class="markers-layer">
+                                <g class="markers"></g>
+                            </g>
+                            <g class="pieces-layer">
+                                <g class="pieces">
+                                    <g data-piece="wr" data-square="a1" transform="translate(16 338)">
+                                        <use href="#wr" class="piece" xlink:href="#wr"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wn" data-square="b1" transform="translate(62 338)">
+                                        <use href="#wn" class="piece" xlink:href="#wn"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wb" data-square="c1" transform="translate(108 338)">
+                                        <use href="#wb" class="piece" xlink:href="#wb"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wq" data-square="d1" transform="translate(154 338)">
+                                        <use href="#wq" class="piece" xlink:href="#wq"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wk" data-square="e1" transform="translate(200 338)">
+                                        <use href="#wk" class="piece" xlink:href="#wk"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wb" data-square="f1" transform="translate(246 338)">
+                                        <use href="#wb" class="piece" xlink:href="#wb"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wn" data-square="g1" transform="translate(292 338)">
+                                        <use href="#wn" class="piece" xlink:href="#wn"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wr" data-square="h1" transform="translate(338 338)">
+                                        <use href="#wr" class="piece" xlink:href="#wr"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="a2" transform="translate(16 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="b2" transform="translate(62 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="c2" transform="translate(108 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="d2" transform="translate(154 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="e2" transform="translate(200 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="f2" transform="translate(246 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="g2" transform="translate(292 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="h2" transform="translate(338 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="a7" transform="translate(16 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="b7" transform="translate(62 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="c7" transform="translate(108 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="d7" transform="translate(154 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="e7" transform="translate(200 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="f7" transform="translate(246 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="g7" transform="translate(292 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="h7" transform="translate(338 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="br" data-square="a8" transform="translate(16 16)">
+                                        <use href="#br" class="piece" xlink:href="#br"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bn" data-square="b8" transform="translate(62 16)">
+                                        <use href="#bn" class="piece" xlink:href="#bn"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bb" data-square="c8" transform="translate(108 16)">
+                                        <use href="#bb" class="piece" xlink:href="#bb"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bq" data-square="d8" transform="translate(154 16)">
+                                        <use href="#bq" class="piece" xlink:href="#bq"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bk" data-square="e8" transform="translate(200 16)">
+                                        <use href="#bk" class="piece" xlink:href="#bk"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bb" data-square="f8" transform="translate(246 16)">
+                                        <use href="#bb" class="piece" xlink:href="#bb"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bn" data-square="g8" transform="translate(292 16)">
+                                        <use href="#bn" class="piece" xlink:href="#bn"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="br" data-square="h8" transform="translate(338 16)">
+                                        <use href="#br" class="piece" xlink:href="#br"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                </g>
+                            </g>
+                            <g class="markers-top-layer">
+                                <g class="markers"></g>
+                                <g class="arrows"></g>
+                                <g class="promotion-dialog-group"></g>
+                            </g>
+                        </svg></div>
+                    <div class="cm-chessboard-accessibility visually-hidden">
+                        <div>
+                            <h3 id="hl_form_sw1uh6">Move piece</h3>
+                            <form aria-labelledby="hl_form_sw1uh6">
+                                <label for="move_piece_input_from_sw1uh6">Move from</label>
+                                <input class="input-from" type="text" size="2" id="move_piece_input_from_sw1uh6">
+                                <label for="move_piece_input_to_sw1uh6">Move to</label>
+                                <input class="input-to" type="text" size="2" id="move_piece_input_to_sw1uh6">
+                                <button type="submit" class="button-move">Make move</button>
+                            </form>
+                        </div>
+                        <div>
+                            <h3 id="hl_table_sw1uh6">Chessboard as table</h3>
+                            <div class="table">
+                                <table aria-labelledby="hl_table_sw1uh6">
+                                    <tbody>
+                                        <tr>
+                                            <th></th>
+                                            <th scope="col">a</th>
+                                            <th scope="col">b</th>
+                                            <th scope="col">c</th>
+                                            <th scope="col">d</th>
+                                            <th scope="col">e</th>
+                                            <th scope="col">f</th>
+                                            <th scope="col">g</th>
+                                            <th scope="col">h</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">8</th>
+                                            <td>Rook Black</td>
+                                            <td>Knight Black</td>
+                                            <td>Bishop Black</td>
+                                            <td>Queen Black</td>
+                                            <td>King Black</td>
+                                            <td>Bishop Black</td>
+                                            <td>Knight Black</td>
+                                            <td>Rook Black</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">7</th>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">6</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">5</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">4</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Rook White</td>
+                                            <td>Knight White</td>
+                                            <td>Bishop White</td>
+                                            <td>Queen White</td>
+                                            <td>King White</td>
+                                            <td>Bishop White</td>
+                                            <td>Knight White</td>
+                                            <td>Rook White</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 id="hl_lists_sw1uh6">Pieces lists</h3>
+                            <div class="list">
+                                <h4 id="white_sw1uh6">Pieces White</h4>
+                                <ul aria-labelledby="white_sw1uh6" class="list-inline">
+                                    <li class="list-inline-item">King e1</li>
+                                    <li class="list-inline-item">Queen d1</li>
+                                    <li class="list-inline-item">Rook a1</li>
+                                    <li class="list-inline-item">Rook h1</li>
+                                    <li class="list-inline-item">Bishop c1</li>
+                                    <li class="list-inline-item">Bishop f1</li>
+                                    <li class="list-inline-item">Knight b1</li>
+                                    <li class="list-inline-item">Knight g1</li>
+                                    <li class="list-inline-item">Pawn a2</li>
+                                    <li class="list-inline-item">Pawn b2</li>
+                                    <li class="list-inline-item">Pawn c2</li>
+                                    <li class="list-inline-item">Pawn d2</li>
+                                    <li class="list-inline-item">Pawn e2</li>
+                                    <li class="list-inline-item">Pawn f2</li>
+                                    <li class="list-inline-item">Pawn g2</li>
+                                    <li class="list-inline-item">Pawn h2</li>
+                                </ul>
+                                <h4 id="black_sw1uh6">Pieces Black</h4>
+                                <ul aria-labelledby="black_sw1uh6" class="list-inline">
+                                    <li class="list-inline-item">King e8</li>
+                                    <li class="list-inline-item">Queen d8</li>
+                                    <li class="list-inline-item">Rook a8</li>
+                                    <li class="list-inline-item">Rook h8</li>
+                                    <li class="list-inline-item">Bishop c8</li>
+                                    <li class="list-inline-item">Bishop f8</li>
+                                    <li class="list-inline-item">Knight b8</li>
+                                    <li class="list-inline-item">Knight g8</li>
+                                    <li class="list-inline-item">Pawn a7</li>
+                                    <li class="list-inline-item">Pawn b7</li>
+                                    <li class="list-inline-item">Pawn c7</li>
+                                    <li class="list-inline-item">Pawn d7</li>
+                                    <li class="list-inline-item">Pawn e7</li>
+                                    <li class="list-inline-item">Pawn f7</li>
+                                    <li class="list-inline-item">Pawn g7</li>
+                                    <li class="list-inline-item">Pawn h7</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <!--One of three columns-->
+            </div>
+            <div class="col">
+                <!--One of three columns-->
+            </div>
+            <div class="col">
+                <!--One of three columns-->
+            </div>
+        </div>
     </div>
-    <div class="col">
-      <!--One of three columns-->
-    </div>
-    <div class="col">
-      <!--One of three columns-->
-    </div>
-    <div class="container" style="position: relative;">
-      <div class="chessprogressbar">
-        <ul>
-          <li style="left: 0px;">
-           <span class="progressbar" style="left: 0px;" progress="50" id="chessprogressbar"></span>
-          </li>
-        </ul>
-      </div>
-      <div id="myBoard" style="width: 100%;position: relative;left: 30px;"><div style="width: 400px; height: 400px;"><svg width="100%" height="100%" class="cm-chessboard border-type-frame green" role="img" alt="W: Ke1 Qd1 Ra1 Rh1 Bc1 Bf1 Nb1 Ng1 a2 b2 c2 d2 e2 f2 g2 h2
-B: Ke8 Qd8 Ra8 Rh8 Bc8 Bf8 Nb8 Ng8 a7 b7 c7 d7 e7 f7 g7 h7"><g class="board input-enabled"><rect width="400" height="400" class="border"></rect><rect x="16" y="16" width="368" height="368" class="border-inner"></rect><rect x="16" y="338" width="46" height="46" class="square black" data-square="a1"></rect><rect x="62" y="338" width="46" height="46" class="square white" data-square="b1"></rect><rect x="108" y="338" width="46" height="46" class="square black" data-square="c1"></rect><rect x="154" y="338" width="46" height="46" class="square white" data-square="d1"></rect><rect x="200" y="338" width="46" height="46" class="square black" data-square="e1"></rect><rect x="246" y="338" width="46" height="46" class="square white" data-square="f1"></rect><rect x="292" y="338" width="46" height="46" class="square black" data-square="g1"></rect><rect x="338" y="338" width="46" height="46" class="square white" data-square="h1"></rect><rect x="16" y="292" width="46" height="46" class="square white" data-square="a2"></rect><rect x="62" y="292" width="46" height="46" class="square black" data-square="b2"></rect><rect x="108" y="292" width="46" height="46" class="square white" data-square="c2"></rect><rect x="154" y="292" width="46" height="46" class="square black" data-square="d2"></rect><rect x="200" y="292" width="46" height="46" class="square white" data-square="e2"></rect><rect x="246" y="292" width="46" height="46" class="square black" data-square="f2"></rect><rect x="292" y="292" width="46" height="46" class="square white" data-square="g2"></rect><rect x="338" y="292" width="46" height="46" class="square black" data-square="h2"></rect><rect x="16" y="246" width="46" height="46" class="square black" data-square="a3"></rect><rect x="62" y="246" width="46" height="46" class="square white" data-square="b3"></rect><rect x="108" y="246" width="46" height="46" class="square black" data-square="c3"></rect><rect x="154" y="246" width="46" height="46" class="square white" data-square="d3"></rect><rect x="200" y="246" width="46" height="46" class="square black" data-square="e3"></rect><rect x="246" y="246" width="46" height="46" class="square white" data-square="f3"></rect><rect x="292" y="246" width="46" height="46" class="square black" data-square="g3"></rect><rect x="338" y="246" width="46" height="46" class="square white" data-square="h3"></rect><rect x="16" y="200" width="46" height="46" class="square white" data-square="a4"></rect><rect x="62" y="200" width="46" height="46" class="square black" data-square="b4"></rect><rect x="108" y="200" width="46" height="46" class="square white" data-square="c4"></rect><rect x="154" y="200" width="46" height="46" class="square black" data-square="d4"></rect><rect x="200" y="200" width="46" height="46" class="square white" data-square="e4"></rect><rect x="246" y="200" width="46" height="46" class="square black" data-square="f4"></rect><rect x="292" y="200" width="46" height="46" class="square white" data-square="g4"></rect><rect x="338" y="200" width="46" height="46" class="square black" data-square="h4"></rect><rect x="16" y="154" width="46" height="46" class="square black" data-square="a5"></rect><rect x="62" y="154" width="46" height="46" class="square white" data-square="b5"></rect><rect x="108" y="154" width="46" height="46" class="square black" data-square="c5"></rect><rect x="154" y="154" width="46" height="46" class="square white" data-square="d5"></rect><rect x="200" y="154" width="46" height="46" class="square black" data-square="e5"></rect><rect x="246" y="154" width="46" height="46" class="square white" data-square="f5"></rect><rect x="292" y="154" width="46" height="46" class="square black" data-square="g5"></rect><rect x="338" y="154" width="46" height="46" class="square white" data-square="h5"></rect><rect x="16" y="108" width="46" height="46" class="square white" data-square="a6"></rect><rect x="62" y="108" width="46" height="46" class="square black" data-square="b6"></rect><rect x="108" y="108" width="46" height="46" class="square white" data-square="c6"></rect><rect x="154" y="108" width="46" height="46" class="square black" data-square="d6"></rect><rect x="200" y="108" width="46" height="46" class="square white" data-square="e6"></rect><rect x="246" y="108" width="46" height="46" class="square black" data-square="f6"></rect><rect x="292" y="108" width="46" height="46" class="square white" data-square="g6"></rect><rect x="338" y="108" width="46" height="46" class="square black" data-square="h6"></rect><rect x="16" y="62" width="46" height="46" class="square black" data-square="a7"></rect><rect x="62" y="62" width="46" height="46" class="square white" data-square="b7"></rect><rect x="108" y="62" width="46" height="46" class="square black" data-square="c7"></rect><rect x="154" y="62" width="46" height="46" class="square white" data-square="d7"></rect><rect x="200" y="62" width="46" height="46" class="square black" data-square="e7"></rect><rect x="246" y="62" width="46" height="46" class="square white" data-square="f7"></rect><rect x="292" y="62" width="46" height="46" class="square black" data-square="g7"></rect><rect x="338" y="62" width="46" height="46" class="square white" data-square="h7"></rect><rect x="16" y="16" width="46" height="46" class="square white" data-square="a8"></rect><rect x="62" y="16" width="46" height="46" class="square black" data-square="b8"></rect><rect x="108" y="16" width="46" height="46" class="square white" data-square="c8"></rect><rect x="154" y="16" width="46" height="46" class="square black" data-square="d8"></rect><rect x="200" y="16" width="46" height="46" class="square white" data-square="e8"></rect><rect x="246" y="16" width="46" height="46" class="square black" data-square="f8"></rect><rect x="292" y="16" width="46" height="46" class="square white" data-square="g8"></rect><rect x="338" y="16" width="46" height="46" class="square black" data-square="h8"></rect></g><g class="coordinates" aria-hidden="true"><text class="coordinate file" x="35.55" y="395.975" style="font-size: 11.5px">a</text><text class="coordinate file" x="81.55" y="395.975" style="font-size: 11.5px">b</text><text class="coordinate file" x="127.55" y="395.975" style="font-size: 11.5px">c</text><text class="coordinate file" x="173.54999999999998" y="395.975" style="font-size: 11.5px">d</text><text class="coordinate file" x="219.54999999999998" y="395.975" style="font-size: 11.5px">e</text><text class="coordinate file" x="265.54999999999995" y="395.975" style="font-size: 11.5px">f</text><text class="coordinate file" x="311.54999999999995" y="395.975" style="font-size: 11.5px">g</text><text class="coordinate file" x="357.54999999999995" y="395.975" style="font-size: 11.5px">h</text><text class="coordinate rank" x="4.324324324324324" y="44.75" style="font-size: 11.5px">8</text><text class="coordinate rank" x="4.324324324324324" y="90.75" style="font-size: 11.5px">7</text><text class="coordinate rank" x="4.324324324324324" y="136.75" style="font-size: 11.5px">6</text><text class="coordinate rank" x="4.324324324324324" y="182.75" style="font-size: 11.5px">5</text><text class="coordinate rank" x="4.324324324324324" y="228.75" style="font-size: 11.5px">4</text><text class="coordinate rank" x="4.324324324324324" y="274.75" style="font-size: 11.5px">3</text><text class="coordinate rank" x="4.324324324324324" y="320.75" style="font-size: 11.5px">2</text><text class="coordinate rank" x="4.324324324324324" y="366.75" style="font-size: 11.5px">1</text></g><g class="markers-layer"><g class="markers"></g></g><g class="pieces-layer"><g class="pieces"><g data-piece="wr" data-square="a1" transform="translate(16 338)"><use href="#wr" class="piece" xlink:href="#wr" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wn" data-square="b1" transform="translate(62 338)"><use href="#wn" class="piece" xlink:href="#wn" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wb" data-square="c1" transform="translate(108 338)"><use href="#wb" class="piece" xlink:href="#wb" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wq" data-square="d1" transform="translate(154 338)"><use href="#wq" class="piece" xlink:href="#wq" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wk" data-square="e1" transform="translate(200 338)"><use href="#wk" class="piece" xlink:href="#wk" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wb" data-square="f1" transform="translate(246 338)"><use href="#wb" class="piece" xlink:href="#wb" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wn" data-square="g1" transform="translate(292 338)"><use href="#wn" class="piece" xlink:href="#wn" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wr" data-square="h1" transform="translate(338 338)"><use href="#wr" class="piece" xlink:href="#wr" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wp" data-square="a2" transform="translate(16 292)"><use href="#wp" class="piece" xlink:href="#wp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wp" data-square="b2" transform="translate(62 292)"><use href="#wp" class="piece" xlink:href="#wp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wp" data-square="c2" transform="translate(108 292)"><use href="#wp" class="piece" xlink:href="#wp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wp" data-square="d2" transform="translate(154 292)"><use href="#wp" class="piece" xlink:href="#wp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wp" data-square="e2" transform="translate(200 292)"><use href="#wp" class="piece" xlink:href="#wp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wp" data-square="f2" transform="translate(246 292)"><use href="#wp" class="piece" xlink:href="#wp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wp" data-square="g2" transform="translate(292 292)"><use href="#wp" class="piece" xlink:href="#wp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="wp" data-square="h2" transform="translate(338 292)"><use href="#wp" class="piece" xlink:href="#wp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bp" data-square="a7" transform="translate(16 62)"><use href="#bp" class="piece" xlink:href="#bp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bp" data-square="b7" transform="translate(62 62)"><use href="#bp" class="piece" xlink:href="#bp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bp" data-square="c7" transform="translate(108 62)"><use href="#bp" class="piece" xlink:href="#bp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bp" data-square="d7" transform="translate(154 62)"><use href="#bp" class="piece" xlink:href="#bp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bp" data-square="e7" transform="translate(200 62)"><use href="#bp" class="piece" xlink:href="#bp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bp" data-square="f7" transform="translate(246 62)"><use href="#bp" class="piece" xlink:href="#bp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bp" data-square="g7" transform="translate(292 62)"><use href="#bp" class="piece" xlink:href="#bp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bp" data-square="h7" transform="translate(338 62)"><use href="#bp" class="piece" xlink:href="#bp" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="br" data-square="a8" transform="translate(16 16)"><use href="#br" class="piece" xlink:href="#br" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bn" data-square="b8" transform="translate(62 16)"><use href="#bn" class="piece" xlink:href="#bn" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bb" data-square="c8" transform="translate(108 16)"><use href="#bb" class="piece" xlink:href="#bb" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bq" data-square="d8" transform="translate(154 16)"><use href="#bq" class="piece" xlink:href="#bq" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bk" data-square="e8" transform="translate(200 16)"><use href="#bk" class="piece" xlink:href="#bk" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bb" data-square="f8" transform="translate(246 16)"><use href="#bb" class="piece" xlink:href="#bb" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="bn" data-square="g8" transform="translate(292 16)"><use href="#bn" class="piece" xlink:href="#bn" transform="translate(0 0) scale(1.15 1.15)"></use></g><g data-piece="br" data-square="h8" transform="translate(338 16)"><use href="#br" class="piece" xlink:href="#br" transform="translate(0 0) scale(1.15 1.15)"></use></g></g></g><g class="markers-top-layer"><g class="markers"></g><g class="arrows"></g><g class="promotion-dialog-group"></g></g></svg></div><div class="cm-chessboard-accessibility visually-hidden"><div>
-    <h3 id="hl_form_sw1uh6">Move piece</h3>
-    <form aria-labelledby="hl_form_sw1uh6">
-        <label for="move_piece_input_from_sw1uh6">Move from</label>
-        <input class="input-from" type="text" size="2" id="move_piece_input_from_sw1uh6">
-        <label for="move_piece_input_to_sw1uh6">Move to</label>
-        <input class="input-to" type="text" size="2" id="move_piece_input_to_sw1uh6">
-        <button type="submit" class="button-move">Make move</button>
-    </form>
-</div><div><h3 id="hl_table_sw1uh6">Chessboard as table</h3><div class="table"><table aria-labelledby="hl_table_sw1uh6"><tbody><tr><th></th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th><th scope="col">e</th><th scope="col">f</th><th scope="col">g</th><th scope="col">h</th></tr><tr><th scope="row">8</th><td>Rook Black</td><td>Knight Black</td><td>Bishop Black</td><td>Queen Black</td><td>King Black</td><td>Bishop Black</td><td>Knight Black</td><td>Rook Black</td></tr><tr><th scope="row">7</th><td>Pawn Black</td><td>Pawn Black</td><td>Pawn Black</td><td>Pawn Black</td><td>Pawn Black</td><td>Pawn Black</td><td>Pawn Black</td><td>Pawn Black</td></tr><tr><th scope="row">6</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row">5</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row">4</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row">3</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row">2</th><td>Pawn White</td><td>Pawn White</td><td>Pawn White</td><td>Pawn White</td><td>Pawn White</td><td>Pawn White</td><td>Pawn White</td><td>Pawn White</td></tr><tr><th scope="row">1</th><td>Rook White</td><td>Knight White</td><td>Bishop White</td><td>Queen White</td><td>King White</td><td>Bishop White</td><td>Knight White</td><td>Rook White</td></tr></tbody></table></div></div><div><h3 id="hl_lists_sw1uh6">Pieces lists</h3><div class="list">
-        <h4 id="white_sw1uh6">Pieces White</h4>
-        <ul aria-labelledby="white_sw1uh6" class="list-inline"><li class="list-inline-item">King e1</li><li class="list-inline-item">Queen d1</li><li class="list-inline-item">Rook a1</li><li class="list-inline-item">Rook h1</li><li class="list-inline-item">Bishop c1</li><li class="list-inline-item">Bishop f1</li><li class="list-inline-item">Knight b1</li><li class="list-inline-item">Knight g1</li><li class="list-inline-item">Pawn a2</li><li class="list-inline-item">Pawn b2</li><li class="list-inline-item">Pawn c2</li><li class="list-inline-item">Pawn d2</li><li class="list-inline-item">Pawn e2</li><li class="list-inline-item">Pawn f2</li><li class="list-inline-item">Pawn g2</li><li class="list-inline-item">Pawn h2</li></ul>
-        <h4 id="black_sw1uh6">Pieces Black</h4>
-        <ul aria-labelledby="black_sw1uh6" class="list-inline"><li class="list-inline-item">King e8</li><li class="list-inline-item">Queen d8</li><li class="list-inline-item">Rook a8</li><li class="list-inline-item">Rook h8</li><li class="list-inline-item">Bishop c8</li><li class="list-inline-item">Bishop f8</li><li class="list-inline-item">Knight b8</li><li class="list-inline-item">Knight g8</li><li class="list-inline-item">Pawn a7</li><li class="list-inline-item">Pawn b7</li><li class="list-inline-item">Pawn c7</li><li class="list-inline-item">Pawn d7</li><li class="list-inline-item">Pawn e7</li><li class="list-inline-item">Pawn f7</li><li class="list-inline-item">Pawn g7</li><li class="list-inline-item">Pawn h7</li></ul></div></div></div></div>
-    </div>
-    <div class="col">
-      <!--One of three columns-->
-    </div>
-    <div class="col">
-      <!--One of three columns-->
-    </div>
-    <div class="col">
-      <!--One of three columns-->
-    </div>
-  </div>
-</div>
 
     <div class="card">
         <div class="card-body">
@@ -285,7 +735,7 @@ B: Ke8 Qd8 Ra8 Rh8 Bc8 Bf8 Nb8 Ng8 a7 b7 c7 d7 e7 f7 g7 h7"><g class="board inpu
 
             board = new Chessboard(document.getElementById("myBoard"), {
                 position: game.fen(),
-                assetsUrl: "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/",
+                assetsUrl: "./lib/cm-chessboard/assets/",
                 style: {
                     cssClass: "green",
                     borderType: BORDER_TYPE.frame,
@@ -391,7 +841,6 @@ B: Ke8 Qd8 Ra8 Rh8 Bc8 Bf8 Nb8 Ng8 a7 b7 c7 d7 e7 f7 g7 h7"><g class="board inpu
             }
         };
     </script>
-
 
     <div id="cm-chessboard-sprite" style="display: none;">
         <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
