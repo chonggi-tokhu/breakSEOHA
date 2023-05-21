@@ -3,624 +3,643 @@
 
 <head>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://urobot2011.github.io/SaveMartin/MartyBot/chessboardjs/css/chessboard-1.0.0.min.css">
-  <style>
-  <link rel="shortcut icon" type="image/x-icon"
-    href="https://images.chesscomfiles.com/uploads/v1/group/459847.a25844d2.160x160o.85394546eb75.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>colourgrey-marty bot L4</title>
-  
-  <style>
-    cgreyico1 {
-        height:20px;
-        width:20px;
-        position:relative;
-        display:block;
-    }
-    #pokpal1 {
-          background-image: var(--merong11);
-    border-radius: 66%;
-    width: 60px;
-    height: 60px;
-    }
-    chess-circle {
-      display: inline-block;
-      width: 50%;
-      height: 50%;
-      background-color: rgba(100,160,100,0.6);
-      border-radius: 100%;
-      margin: 25%;
-    }
-    .footer {
-      background: var(--lightgrey);
-    }
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://urobot2011.github.io/SaveMartin/MartyBot/chessboardjs/css/chessboard-1.0.0.min.css">
+        <link rel="shortcut icon" type="image/x-icon"
+        href="https://images.chesscomfiles.com/uploads/v1/group/459847.a25844d2.160x160o.85394546eb75.png"><meta name="viewport" content="width=device-width, initial-scale=1"><title>colourgrey-marty bot L4</title>
+        <style>cgreyico1 {
+        
+            height: 20px;
+            width: 20px;
+            position: relative;
+            display: block;
+        }
 
-    .footer p.license {
-      text-align: center;
-      width: 100%;
-    }
+        #pokpal1 {
+            background-image: var(--merong11);
+            border-radius: 66%;
+            width: 60px;
+            height: 60px;
+        }
 
-    #MartySay.dark {
-      background: #204739;
-    }
+        chess-circle {
+            display: inline-block;
+            width: 50%;
+            height: 50%;
+            background-color: rgba(100, 160, 100, 0.6);
+            border-radius: 100%;
+            margin: 25%;
+        }
 
-    .switch {
-      height: 83px;
-      width: 234px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-top: -51px;
-      margin-left: -117px;
-      -moz-border-radius: 40px;
-      -webkit-border-radius: 40px;
-      border-radius: 40px;
-      background-color: #d1d1d1;
-      *zoom: 1;
-      filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFD1D1D1', endColorstr='#FFFEFBF7');
-      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2QxZDFkMSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZlZmJmNyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
-      background-size: 100%;
-      background-image: -moz-linear-gradient(top, #d1d1d1 0%, #fefbf7 100%);
-      background-image: -webkit-linear-gradient(top, #d1d1d1 0%, #fefbf7 100%);
-      background-image: linear-gradient(to bottom, #d1d1d1 0%, #fefbf7 100%);
-    }
+        .footer {
+            background: var(--lightgrey);
+        }
 
-    .switch:after {
-      height: 70px;
-      width: 220px;
-      position: absolute;
-      top: 7px;
-      left: 7px;
-      content: '';
-      z-index: 2;
-      -moz-border-radius: 40px;
-      -webkit-border-radius: 40px;
-      border-radius: 40px;
-      background-color: #a5a5a5;
-      *zoom: 1;
-      filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFA5A5A5', endColorstr='#FFE8D7BE');
-      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E1YTVhNSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2U4ZDdiZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
-      background-size: 100%;
-      background-image: -moz-linear-gradient(top, #a5a5a5 0%, #e8d7be 100%);
-      background-image: -webkit-linear-gradient(top, #a5a5a5 0%, #e8d7be 100%);
-      background-image: linear-gradient(to bottom, #a5a5a5 0%, #e8d7be 100%);
-    }
+        .footer p.license {
+            text-align: center;
+            width: 100%;
+        }
 
-    .checkbox {
-      height: 60px;
-      width: 210px;
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      z-index: 10000;
-      -moz-border-radius: 35px;
-      -webkit-border-radius: 35px;
-      border-radius: 35px;
-      -moz-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-      -webkit-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-      box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-      background-color: #e7f4a0;
-      *zoom: 1;
-      filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFF28A00', endColorstr='#FFD86517');
-      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyOGEwMCIvPjxzdG9wIG9mZnNldD0iNjclIiBzdG9wLWNvbG9yPSIjZTY1MzAwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZDg2NTE3Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-      background-size: 100%;
-      background-image: linear-gradient(#f2fa90, #f8ff6b, #d8ff07);
-      background-image: linear-gradient(to top, #f2fa90, #f8ff6b, #d8ff07 100%);
-      background-image: linear-gradient(to bottom, #f2fa90, #f8ff6b, #d8ff07 100%);
+        #MartySay.dark {
+            background: #204739;
+        }
 
-    }
+        .switch {
+            height: 83px;
+            width: 234px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -51px;
+            margin-left: -117px;
+            -moz-border-radius: 40px;
+            -webkit-border-radius: 40px;
+            border-radius: 40px;
+            background-color: #d1d1d1;
+            *zoom: 1;
+            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFD1D1D1', endColorstr='#FFFEFBF7');
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2QxZDFkMSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZlZmJmNyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+            background-size: 100%;
+            background-image: -moz-linear-gradient(top, #d1d1d1 0%, #fefbf7 100%);
+            background-image: -webkit-linear-gradient(top, #d1d1d1 0%, #fefbf7 100%);
+            background-image: linear-gradient(to bottom, #d1d1d1 0%, #fefbf7 100%);
+        }
 
-    .checkbox:after {
-      transition: background 0.4s ease;
-      height: 60px;
-      width: 117px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: '';
-      z-index: 9999;
-      -moz-border-radius: 35px 0 0 35px;
-      -webkit-border-radius: 35px;
-      border-radius: 35px 0 0 35px;
-      -moz-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-      -webkit-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-      box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-      background-color: #718d99;
-      *zoom: 1;
-      filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFB1DD00', endColorstr='#FF84AD00');
-      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2IxZGQwMCIvPjxzdG9wIG9mZnNldD0iNjclIiBzdG9wLWNvbG9yPSIjN2VhZjAwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjODRhZDAwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-      background-size: 100%;
-      background: linear-gradient(to top, #718d99 0%, #718d83 67%, #848890 100%);
-      background-image: -webkit-linear-gradient(to top, #718d99 0%, #718d83 67%, #848890 100%);
-      background: linear-gradient(to bottom, #718d99 0%, #718d83 67%, #848890 100%);
-      animation: switchan6 1s infinite;
-    }
+        .switch:after {
+            height: 70px;
+            width: 220px;
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            content: '';
+            z-index: 2;
+            -moz-border-radius: 40px;
+            -webkit-border-radius: 40px;
+            border-radius: 40px;
+            background-color: #a5a5a5;
+            *zoom: 1;
+            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFA5A5A5', endColorstr='#FFE8D7BE');
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E1YTVhNSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2U4ZDdiZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+            background-size: 100%;
+            background-image: -moz-linear-gradient(top, #a5a5a5 0%, #e8d7be 100%);
+            background-image: -webkit-linear-gradient(top, #a5a5a5 0%, #e8d7be 100%);
+            background-image: linear-gradient(to bottom, #a5a5a5 0%, #e8d7be 100%);
+        }
 
-    .control {
-      height: 73px;
-      width: 138px;
-      outline: 0;
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      z-index: 10001;
-      appearance: none;
-      -moz-border-radius: 36.5px;
-      -webkit-border-radius: 36.5px;
-      border-radius: 36.5px;
-      -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.55), inset 0 2px 0 #fafafa, inset 0 -2px 0 #ada39d;
-      -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.55), inset 0 2px 0 #fafafa, inset 0 -2px 0 #ada39d;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.55), inset 0 2px 0 #fafafa, inset 0 -2px 0 #ada39d;
-      background-color: #efefef;
-      *zoom: 1;
-      filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEFEFEF', endColorstr='#FFBCB9B8');
-      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIzMiUiIHN0b3AtY29sb3I9IiNlZmVmZWYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiY2I5YjgiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
-      background-size: 100%;
-      background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(32%, #efefef), color-stop(100%, #bcb9b8));
-      background-image: -moz-linear-gradient(top, #efefef 32%, #bcb9b8 100%);
-      background-image: -webkit-linear-gradient(top, #efefef 32%, #bcb9b8 100%);
-      background-image: linear-gradient(to bottom, #efefef 32%, #bcb9b8 100%);
-      -moz-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      -webkit-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
-    }
+        .checkbox {
+            height: 60px;
+            width: 210px;
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 10000;
+            -moz-border-radius: 35px;
+            -webkit-border-radius: 35px;
+            border-radius: 35px;
+            -moz-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
+            -webkit-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
+            box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
+            background-color: #e7f4a0;
+            *zoom: 1;
+            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFF28A00', endColorstr='#FFD86517');
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyOGEwMCIvPjxzdG9wIG9mZnNldD0iNjclIiBzdG9wLWNvbG9yPSIjZTY1MzAwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZDg2NTE3Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+            background-size: 100%;
+            background-image: linear-gradient(#f2fa90, #f8ff6b, #d8ff07);
+            background-image: linear-gradient(to top, #f2fa90, #f8ff6b, #d8ff07 100%);
+            background-image: linear-gradient(to bottom, #f2fa90, #f8ff6b, #d8ff07 100%);
 
-    .control:checked {
-      left: 91px;
-    }
+        }
 
-    .control:after {
-      height: 40px;
-      width: 40px;
-      position: absolute;
-      right: 15px;
-      top: 15px;
-      content: '';
-      z-index: 10001;
-      -moz-border-radius: 50%;
-      -webkit-border-radius: 50%;
-      border-radius: 50%;
-      background-color: #c2c0be;
-      *zoom: 1;
-      filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFC2C0BE', endColorstr='#FFD7D7D7');
-      background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2MyYzBiZSIvPjxzdG9wIG9mZnNldD0iNzIlIiBzdG9wLWNvbG9yPSIjZDdkN2Q3Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-      background-size: 100%;
-      background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c2c0be), color-stop(72%, #d7d7d7));
-      background-image: -moz-linear-gradient(top, #c2c0be 0%, #d7d7d7 72%);
-      background-image: -webkit-linear-gradient(top, #c2c0be 0%, #d7d7d7 72%);
-      background-image: linear-gradient(to bottom, #c2c0be 0%, #d7d7d7 72%);
-    }
+        .checkbox:after {
+            transition: background 0.4s ease;
+            height: 60px;
+            width: 117px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: '';
+            z-index: 9999;
+            -moz-border-radius: 35px 0 0 35px;
+            -webkit-border-radius: 35px;
+            border-radius: 35px 0 0 35px;
+            -moz-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
+            -webkit-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
+            box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
+            background-color: #718d99;
+            *zoom: 1;
+            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFB1DD00', endColorstr='#FF84AD00');
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2IxZGQwMCIvPjxzdG9wIG9mZnNldD0iNjclIiBzdG9wLWNvbG9yPSIjN2VhZjAwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjODRhZDAwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+            background-size: 100%;
+            background: linear-gradient(to top, #718d99 0%, #718d83 67%, #848890 100%);
+            background-image: -webkit-linear-gradient(to top, #718d99 0%, #718d83 67%, #848890 100%);
+            background: linear-gradient(to bottom, #718d99 0%, #718d83 67%, #848890 100%);
+            animation: switchan6 1s infinite;
+        }
+
+        .control {
+            height: 73px;
+            width: 138px;
+            outline: 0;
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            z-index: 10001;
+            appearance: none;
+            -moz-border-radius: 36.5px;
+            -webkit-border-radius: 36.5px;
+            border-radius: 36.5px;
+            -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.55), inset 0 2px 0 #fafafa, inset 0 -2px 0 #ada39d;
+            -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.55), inset 0 2px 0 #fafafa, inset 0 -2px 0 #ada39d;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.55), inset 0 2px 0 #fafafa, inset 0 -2px 0 #ada39d;
+            background-color: #efefef;
+            *zoom: 1;
+            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEFEFEF', endColorstr='#FFBCB9B8');
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIzMiUiIHN0b3AtY29sb3I9IiNlZmVmZWYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiY2I5YjgiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+            background-size: 100%;
+            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(32%, #efefef), color-stop(100%, #bcb9b8));
+            background-image: -moz-linear-gradient(top, #efefef 32%, #bcb9b8 100%);
+            background-image: -webkit-linear-gradient(top, #efefef 32%, #bcb9b8 100%);
+            background-image: linear-gradient(to bottom, #efefef 32%, #bcb9b8 100%);
+            -moz-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .control:checked {
+            left: 91px;
+        }
+
+        .control:after {
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            content: '';
+            z-index: 10001;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            background-color: #c2c0be;
+            *zoom: 1;
+            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFC2C0BE', endColorstr='#FFD7D7D7');
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2MyYzBiZSIvPjxzdG9wIG9mZnNldD0iNzIlIiBzdG9wLWNvbG9yPSIjZDdkN2Q3Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+            background-size: 100%;
+            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c2c0be), color-stop(72%, #d7d7d7));
+            background-image: -moz-linear-gradient(top, #c2c0be 0%, #d7d7d7 72%);
+            background-image: -webkit-linear-gradient(top, #c2c0be 0%, #d7d7d7 72%);
+            background-image: linear-gradient(to bottom, #c2c0be 0%, #d7d7d7 72%);
+        }
+
         #movecommand1 {
-      background: var(--dark);
-      color: #ecf;
-    }
-    #movecommand1 input {
-      background: var(--dark);
-      color: #ecf;
-    }
-    @media only screen and (max-width: 600px) {
-      .hehehe1 {
-        height: 385px;
-        width: 400px;
-        overflow: scroll;
-      }
-    }
-  </style>
+            background: var(--dark);
+            color: #ecf;
+        }
+
+        #movecommand1 input {
+            background: var(--dark);
+            color: #ecf;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .hehehe1 {
+                height: 385px;
+                width: 400px;
+                overflow: scroll;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <div id="body734" style="width: 100%;height: 2000px;">
-    <a href="/aass/docs/pages/films.html">올해 신작 영화들</a>
-    <h1>colou<span onclick="this.style.color='blue';">rgrey-b</span>ot L4</h1>
-    <h2 onclick="this.classList.add('merong8989')" role="button">눌러보시면 무지개가 빤짝빤짝!!!<br>April Fools' Day!!!오늘은 만우절입니다. <br>만우절 장난을 견디지 못해 지친 컬그봇이 고장났다고 합니다.<br> 낚시인거 아시죠???</h2>
-    <div class="mb-3">
-      <select id="boardthemeselect">
-        <option value="default" selected>default board theme</option>
-        <option value="classic">board theme:classic</option>
-        <option value="chocolate">board theme:chocolate</option>
-        <option value="bnw">board theme:black and white</option>
-        <option value="green">board theme in colour:green</option>
-        <option value="purple">board theme in colour:purple</option>
-        <option value="blue">board theme in colour:blue</option>
-        <option value="brown">board theme in colour:brown</option>
-        <option value="orange">board theme in colour:orange</option>
-        <option value="marble">board theme in texture:marble</option>
-        <option value="goldsilver">board theme in texture:gold and silver</option>
-        <option value="walnut">board theme in texture:walnut</option>
-        <option value="wood">board theme in texture:wood</option>
-        <option value="neowood">board theme in texture:neo-wood</option>
-        <option value="ivory">board theme in texture:ivory and ebony wood</option>
-      </select>
-      <button type="button" class="btn btn-primary" onclick="colourchangeff1()" id="colourchange1">change board
-        theme</button>
-    </div>
-    <div class="mb-3">
-      <select id="piecethemes1">
-        <option value="wikipedia" selected>default chess pieces(wikipedia)</option>
-        <option value="fromchesscom/alpha">alpha(from chess.com)</option>
-        <option value="fromchesscom/marble">marble(from chess.com)</option>
-        <option value="fromchesscom/wood">wood(from chess.com)</option>
-        <option value="fromchesscom/neo">neo(from chess.com)</option>
-        <option value="fromchesscom/neo-wood">neo-wood(from chess.com)</option>
-        <option value="colourgrey-style-pieces">custom(colourgrey)</option>
-      </select>
-      <h5><b style="color: #ff0060;text-decoration: underline wavy;">주의:컬러그레이봇과 경기 중에는 <br> 기물테마(piece theme)를 바꾸지 마세요.<br>지금까지 뒀던 포지션이 초기화됩니다.</b><br><b>그리고 레벨을 '고수' 이상으로 설정하시면 매우 느려집니다.</b></h5>
-    <div class="boardinner123">
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      <div>
-        <div class="hehehe1">
-          <div id="myBoard" style="width: 400px"></div>
+    <div id="body734" style="width: 100%;height: 2000px;">
+        <a href="/aass/docs/pages/films.html">올해 신작 영화들</a>
+        <h1>colou<span onclick="this.style.color='blue';">rgrey-b</span>ot L4</h1>
+        <h2 onclick="this.classList.add('merong8989')" role="button">눌러보시면 무지개가 빤짝빤짝!!!<br>April Fools' Day!!!오늘은
+            만우절입니다. <br>만우절 장난을 견디지 못해 지친 컬그봇이 고장났다고 합니다.<br> 낚시인거 아시죠???</h2>
+        <div class="mb-3">
+            <select id="boardthemeselect">
+                <option value="default" selected>default board theme</option>
+                <option value="classic">board theme:classic</option>
+                <option value="chocolate">board theme:chocolate</option>
+                <option value="bnw">board theme:black and white</option>
+                <option value="green">board theme in colour:green</option>
+                <option value="purple">board theme in colour:purple</option>
+                <option value="blue">board theme in colour:blue</option>
+                <option value="brown">board theme in colour:brown</option>
+                <option value="orange">board theme in colour:orange</option>
+                <option value="marble">board theme in texture:marble</option>
+                <option value="goldsilver">board theme in texture:gold and silver</option>
+                <option value="walnut">board theme in texture:walnut</option>
+                <option value="wood">board theme in texture:wood</option>
+                <option value="neowood">board theme in texture:neo-wood</option>
+                <option value="ivory">board theme in texture:ivory and ebony wood</option>
+            </select>
+            <button type="button" class="btn btn-primary" onclick="colourchangeff1()" id="colourchange1">change board
+                theme</button>
         </div>
-      </div>
-      <div>
-	      <p contenteditable="true" id="loadpgn123">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1</p>
+        <div class="mb-3">
+            <select id="piecethemes1">
+                <option value="wikipedia" selected>default chess pieces(wikipedia)</option>
+                <option value="fromchesscom/alpha">alpha(from chess.com)</option>
+                <option value="fromchesscom/marble">marble(from chess.com)</option>
+                <option value="fromchesscom/wood">wood(from chess.com)</option>
+                <option value="fromchesscom/neo">neo(from chess.com)</option>
+                <option value="fromchesscom/neo-wood">neo-wood(from chess.com)</option>
+                <option value="colourgrey-style-pieces">custom(colourgrey)</option>
+            </select>
+            <h5><b style="color: #ff0060;text-decoration: underline wavy;">주의:컬러그레이봇과 경기 중에는 <br> 기물테마(piece theme)를 바꾸지
+                    마세요.<br>지금까지 뒀던 포지션이 초기화됩니다.</b><br><b>그리고 레벨을 '고수' 이상으로 설정하시면 매우 느려집니다.</b></h5>
+            <div class="boardinner123">
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+                    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+                    crossorigin="anonymous"></script>
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                <div>
+                    <div class="hehehe1">
+                        <div id="myBoard" style="width: 400px"></div>
+                    </div>
+                </div>
+                <div>
+                    <p contenteditable="true" id="loadpgn123">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+                    </p>
 
-      
-    </div>
 
-    <div class="card">
-       <div id="scoreblock">
-        <h3><span style="color:var(--green);">W</span>:<span id="scorew"></span></h3>
-        <h3><span style="color:var(--nred);">L</span>:<span id="scorel"></span></h3>
-      </div>
-      <div class="card-body" id="MartySay">
-        <div id="MartySay1"></div>
-        <small class="license">license:developer:colourgrey-urobot2011chess공동개발,<br>오픈 소스(출처 명시 필수)<br>(디자인-colourgrey,봇
-          인공지능-urobot2011chess)</small>
-      </div>
-      <div id="movecommand1">
-          <div id="movecommand2">
-            your new move...
-          </div>
-          <input type="text" id="inputmovecommand1" placeholder="당신이 둘 수를 기보표기법대로 입력하세요" onkeydown="movecommandmove1(event)">
-        </div>
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="wn" class="form-label">백 이름</label>
-      <input type="text" class="form-control" id="wn" placeholder="사용할 별명">
-    </div>
-    <div class="mb-3">
-      <select class="form-select" aria-label="봇의 색" id="martycolor">
-        <option selected value="b">봇의 색상(기본 흑)</option>
-        <option value="w">백</option>
-        <option value="b">흑</option>
-        <input type="hidden" id="chesspiecesxxx">
-      </select>
-    </div>
-    <div class="mb-3">
-      <h3>your chess skill level</h3>
-      <select id="userlevel">
-        <option value="grandmaster">그랜드마스터</option>
-        <option value="advance">고수</option>
-        <option value="middle" selected>중수</option>
-        <option value="hasu">하수</option>
-        <option value="pyongsin">체스 병신</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <button type="button" class="btn btn-primary" id="start">start<cgreyico1 type="lol.gif"></cgreyico1></button>
-      <button id="resignBtn" class="btn btn-primary" onclick="checkforgameover1 = true;">resign</button>
-      
-    </div>
+                </div>
 
-    <label>FEN:</label>
-    <div id="fen"></div>
-    <label>PGN:</label>
-    <div id="pgn"></div>
-    <div class="nukebomb" onclick="alert('hello!');
+                <div class="card">
+                    <div id="scoreblock">
+                        <h3><span style="color:var(--green);">W</span>:<span id="scorew"></span></h3>
+                        <h3><span style="color:var(--nred);">L</span>:<span id="scorel"></span></h3>
+                    </div>
+                    <div class="card-body" id="MartySay">
+                        <div id="MartySay1"></div>
+                        <small class="license">license:developer:colourgrey-urobot2011chess공동개발,<br>오픈 소스(출처 명시
+                            필수)<br>(디자인-colourgrey,봇
+                            인공지능-urobot2011chess)</small>
+                    </div>
+                    <div id="movecommand1">
+                        <div id="movecommand2">
+                            your new move...
+                        </div>
+                        <input type="text" id="inputmovecommand1" placeholder="당신이 둘 수를 기보표기법대로 입력하세요"
+                            onkeydown="movecommandmove1(event)">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="wn" class="form-label">백 이름</label>
+                <input type="text" class="form-control" id="wn" placeholder="사용할 별명">
+            </div>
+            <div class="mb-3">
+                <select class="form-select" aria-label="봇의 색" id="martycolor">
+                    <option selected value="b">봇의 색상(기본 흑)</option>
+                    <option value="w">백</option>
+                    <option value="b">흑</option>
+                    <input type="hidden" id="chesspiecesxxx">
+                </select>
+            </div>
+            <div class="mb-3">
+                <h3>your chess skill level</h3>
+                <select id="userlevel">
+                    <option value="grandmaster">그랜드마스터</option>
+                    <option value="advance">고수</option>
+                    <option value="middle" selected>중수</option>
+                    <option value="hasu">하수</option>
+                    <option value="pyongsin">체스 병신</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn btn-primary" id="start">start<cgreyico1 type="lol.gif"></cgreyico1>
+                    </button>
+                <button id="resignBtn" class="btn btn-primary" onclick="checkforgameover1 = true;">resign</button>
+
+            </div>
+
+            <label>FEN:</label>
+            <div id="fen"></div>
+            <label>PGN:</label>
+            <div id="pgn"></div>
+            <div class="nukebomb" onclick="alert('hello!');
       for (n=0;n<190;n++) {
         alert((190-n)+'hello!')
       }
       alert('0hello!')">
-      <p><button type="button">_</button></p>
-    </div>
-	    <script src="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/Chessboard.js"></script>
-	    <script type="module">
-    import {INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/Chessboard.js";
-    import {MARKER_TYPE, Markers} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/markers/Markers.js";
-    import {ARROW_TYPE, Arrows} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/arrows/Arrows.js"
-    import {PromotionDialog} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/promotion-dialog/PromotionDialog.js";
-    import {Accessibility} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/accessibility/Accessibility.js";
-    var CHESSBOARD = {
-        INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE, 
-        MARKER_TYPE, Markers, 
-        ARROW_TYPE, Arrows, 
-        PromotionDialog,
-        Accessibility
-    };
-    window['CHESSBOARD'] = CHESSBOARD;
-</script>
-    <script src="/aass/docs/chess/martycopy1_files/popper.min.js"
-      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-      crossorigin="anonymous"></script>
-<script src="./src/MartyEngine.js"></script>
-	    <script src="https://urobot2011.github.io/SaveMartin/MartyBot/chess/chess.js"></script>
-    <script>
-
-      
-     
-      
-var board;
-var game;
-var Marty;
-var $board = $('#myBoard');
-var $start = $('#start');
-var $fen = $('#fen');
-var $pgn = $('#pgn');
-var $wn = $('#wname');
-var $martycolor = $('#martycolor');
-var $ratingUp = $('#ratingUp');
-var martycolor = "b";
-var $pgnsss = $("#loadpgn123")
-var mycolor = 'white';
-var start_bool = 0;
-var MakeMove;
-window.onload = function(){
-    var {INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE, 
-        MARKER_TYPE, Markers, 
-        ARROW_TYPE, Arrows, 
-        PromotionDialog,
-        Accessibility
-    } = window['CHESSBOARD'];
-    game = new Chess();
-    Marty = new MartyEngine();
-    board = new Chessboard(document.getElementById("myBoard"), {
-        position: game.fen(),
-        assetsUrl: "./lib/cm-chessboard/assets/",
-        style: {
-            cssClass: "green",
-            borderType: BORDER_TYPE.frame,
-            pieces: {
-                file: "staunty.svg"
-            }
-        },
-        orientation: COLOR.white,
-        extensions: [{
-            class: Markers,
-            props: {
-                autoMarkers: MARKER_TYPE.square
-            }
-        }, {
-            class: Arrows
-        }, {
-            class: PromotionDialog
-        }, {
-            class: Accessibility,
-            props: {
-                visuallyHidden: true
-            }
-        }]
-    });};
-
-    $martycolor.change(function(){
-        martycolor = $(this).val();
-        mycolor = martycolor == 'b' ? 'white' : 'black';
-    
-    });
+                <p><button type="button">_</button></p>
+            </div>
+            <script
+                src="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/Chessboard.js"></script>
+            <script type="module">
+                import { INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/Chessboard.js";
+                import { MARKER_TYPE, Markers } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/markers/Markers.js";
+                import { ARROW_TYPE, Arrows } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/arrows/Arrows.js"
+                import { PromotionDialog } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/promotion-dialog/PromotionDialog.js";
+                import { Accessibility } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/accessibility/Accessibility.js";
+                var CHESSBOARD = {
+                    INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE,
+                    MARKER_TYPE, Markers,
+                    ARROW_TYPE, Arrows,
+                    PromotionDialog,
+                    Accessibility
+                };
+                window['CHESSBOARD'] = CHESSBOARD;
+            </script>
+            <script src="/aass/docs/chess/martycopy1_files/popper.min.js"
+                integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+                crossorigin="anonymous"></script>
+            <script src="./src/MartyEngine.js"></script>
+            <script src="https://urobot2011.github.io/SaveMartin/MartyBot/chess/chess.js"></script>
+            <script>
 
 
-    function MartySay(say) {
-        var $MartySay = $('MartySay');
-        $MartySay.html(say);
-    }
 
-    MartySay('Hello? I am Marty. Would you like to play with me?');
 
-    function chessprogressbar() {
-      $('.chessprogressbar .progressbar').each(function (index, item){
-        $(item).attr("style", $(item).attr("style")+"height: "+$(item).attr("progress")+"%;");
-      });
-    }
-
-    function makeEngineMove(chessboard = null) {
-        board.setPosition(game.fen(), true);
-        setTimeout(() => {
-            MartySay('Hmm....');
-            updateStatus();
-            var possibleMoves = game.moves();
-
-            if (game.game_over() === true ||
-                game.in_draw() === true ||
-                possibleMoves.length === 0) return;
-            var bestMove = getBestMove(game);
-            game.move(bestMove);
-            board.setPosition(game.fen(), true);
-            board.enableMoveInput(inputHandler, COLOR[mycolor]);
-            updateStatus();
-        }, 500);
-    }
-    MakeMove = makeEngineMove;
-
-    function inputHandler(event) {
-        event.chessboard.removeMarkers(MARKER_TYPE.dot)
-        event.chessboard.removeMarkers(MARKER_TYPE.bevel)
-        if (event.type === INPUT_EVENT_TYPE.moveInputStarted) {
-            const moves = game.moves({square: event.square, verbose: true})
-            for (const move of moves) { // draw dots on possible squares
-                if (move.promotion && move.promotion !== "q") {
-                    continue
-                }
-                if (event.chessboard.getPiece(move.to)) {
-                    event.chessboard.addMarker(MARKER_TYPE.bevel, move.to)
-                } else {
-                    event.chessboard.addMarker(MARKER_TYPE.dot, move.to)
-                }
-            }
-            return moves.length > 0
-        } else if (event.type === INPUT_EVENT_TYPE.validateMoveInput) {
-            const move = {from: event.squareFrom, to: event.squareTo, promotion: event.promotion}
-            const result = game.move(move)
-            if (result) {
-                event.chessboard.disableMoveInput()
-                this.chessboard.state.moveInputProcess.then(() => { // wait for the move input process has finished
-                    this.chessboard.setPosition(game.fen(), true).then(() => { // update position, maybe castled and wait for animation has finished
-                        makeEngineMove(event.chessboard);
-                    })
-                })
-            } else {
-                // promotion?
-                let possibleMoves = game.moves({square: event.squareFrom, verbose: true})
-                for (const possibleMove of possibleMoves) {
-                    if (possibleMove.promotion && possibleMove.to === event.squareTo) {
-                        event.chessboard.showPromotionDialog(event.squareTo, COLOR[mycolor], (result) => {
-                            console.log("promotion result", result);
-                            if (result) {
-                                game.move({from: event.squareFrom, to: event.squareTo, promotion: result.piece.charAt(1)})
-                                event.chessboard.setPosition(game.fen(), true)
-                                makeEngineMove(event.chessboard)
-                            } else {
-                                event.chessboard.setPosition(game.fen(), true)
-                                event.chessboard.enableMoveInput(inputHandler, COLOR[mycolor])
+                var board;
+                var game;
+                var Marty;
+                var $board = $('#myBoard');
+                var $start = $('#start');
+                var $fen = $('#fen');
+                var $pgn = $('#pgn');
+                var $wn = $('#wname');
+                var $martycolor = $('#martycolor');
+                var $ratingUp = $('#ratingUp');
+                var martycolor = "b";
+                var $pgnsss = $("#loadpgn123")
+                var mycolor = 'white';
+                var start_bool = 0;
+                var MakeMove;
+                window.onload = function () {
+                    var { INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE,
+                        MARKER_TYPE, Markers,
+                        ARROW_TYPE, Arrows,
+                        PromotionDialog,
+                        Accessibility
+                    } = window['CHESSBOARD'];
+                    game = new Chess();
+                    Marty = new MartyEngine();
+                    board = new Chessboard(document.getElementById("myBoard"), {
+                        position: game.fen(),
+                        assetsUrl: "./lib/cm-chessboard/assets/",
+                        style: {
+                            cssClass: "green",
+                            borderType: BORDER_TYPE.frame,
+                            pieces: {
+                                file: "staunty.svg"
                             }
-                        })
-                        return true
+                        },
+                        orientation: COLOR.white,
+                        extensions: [{
+                            class: Markers,
+                            props: {
+                                autoMarkers: MARKER_TYPE.square
+                            }
+                        }, {
+                            class: Arrows
+                        }, {
+                            class: PromotionDialog
+                        }, {
+                            class: Accessibility,
+                            props: {
+                                visuallyHidden: true
+                            }
+                        }]
+                    });
+                };
+
+                $martycolor.change(function () {
+                    martycolor = $(this).val();
+                    mycolor = martycolor == 'b' ? 'white' : 'black';
+
+                });
+
+
+                function MartySay(say) {
+                    var $MartySay = $('MartySay');
+                    $MartySay.html(say);
+                }
+
+                MartySay('Hello? I am Marty. Would you like to play with me?');
+
+                function chessprogressbar() {
+                    $('.chessprogressbar .progressbar').each(function (index, item) {
+                        $(item).attr("style", $(item).attr("style") + "height: " + $(item).attr("progress") + "%;");
+                    });
+                }
+
+                function makeEngineMove(chessboard = null) {
+                    board.setPosition(game.fen(), true);
+                    setTimeout(() => {
+                        MartySay('Hmm....');
+                        updateStatus();
+                        var possibleMoves = game.moves();
+
+                        if (game.game_over() === true ||
+                            game.in_draw() === true ||
+                            possibleMoves.length === 0) return;
+                        var bestMove = getBestMove(game);
+                        game.move(bestMove);
+                        board.setPosition(game.fen(), true);
+                        board.enableMoveInput(inputHandler, COLOR[mycolor]);
+                        updateStatus();
+                    }, 500);
+                }
+                MakeMove = makeEngineMove;
+
+                function inputHandler(event) {
+                    event.chessboard.removeMarkers(MARKER_TYPE.dot)
+                    event.chessboard.removeMarkers(MARKER_TYPE.bevel)
+                    if (event.type === INPUT_EVENT_TYPE.moveInputStarted) {
+                        const moves = game.moves({ square: event.square, verbose: true })
+                        for (const move of moves) { // draw dots on possible squares
+                            if (move.promotion && move.promotion !== "q") {
+                                continue
+                            }
+                            if (event.chessboard.getPiece(move.to)) {
+                                event.chessboard.addMarker(MARKER_TYPE.bevel, move.to)
+                            } else {
+                                event.chessboard.addMarker(MARKER_TYPE.dot, move.to)
+                            }
+                        }
+                        return moves.length > 0
+                    } else if (event.type === INPUT_EVENT_TYPE.validateMoveInput) {
+                        const move = { from: event.squareFrom, to: event.squareTo, promotion: event.promotion }
+                        const result = game.move(move)
+                        if (result) {
+                            event.chessboard.disableMoveInput()
+                            this.chessboard.state.moveInputProcess.then(() => { // wait for the move input process has finished
+                                this.chessboard.setPosition(game.fen(), true).then(() => { // update position, maybe castled and wait for animation has finished
+                                    makeEngineMove(event.chessboard);
+                                })
+                            })
+                        } else {
+                            // promotion?
+                            let possibleMoves = game.moves({ square: event.squareFrom, verbose: true })
+                            for (const possibleMove of possibleMoves) {
+                                if (possibleMove.promotion && possibleMove.to === event.squareTo) {
+                                    event.chessboard.showPromotionDialog(event.squareTo, COLOR[mycolor], (result) => {
+                                        console.log("promotion result", result);
+                                        if (result) {
+                                            game.move({ from: event.squareFrom, to: event.squareTo, promotion: result.piece.charAt(1) })
+                                            event.chessboard.setPosition(game.fen(), true)
+                                            makeEngineMove(event.chessboard)
+                                        } else {
+                                            event.chessboard.setPosition(game.fen(), true)
+                                            event.chessboard.enableMoveInput(inputHandler, COLOR[mycolor])
+                                        }
+                                    })
+                                    return true
+                                }
+                            }
+                        }
+                        return result
                     }
                 }
-            }
-            return result
-        }
-    }
-
-    
-    board.enableMoveInput(inputHandler, COLOR[mycolor]);
-
-    $start.click(function() {
-        setTimeout(() => {
-            start_bool = 1;
-            game.load($pgnsss.html());
-            board.setPosition($pgnsss.html());
-            $fen.html("");
-            $pgn.html("");
-            board.setOrientation(mycolor.charAt(0));
-            board.enableMoveInput(inputHandler, COLOR[mycolor]);
-            if(martycolor == "b"){
-                game.header('White', $wn.val());
-                game.header('Black', 'MartyBot L5');
-            } else {
-                game.header('Black', $wn.val());
-                game.header('White', 'MartyBot L5');
-                window.setTimeout(makeEngineMove, 250);
-            }
-            updateStatus();
-        }, 500);
-    });
-
-    function getBestMove(game) {
-        Marty.load(game.fen())
-        var bestMove = Marty.Engine($ratingUp.is(":checked") ? 8 : 2);
-        return bestMove;
-    }
-    function evaluateScore(score) {
-  if (score.includes('M')) {
-    return Math.abs(parseFloat(score)) == parseFloat(score) ? 0 : 100;
-  } else {
-    return Math.max(0, Math.min(100, (parseFloat(score) + 10) * 5));
-  }
-}
-
-    function updateStatus() {
-        if(start_bool == 0){
-            if(martycolor == "b"){
-            game.header('White', $wn.val());
-            game.header('Black', 'MartyBot L5');
-            } else if(martycolor == "w"){
-            game.header('Black', $wn.val());
-            game.header('White', 'MartyBot L5');
-            }
-        }
-        var moveColor = 'White';
-        if (game.turn() === 'b') {
-            moveColor = 'Black';
-        }
-        if (game.in_checkmate()) {
-            status = 'Game over, ' + moveColor + ' is in checkmate.';
-            if(martycolor == game.turn()){
-            MartySay('Checkmate! Whoops, I lost. Would you like another round?');
-            } else {
-            MartySay('Checkmate! Oops, you lost.');
-            }
-        } else if (game.in_draw()) {
-            status = 'Game over, drawn position';
-            MartySay('Oh, it`s a draw. Would you like another round?');
-        } else {
-            status = moveColor + ' to move';
-            if (game.in_check()) {
-            status += ', ' + moveColor + ' is in check';
-            if(martycolor == game.turn()){
-                MartySay('Hmm, I`ve been checked.');
-            } else {
-                MartySay('You`ve been checked. i like check!');
-            }
-            }
-        }
-        $fen.html(game.fen());
-        $pgn.html(game.pgn());
-        var $chessprogressbar = $("#chessprogressbar");
-        var score = evaluateScore(Marty.chess.engine.sea.scoreText || '0.00');//Math.abs(Marty.chess.engine.sea.score) > Marty.chess.const.MATE - Marty.chess.const.MAXDEPTH ? (Math.abs(Marty.chess.engine.sea.score) == Marty.chess.engine.sea.score ? 100 : 0) : 100-(50+Marty.chess.engine.sea.score);
-        $chessprogressbar.attr("progress", score);
-        $chessprogressbar.html(Marty.chess.engine.sea.scoreText);
-        chessprogressbar();
-    }
-};
-
-      document.getElementById("chesspiecesxxx").value = "wikipedia";
 
 
-    
+                board.enableMoveInput(inputHandler, COLOR[mycolor]);
+
+                $start.click(function () {
+                    setTimeout(() => {
+                        start_bool = 1;
+                        game.load($pgnsss.html());
+                        board.setPosition($pgnsss.html());
+                        $fen.html("");
+                        $pgn.html("");
+                        board.setOrientation(mycolor.charAt(0));
+                        board.enableMoveInput(inputHandler, COLOR[mycolor]);
+                        if (martycolor == "b") {
+                            game.header('White', $wn.val());
+                            game.header('Black', 'MartyBot L5');
+                        } else {
+                            game.header('Black', $wn.val());
+                            game.header('White', 'MartyBot L5');
+                            window.setTimeout(makeEngineMove, 250);
+                        }
+                        updateStatus();
+                    }, 500);
+                });
+
+                function getBestMove(game) {
+                    Marty.load(game.fen())
+                    var bestMove = Marty.Engine($ratingUp.is(":checked") ? 8 : 2);
+                    return bestMove;
+                }
+                function evaluateScore(score) {
+                    if (score.includes('M')) {
+                        return Math.abs(parseFloat(score)) == parseFloat(score) ? 0 : 100;
+                    } else {
+                        return Math.max(0, Math.min(100, (parseFloat(score) + 10) * 5));
+                    }
+                }
+
+                function updateStatus() {
+                    if (start_bool == 0) {
+                        if (martycolor == "b") {
+                            game.header('White', $wn.val());
+                            game.header('Black', 'MartyBot L5');
+                        } else if (martycolor == "w") {
+                            game.header('Black', $wn.val());
+                            game.header('White', 'MartyBot L5');
+                        }
+                    }
+                    var moveColor = 'White';
+                    if (game.turn() === 'b') {
+                        moveColor = 'Black';
+                    }
+                    if (game.in_checkmate()) {
+                        status = 'Game over, ' + moveColor + ' is in checkmate.';
+                        if (martycolor == game.turn()) {
+                            MartySay('Checkmate! Whoops, I lost. Would you like another round?');
+                        } else {
+                            MartySay('Checkmate! Oops, you lost.');
+                        }
+                    } else if (game.in_draw()) {
+                        status = 'Game over, drawn position';
+                        MartySay('Oh, it`s a draw. Would you like another round?');
+                    } else {
+                        status = moveColor + ' to move';
+                        if (game.in_check()) {
+                            status += ', ' + moveColor + ' is in check';
+                            if (martycolor == game.turn()) {
+                                MartySay('Hmm, I`ve been checked.');
+                            } else {
+                                MartySay('You`ve been checked. i like check!');
+                            }
+                        }
+                    }
+                    $fen.html(game.fen());
+                    $pgn.html(game.pgn());
+                    var $chessprogressbar = $("#chessprogressbar");
+                    var score = evaluateScore(Marty.chess.engine.sea.scoreText || '0.00');//Math.abs(Marty.chess.engine.sea.score) > Marty.chess.const.MATE - Marty.chess.const.MAXDEPTH ? (Math.abs(Marty.chess.engine.sea.score) == Marty.chess.engine.sea.score ? 100 : 0) : 100-(50+Marty.chess.engine.sea.score);
+                    $chessprogressbar.attr("progress", score);
+                    $chessprogressbar.html(Marty.chess.engine.sea.scoreText);
+                    chessprogressbar();
+                }
 
 
-      
-    </script>
-    <div>
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="225" height="150" viewBox="-36 -24 72 48">
-<path fill="#fff" d="M-36-24h72v48h-72z"/>
-<g transform="rotate(-56.31)"><g id="b">
-<path id="a" stroke="#000" stroke-width="2" d="M-6-25H6m-12 3H6m-12 3H6"/>
-<use xlink:href="#a" y="44"/>
-</g>
-<path stroke="#fff" d="M0 17v10"/>
-<circle r="12">
-<animate attributeType="CSS" attributeName="fill" from="#cd2e3a" to="#0047a0" dur="2s" repeatCount="indefinite" />
-</circle>
+                document.getElementById("chesspiecesxxx").value = "wikipedia";
 
-<path d="M0-12A6 6 0 0 0 0 0a6 6 0 0 1 0 12 12 12 0 0 1 0-24Z">
-<animate attributeType="CSS" attributeName="fill" from="#0047a0" to="#cd2e3a" dur="2s" repeatCount="indefinite" />
-</path>
 
-</g>
-<g transform="rotate(-123.69)">
-<use xlink:href="#b"/>
-<path stroke="#fff" d="M0-23.5v3M0 17v3.5m0 3v3"/>
-</g>
-</svg>
-      <div style="position: fixed;right: 120px;bottom: 40px;border-radius: 81%;height: 50px;">
-        <p class="yagwang9" onclick="darkmode99(event)">
-        <div class="switch" onclick="darkmode99(event)">
-          <input type="checkbox" id="control" class="control">
-          <label for="control" class="checkbox"></label>
+
+
+
+
+            </script>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="225"
+                    height="150" viewBox="-36 -24 72 48">
+                    <path fill="#fff" d="M-36-24h72v48h-72z" />
+                    <g transform="rotate(-56.31)">
+                        <g id="b">
+                            <path id="a" stroke="#000" stroke-width="2" d="M-6-25H6m-12 3H6m-12 3H6" />
+                            <use xlink:href="#a" y="44" />
+                        </g>
+                        <path stroke="#fff" d="M0 17v10" />
+                        <circle r="12">
+                            <animate attributeType="CSS" attributeName="fill" from="#cd2e3a" to="#0047a0" dur="2s"
+                                repeatCount="indefinite" />
+                        </circle>
+
+                        <path d="M0-12A6 6 0 0 0 0 0a6 6 0 0 1 0 12 12 12 0 0 1 0-24Z">
+                            <animate attributeType="CSS" attributeName="fill" from="#0047a0" to="#cd2e3a" dur="2s"
+                                repeatCount="indefinite" />
+                        </path>
+
+                    </g>
+                    <g transform="rotate(-123.69)">
+                        <use xlink:href="#b" />
+                        <path stroke="#fff" d="M0-23.5v3M0 17v3.5m0 3v3" />
+                    </g>
+                </svg>
+                <div style="position: fixed;right: 120px;bottom: 40px;border-radius: 81%;height: 50px;">
+                    <p class="yagwang9" onclick="darkmode99(event)">
+                    <div class="switch" onclick="darkmode99(event)">
+                        <input type="checkbox" id="control" class="control">
+                        <label for="control" class="checkbox"></label>
+                    </div>
+                    <script>
+
+                    </script>
+                    </p>
+                </div>
+            </div>
+            <script src="https://chonggi-tokhu.github.io/aass/docs/colourgrey-styles-1.0/js/icon.css-1-0.js"></script>
+            <div class="footer">
+                <p class="license">sources of images:chess.com,pixabay</p>
+                <p class="license">javascript chess board powered by <a
+                        href="http://www.chessboardjs.com/">chessboardjs</a></p>
+
+            </div>
+            <img src="/aass/docs/chess/martycopy1_files/wP.png" id="b6a5-1ff7-4510-421c-edf5-73b9-43be-8002" alt=""
+                class="piece-417db" data-piece="wP" style="width: 49px; height: 49px; display: none;">
+
         </div>
-        <script>
 
-        </script>
-        </p>
-      </div>
-    </div>
-    <script src="https://chonggi-tokhu.github.io/aass/docs/colourgrey-styles-1.0/js/icon.css-1-0.js"></script>
-    <div class="footer">
-      <p class="license">sources of images:chess.com,pixabay</p>
-      <p class="license">javascript chess board powered by <a href="http://www.chessboardjs.com/">chessboardjs</a></p>
-      
-    </div>
-    <img src="/aass/docs/chess/martycopy1_files/wP.png" id="b6a5-1ff7-4510-421c-edf5-73b9-43be-8002" alt="" class="piece-417db"
-      data-piece="wP" style="width: 49px; height: 49px; display: none;">
-
-  </div>
-  
 </body>
 
 </html>
