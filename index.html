@@ -811,6 +811,9 @@ MartySay('Hello? I am Marty. Would you like to play with me?');
 $start.click(function() {
   start_bool = 1;
   game.load($pgns111.html());
+  if ($pgns111.html() == "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") else {
+      window.setTimeout(makeMove,250);
+  }
   board.position($pgns111.html());
   board.orientation('white');
   $fen.html("");
