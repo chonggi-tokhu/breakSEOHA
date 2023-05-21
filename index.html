@@ -319,6 +319,21 @@
       alert('0hello!')">
       <p><button type="button">_</button></p>
     </div>
+	    <script type="module">
+    import {INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/Chessboard.js";
+    import {MARKER_TYPE, Markers} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/markers/Markers.js";
+    import {ARROW_TYPE, Arrows} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/arrows/Arrows.js"
+    import {PromotionDialog} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/promotion-dialog/PromotionDialog.js";
+    import {Accessibility} from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/accessibility/Accessibility.js";
+    var CHESSBOARD = {
+        INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE, 
+        MARKER_TYPE, Markers, 
+        ARROW_TYPE, Arrows, 
+        PromotionDialog,
+        Accessibility
+    };
+    window['CHESSBOARD'] = CHESSBOARD;
+</script>
     <script src="/aass/docs/chess/martycopy1_files/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
       crossorigin="anonymous"></script>
