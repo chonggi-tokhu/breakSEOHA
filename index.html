@@ -776,8 +776,227 @@
       }
 
 
-      var Marty = new MartyEngine();
-console.log(Marty.AiMove());
+      var board;
+var game = new Chess();
+var Marty = new MartyEngine();
+var $board = $('#myBoard');
+var $start = $('#start');
+var $fen = $('#fen');
+var $pgn = $('#pgn');
+var $wn = $('#wn');
+var $martycolor = $('#martycolor');
+var martycolor = "b";
+
+var start_bool = 0;
+
+var chessprogressval = 0;
+
+var openingData = [
+  ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", "d4"],
+  ["rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3 0 1", "d5"],
+  ["rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1", "e5"],
+  ["rnbqkbnr/pppppppp/8/8/8/5P2/PPPPP1PP/RNBQKBNR b KQkq - 0 1", "e6"],//바보 메이트
+  ["rnbqkbnr/pppp1ppp/4p3/8/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq g3 0 2", "Qh4#"],//바보 메이트
+];
+
+function checkOpeningData(fen) {
+  var opening;
+  function checkOpeningData_some(element) {
+    if(element[0] == fen) {
+      opening = element[1];
+      return true;
+    }
+  }
+  if(openingData.some(checkOpeningData_some)){
+    return opening;
+  }
+  return false;
+}
+
+$martycolor.change(function(){
+  martycolor = $(this).val();
+});
+
+function MartySay(say) {
+  var $MartySay = $('MartySay');
+  $MartySay.html(say);
+}
+
+MartySay('Hello? I am Marty. Would you like to play with me?');
+
+$start.click(function() {
+  start_bool = 1;
+  game.load("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  board.position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  board.orientation('white');
+  $fen.html("");
+  $pgn.html("");
+  if(martycolor == "b"){
+    game.header('White', $wn.val());
+    game.header('Black', 'MartyBot L5');
+  } else if(martycolor == "w"){
+    game.header('Black', $wn.val());
+    game.header('White', 'MartyBot L5');
+  }
+  if(martycolor == "w"){
+    board.position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+    board.orientation('black');
+    window.setTimeout(makeMove, 250);
+  }
+  Marty.load(game.fen());
+  updateStatus();
+});
+
+
+function getBestMove(game) {
+  Marty.load(game.fen());
+  var newGameMoves = game.moves();
+  var opening = checkOpeningData(game.fen());
+  if(opening != false){
+    for (var i = 0; i < newGameMoves.length; i++) {
+      if(newGameMoves[i] == opening){
+        return opening;
+      }
+    }
+  }
+  return Marty.AiMove();
+}
+
+function chessprogressbar() {
+  $('.chessprogressbar .progressbar').each(function (index, item){
+    $(item).attr("style", $(item).attr("style")+"height: "+$(item).attr("progress")+"%;");
+  });
+}
+
+function makeMove () {
+  MartySay('Hmm....');
+  updateStatus();
+  var possibleMoves = game.moves();
+
+  if (possibleMoves.length === 0) return;
+
+  var possibleMoves = game.moves();
+
+  if (game.game_over() === true ||
+    game.in_draw() === true ||
+    possibleMoves.length === 0) return;
+  var bestMove = getBestMove(game);
+  game.move(bestMove);
+  board.position(game.fen());
+
+  updateStatus();
+}
+
+
+function updateStatus() {
+  if(start_bool == 0){
+    if(martycolor == "b"){
+      game.header('White', $wn.val());
+      game.header('Black', 'MartyBot L5');
+    } else if(martycolor == "w"){
+      game.header('Black', $wn.val());
+      game.header('White', 'MartyBot L5');
+    }
+  }
+  var moveColor = 'White';
+  if (game.turn() === 'b') {
+    moveColor = 'Black';
+  }
+  if (game.in_checkmate()) {
+    status = 'Game over, ' + moveColor + ' is in checkmate.';
+    if(martycolor == game.turn()){
+	  MartySay('Checkmate! Whoops, I lost. Would you like another round?');
+	} else {
+	  MartySay('Checkmate! Oops, you lost.');
+	}
+  } else if (game.in_draw()) {
+    status = 'Game over, drawn position';
+	MartySay('Oh, it`s a draw. Would you like another round?');
+  } else {
+    status = moveColor + ' to move';
+    if (game.in_check()) {
+      status += ', ' + moveColor + ' is in check';
+	  if(martycolor == game.turn()){
+		MartySay('Hmm, I`ve been checked.');
+	  } else {
+	    MartySay('You`ve been checked. i like check!');
+	  }
+    }
+  }
+  $fen.html(game.fen());
+  $pgn.html(game.pgn());
+  var $chessprogressbar = $("#chessprogressbar");
+  //$chessprogressbar.attr("progress", 100-(49+evaluateBoard(game.board())));
+  chessprogressbar();
+}
+
+function onDragStart (source, piece, position, orientation) {
+  if (game.game_over()) return false;
+  if (piece.search(/^${martycolor}/) !== -1) return false;
+}
+function onDrop (source, target) {
+  var move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q'
+  });
+  
+  if (move === null) return 'snapback';
+  window.setTimeout(makeMove, 250);
+}
+
+
+function onSnapEnd () {
+  board.clearCircles();
+  board.position(game.fen());
+}
+
+function pieceTheme (piece) {
+  if (piece.search(/w/) !== -1) {
+    return 'https://urobot2011.github.io/SaveMartin/MartyBot/chessboardjs/img/chesspieces/wikipedia/' + piece + '.png';
+  }
+  return 'https://urobot2011.github.io/SaveMartin/MartyBot/chessboardjs/img/chesspieces/wikipedia/' + piece + '.png';
+}
+
+var config = {
+  pieceTheme: pieceTheme,
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+};
+board = Chessboard('myBoard', config);
+// add
+board.addCircle = function(to){
+  var $circle = $("[data-square='"+to+"']");
+  if($circle != undefined){
+    var circle = $circle.html();
+    if(!circle.includes("img")){
+      $circle.html($circle.html()+"<chess-circle></chess-circle>");
+    } else {
+      //$circle.html(circle + "<chess-eat></chess-eat>");
+      $circle.addClass('highlight-black');
+    }
+  } else {
+    return null;
+  }
+};
+board.clearCircles = function(){
+  var $circles = $("[data-square]");
+  if($circles != undefined){
+    $circles.each(function(index, element){
+      var circle = $(element).html();
+      circle = circle.replace('<chess-circle></chess-circle>', '');
+      circle = circle.replace('<chess-eat></chess-eat>', '');
+      $(element).html(circle);
+      $(element).removeClass('highlight-black');
+    });
+  } else {
+    return null;
+  }
+};
+
 
     </script>
     <div>
