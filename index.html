@@ -160,6 +160,13 @@
         Accessibility
     };
     window['CHESSBOARD'] = CHESSBOARD;
+    window['CHESSBOARD'] = {
+        INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE, 
+        MARKER_TYPE, Markers, 
+        ARROW_TYPE, Arrows, 
+        PromotionDialog,
+        Accessibility
+    };
     var boardabc111 = CHESSBOARD;
     </script>
     <script>
@@ -177,8 +184,6 @@
         var mycolor = 'white';
         var start_bool = 0;
         var MakeMove;
-        window.CHESSBOARD = boardabc111;
-        window['CHESSBOARD'] = boardabc111;
         window.onload = function () {
             var { INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE,
                 MARKER_TYPE, Markers,
