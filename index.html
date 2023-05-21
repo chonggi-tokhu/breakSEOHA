@@ -151,8 +151,7 @@
     import {ARROW_TYPE, Arrows} from "./cm-chessboard/extensions/arrows/Arrows.js"
     import {PromotionDialog} from "./cm-chessboard/extensions/promotion-dialog/PromotionDialog.js";
     import {Accessibility} from "./cm-chessboard/extensions/accessibility/Accessibility.js";
-    </script>
-    <script>
+
     var CHESSBOARD = {
         INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE, 
         MARKER_TYPE, Markers, 
@@ -161,6 +160,9 @@
         Accessibility
     };
     window['CHESSBOARD'] = CHESSBOARD;
+    var boardabc111 = CHESSBOARD;
+    </script>
+    <script>
         var board;
         var game;
         var Marty;
@@ -175,6 +177,8 @@
         var mycolor = 'white';
         var start_bool = 0;
         var MakeMove;
+        window.CHESSBOARD = boardabc111;
+        window['CHESSBOARD'] = boardabc111;
         window.onload = function () {
             var { INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE,
                 MARKER_TYPE, Markers,
