@@ -8,10 +8,13 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://urobot2011.github.io/SaveMartin/MartyBot/chessboardjs/css/chessboard-1.0.0.min.css">
-        <link rel="shortcut icon" type="image/x-icon"
-        href="https://images.chesscomfiles.com/uploads/v1/group/459847.a25844d2.160x160o.85394546eb75.png"><meta name="viewport" content="width=device-width, initial-scale=1"><title>colourgrey-marty bot L4</title>
-        <style>cgreyico1 {
-        
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://images.chesscomfiles.com/uploads/v1/group/459847.a25844d2.160x160o.85394546eb75.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>colourgrey-marty bot L4</title>
+    <style>
+        cgreyico1 {
+
             height: 20px;
             width: 20px;
             position: relative;
@@ -315,7 +318,7 @@
             </div>
             <div class="mb-3">
                 <button type="button" class="btn btn-primary" id="start">start<cgreyico1 type="lol.gif"></cgreyico1>
-                    </button>
+                </button>
                 <button id="resignBtn" class="btn btn-primary" onclick="checkforgameover1 = true;">resign</button>
 
             </div>
@@ -356,8 +359,6 @@
             <script>
 
 
-
-
                 var board;
                 var game;
                 var Marty;
@@ -369,7 +370,6 @@
                 var $martycolor = $('#martycolor');
                 var $ratingUp = $('#ratingUp');
                 var martycolor = "b";
-                var $pgnsss = $("#loadpgn123")
                 var mycolor = 'white';
                 var start_bool = 0;
                 var MakeMove;
@@ -382,6 +382,94 @@
                     } = window['CHESSBOARD'];
                     game = new Chess();
                     Marty = new MartyEngine();
+
+                    $martycolor.change(function () {
+                        martycolor = $(this).val();
+                        mycolor = martycolor == 'b' ? 'white' : 'black';
+                    });
+
+                    function MartySay(say) {
+                        var $MartySay = $('MartySay');
+                        $MartySay.html(say);
+                    }
+
+                    MartySay('Hello? I am Marty. Would you like to play with me?');
+
+                    function chessprogressbar() {
+                        $('.chessprogressbar .progressbar').each(function (index, item) {
+                            $(item).attr("style", $(item).attr("style") + "height: " + $(item).attr("progress") + "%;");
+                        });
+                    }
+
+                    function makeEngineMove(chessboard = null) {
+                        board.setPosition(game.fen(), true);
+                        setTimeout(() => {
+                            MartySay('Hmm....');
+                            updateStatus();
+                            var possibleMoves = game.moves();
+
+                            if (game.game_over() === true ||
+                                game.in_draw() === true ||
+                                possibleMoves.length === 0) return;
+                            var bestMove = getBestMove(game);
+                            game.move(bestMove);
+                            board.setPosition(game.fen(), true);
+                            board.enableMoveInput(inputHandler, COLOR[mycolor]);
+                            updateStatus();
+                        }, 500);
+                    }
+                    MakeMove = makeEngineMove;
+
+                    function inputHandler(event) {
+                        event.chessboard.removeMarkers(MARKER_TYPE.dot)
+                        event.chessboard.removeMarkers(MARKER_TYPE.bevel)
+                        if (event.type === INPUT_EVENT_TYPE.moveInputStarted) {
+                            const moves = game.moves({ square: event.square, verbose: true })
+                            for (const move of moves) { // draw dots on possible squares
+                                if (move.promotion && move.promotion !== "q") {
+                                    continue
+                                }
+                                if (event.chessboard.getPiece(move.to)) {
+                                    event.chessboard.addMarker(MARKER_TYPE.bevel, move.to)
+                                } else {
+                                    event.chessboard.addMarker(MARKER_TYPE.dot, move.to)
+                                }
+                            }
+                            return moves.length > 0
+                        } else if (event.type === INPUT_EVENT_TYPE.validateMoveInput) {
+                            const move = { from: event.squareFrom, to: event.squareTo, promotion: event.promotion }
+                            const result = game.move(move)
+                            if (result) {
+                                event.chessboard.disableMoveInput()
+                                this.chessboard.state.moveInputProcess.then(() => { // wait for the move input process has finished
+                                    this.chessboard.setPosition(game.fen(), true).then(() => { // update position, maybe castled and wait for animation has finished
+                                        makeEngineMove(event.chessboard);
+                                    })
+                                })
+                            } else {
+                                // promotion?
+                                let possibleMoves = game.moves({ square: event.squareFrom, verbose: true })
+                                for (const possibleMove of possibleMoves) {
+                                    if (possibleMove.promotion && possibleMove.to === event.squareTo) {
+                                        event.chessboard.showPromotionDialog(event.squareTo, COLOR[mycolor], (result) => {
+                                            console.log("promotion result", result);
+                                            if (result) {
+                                                game.move({ from: event.squareFrom, to: event.squareTo, promotion: result.piece.charAt(1) })
+                                                event.chessboard.setPosition(game.fen(), true)
+                                                makeEngineMove(event.chessboard)
+                                            } else {
+                                                event.chessboard.setPosition(game.fen(), true)
+                                                event.chessboard.enableMoveInput(inputHandler, COLOR[mycolor])
+                                            }
+                                        })
+                                        return true
+                                    }
+                                }
+                            }
+                            return result
+                        }
+                    }
+
                     board = new Chessboard(document.getElementById("myBoard"), {
                         position: game.fen(),
                         assetsUrl: "./lib/cm-chessboard/assets/",
@@ -409,182 +497,86 @@
                             }
                         }]
                     });
-                };
+                    board.enableMoveInput(inputHandler, COLOR[mycolor]);
 
-                $martycolor.change(function () {
-                    martycolor = $(this).val();
-                    mycolor = martycolor == 'b' ? 'white' : 'black';
-
-                });
-
-
-                function MartySay(say) {
-                    var $MartySay = $('MartySay');
-                    $MartySay.html(say);
-                }
-
-                MartySay('Hello? I am Marty. Would you like to play with me?');
-
-                function chessprogressbar() {
-                    $('.chessprogressbar .progressbar').each(function (index, item) {
-                        $(item).attr("style", $(item).attr("style") + "height: " + $(item).attr("progress") + "%;");
-                    });
-                }
-
-                function makeEngineMove(chessboard = null) {
-                    board.setPosition(game.fen(), true);
-                    setTimeout(() => {
-                        MartySay('Hmm....');
-                        updateStatus();
-                        var possibleMoves = game.moves();
-
-                        if (game.game_over() === true ||
-                            game.in_draw() === true ||
-                            possibleMoves.length === 0) return;
-                        var bestMove = getBestMove(game);
-                        game.move(bestMove);
-                        board.setPosition(game.fen(), true);
-                        board.enableMoveInput(inputHandler, COLOR[mycolor]);
-                        updateStatus();
-                    }, 500);
-                }
-                MakeMove = makeEngineMove;
-
-                function inputHandler(event) {
-                    event.chessboard.removeMarkers(MARKER_TYPE.dot)
-                    event.chessboard.removeMarkers(MARKER_TYPE.bevel)
-                    if (event.type === INPUT_EVENT_TYPE.moveInputStarted) {
-                        const moves = game.moves({ square: event.square, verbose: true })
-                        for (const move of moves) { // draw dots on possible squares
-                            if (move.promotion && move.promotion !== "q") {
-                                continue
-                            }
-                            if (event.chessboard.getPiece(move.to)) {
-                                event.chessboard.addMarker(MARKER_TYPE.bevel, move.to)
+                    $start.click(function () {
+                        setTimeout(() => {
+                            start_bool = 1;
+                            game.load("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+                            board.setPosition("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+                            $fen.html("");
+                            $pgn.html("");
+                            board.setOrientation(mycolor.charAt(0));
+                            board.enableMoveInput(inputHandler, COLOR[mycolor]);
+                            if (martycolor == "b") {
+                                game.header('White', $wn.val());
+                                game.header('Black', 'MartyBot L5');
                             } else {
-                                event.chessboard.addMarker(MARKER_TYPE.dot, move.to)
+                                game.header('Black', $wn.val());
+                                game.header('White', 'MartyBot L5');
+                                window.setTimeout(makeEngineMove, 250);
+                            }
+                            updateStatus();
+                        }, 500);
+                    });
+
+                    function getBestMove(game) {
+                        Marty.load(game.fen())
+                        var bestMove = Marty.Engine($ratingUp.is(":checked") ? 8 : 2);
+                        return bestMove;
+                    }
+                    function evaluateScore(score) {
+                        if (score.includes('M')) {
+                            return Math.abs(parseFloat(score)) == parseFloat(score) ? 0 : 100;
+                        } else {
+                            return Math.max(0, Math.min(100, (parseFloat(score) + 10) * 5));
+                        }
+                    }
+
+                    function updateStatus() {
+                        if (start_bool == 0) {
+                            if (martycolor == "b") {
+                                game.header('White', $wn.val());
+                                game.header('Black', 'MartyBot L5');
+                            } else if (martycolor == "w") {
+                                game.header('Black', $wn.val());
+                                game.header('White', 'MartyBot L5');
                             }
                         }
-                        return moves.length > 0
-                    } else if (event.type === INPUT_EVENT_TYPE.validateMoveInput) {
-                        const move = { from: event.squareFrom, to: event.squareTo, promotion: event.promotion }
-                        const result = game.move(move)
-                        if (result) {
-                            event.chessboard.disableMoveInput()
-                            this.chessboard.state.moveInputProcess.then(() => { // wait for the move input process has finished
-                                this.chessboard.setPosition(game.fen(), true).then(() => { // update position, maybe castled and wait for animation has finished
-                                    makeEngineMove(event.chessboard);
-                                })
-                            })
+                        var moveColor = 'White';
+                        if (game.turn() === 'b') {
+                            moveColor = 'Black';
+                        }
+                        if (game.in_checkmate()) {
+                            status = 'Game over, ' + moveColor + ' is in checkmate.';
+                            if (martycolor == game.turn()) {
+                                MartySay('Checkmate! Whoops, I lost. Would you like another round?');
+                            } else {
+                                MartySay('Checkmate! Oops, you lost.');
+                            }
+                        } else if (game.in_draw()) {
+                            status = 'Game over, drawn position';
+                            MartySay('Oh, it`s a draw. Would you like another round?');
                         } else {
-                            // promotion?
-                            let possibleMoves = game.moves({ square: event.squareFrom, verbose: true })
-                            for (const possibleMove of possibleMoves) {
-                                if (possibleMove.promotion && possibleMove.to === event.squareTo) {
-                                    event.chessboard.showPromotionDialog(event.squareTo, COLOR[mycolor], (result) => {
-                                        console.log("promotion result", result);
-                                        if (result) {
-                                            game.move({ from: event.squareFrom, to: event.squareTo, promotion: result.piece.charAt(1) })
-                                            event.chessboard.setPosition(game.fen(), true)
-                                            makeEngineMove(event.chessboard)
-                                        } else {
-                                            event.chessboard.setPosition(game.fen(), true)
-                                            event.chessboard.enableMoveInput(inputHandler, COLOR[mycolor])
-                                        }
-                                    })
-                                    return true
+                            status = moveColor + ' to move';
+                            if (game.in_check()) {
+                                status += ', ' + moveColor + ' is in check';
+                                if (martycolor == game.turn()) {
+                                    MartySay('Hmm, I`ve been checked.');
+                                } else {
+                                    MartySay('You`ve been checked. i like check!');
                                 }
                             }
                         }
-                        return result
+                        $fen.html(game.fen());
+                        $pgn.html(game.pgn());
+                        var $chessprogressbar = $("#chessprogressbar");
+                        var score = evaluateScore(Marty.chess.engine.sea.scoreText || '0.00');//Math.abs(Marty.chess.engine.sea.score) > Marty.chess.const.MATE - Marty.chess.const.MAXDEPTH ? (Math.abs(Marty.chess.engine.sea.score) == Marty.chess.engine.sea.score ? 100 : 0) : 100-(50+Marty.chess.engine.sea.score);
+                        $chessprogressbar.attr("progress", score);
+                        $chessprogressbar.html(Marty.chess.engine.sea.scoreText);
+                        chessprogressbar();
                     }
-                }
-
-
-                board.enableMoveInput(inputHandler, COLOR[mycolor]);
-
-                $start.click(function () {
-                    setTimeout(() => {
-                        start_bool = 1;
-                        game.load($pgnsss.html());
-                        board.setPosition($pgnsss.html());
-                        $fen.html("");
-                        $pgn.html("");
-                        board.setOrientation(mycolor.charAt(0));
-                        board.enableMoveInput(inputHandler, COLOR[mycolor]);
-                        if (martycolor == "b") {
-                            game.header('White', $wn.val());
-                            game.header('Black', 'MartyBot L5');
-                        } else {
-                            game.header('Black', $wn.val());
-                            game.header('White', 'MartyBot L5');
-                            window.setTimeout(makeEngineMove, 250);
-                        }
-                        updateStatus();
-                    }, 500);
-                });
-
-                function getBestMove(game) {
-                    Marty.load(game.fen())
-                    var bestMove = Marty.Engine($ratingUp.is(":checked") ? 8 : 2);
-                    return bestMove;
-                }
-                function evaluateScore(score) {
-                    if (score.includes('M')) {
-                        return Math.abs(parseFloat(score)) == parseFloat(score) ? 0 : 100;
-                    } else {
-                        return Math.max(0, Math.min(100, (parseFloat(score) + 10) * 5));
-                    }
-                }
-
-                function updateStatus() {
-                    if (start_bool == 0) {
-                        if (martycolor == "b") {
-                            game.header('White', $wn.val());
-                            game.header('Black', 'MartyBot L5');
-                        } else if (martycolor == "w") {
-                            game.header('Black', $wn.val());
-                            game.header('White', 'MartyBot L5');
-                        }
-                    }
-                    var moveColor = 'White';
-                    if (game.turn() === 'b') {
-                        moveColor = 'Black';
-                    }
-                    if (game.in_checkmate()) {
-                        status = 'Game over, ' + moveColor + ' is in checkmate.';
-                        if (martycolor == game.turn()) {
-                            MartySay('Checkmate! Whoops, I lost. Would you like another round?');
-                        } else {
-                            MartySay('Checkmate! Oops, you lost.');
-                        }
-                    } else if (game.in_draw()) {
-                        status = 'Game over, drawn position';
-                        MartySay('Oh, it`s a draw. Would you like another round?');
-                    } else {
-                        status = moveColor + ' to move';
-                        if (game.in_check()) {
-                            status += ', ' + moveColor + ' is in check';
-                            if (martycolor == game.turn()) {
-                                MartySay('Hmm, I`ve been checked.');
-                            } else {
-                                MartySay('You`ve been checked. i like check!');
-                            }
-                        }
-                    }
-                    $fen.html(game.fen());
-                    $pgn.html(game.pgn());
-                    var $chessprogressbar = $("#chessprogressbar");
-                    var score = evaluateScore(Marty.chess.engine.sea.scoreText || '0.00');//Math.abs(Marty.chess.engine.sea.score) > Marty.chess.const.MATE - Marty.chess.const.MAXDEPTH ? (Math.abs(Marty.chess.engine.sea.score) == Marty.chess.engine.sea.score ? 100 : 0) : 100-(50+Marty.chess.engine.sea.score);
-                    $chessprogressbar.attr("progress", score);
-                    $chessprogressbar.html(Marty.chess.engine.sea.scoreText);
-                    chessprogressbar();
-                }
-
-
-                document.getElementById("chesspiecesxxx").value = "wikipedia";
-
-
+                };
 
 
 
