@@ -1,637 +1,1229 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 
 <head>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MartyBot L5</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://urobot2011.github.io/SaveMartin/MartyBot/chessboardjs/css/chessboard-1.0.0.min.css">
-    <link rel="shortcut icon" type="image/x-icon"
-        href="https://images.chesscomfiles.com/uploads/v1/group/459847.a25844d2.160x160o.85394546eb75.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>colourgrey-marty bot L4</title>
+    <link rel="stylesheet" href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/chessboard.css">
+    <link rel="stylesheet" href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/extensions/markers/markers.css">
+    <link rel="stylesheet" href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/extensions/arrows/arrows.css">
+    <link rel="stylesheet" href="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/extensions/promotion-dialog/promotion-dialog.css">
     <style>
-        cgreyico1 {
+        .chessprogressbar {
+            left: 18px;
+            position: absolute;
 
-            height: 20px;
+        }
+
+        .chessprogressbar ul {
+            /*position: relative;*/
+            position: absolute;
+            padding: 0;
+            list-style: none;
+            height: 400px;
+            margin: 0;
+        }
+
+        .chessprogressbar ul li {
+            background-color: #EEEEEE;
             width: 20px;
-            position: relative;
-            display: block;
+            height: 100%;
+            border-radius: 10px;
         }
 
-        #pokpal1 {
-            background-image: var(--merong11);
-            border-radius: 66%;
-            width: 60px;
-            height: 60px;
-        }
-
-        chess-circle {
-            display: inline-block;
-            width: 50%;
+        .chessprogressbar ul li .progressbar {
+            position: absolute;
+            border-radius: 10px 10px 0 0;
+            background-color: #262421;
+            width: 20px;
             height: 50%;
-            background-color: rgba(100, 160, 100, 0.6);
-            border-radius: 100%;
-            margin: 25%;
+            /*height: attr(progress %);*/
+            /*animation: css-progressbar 2s ease-out;*/
         }
 
-        .footer {
-            background: var(--lightgrey);
+        .progressbar {
+            color: #ff0000;
+            font-size: 10px;
         }
 
-        .footer p.license {
-            text-align: center;
-            width: 100%;
-        }
+        @keyframes css-progressbar {
+            0% {
+                height: 0px;
+            }
 
-        #MartySay.dark {
-            background: #204739;
-        }
-
-        .switch {
-            height: 83px;
-            width: 234px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -51px;
-            margin-left: -117px;
-            -moz-border-radius: 40px;
-            -webkit-border-radius: 40px;
-            border-radius: 40px;
-            background-color: #d1d1d1;
-            *zoom: 1;
-            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFD1D1D1', endColorstr='#FFFEFBF7');
-            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2QxZDFkMSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZlZmJmNyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
-            background-size: 100%;
-            background-image: -moz-linear-gradient(top, #d1d1d1 0%, #fefbf7 100%);
-            background-image: -webkit-linear-gradient(top, #d1d1d1 0%, #fefbf7 100%);
-            background-image: linear-gradient(to bottom, #d1d1d1 0%, #fefbf7 100%);
-        }
-
-        .switch:after {
-            height: 70px;
-            width: 220px;
-            position: absolute;
-            top: 7px;
-            left: 7px;
-            content: '';
-            z-index: 2;
-            -moz-border-radius: 40px;
-            -webkit-border-radius: 40px;
-            border-radius: 40px;
-            background-color: #a5a5a5;
-            *zoom: 1;
-            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFA5A5A5', endColorstr='#FFE8D7BE');
-            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E1YTVhNSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2U4ZDdiZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
-            background-size: 100%;
-            background-image: -moz-linear-gradient(top, #a5a5a5 0%, #e8d7be 100%);
-            background-image: -webkit-linear-gradient(top, #a5a5a5 0%, #e8d7be 100%);
-            background-image: linear-gradient(to bottom, #a5a5a5 0%, #e8d7be 100%);
-        }
-
-        .checkbox {
-            height: 60px;
-            width: 210px;
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            z-index: 10000;
-            -moz-border-radius: 35px;
-            -webkit-border-radius: 35px;
-            border-radius: 35px;
-            -moz-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-            -webkit-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-            box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-            background-color: #e7f4a0;
-            *zoom: 1;
-            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFF28A00', endColorstr='#FFD86517');
-            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyOGEwMCIvPjxzdG9wIG9mZnNldD0iNjclIiBzdG9wLWNvbG9yPSIjZTY1MzAwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZDg2NTE3Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-            background-size: 100%;
-            background-image: linear-gradient(#f2fa90, #f8ff6b, #d8ff07);
-            background-image: linear-gradient(to top, #f2fa90, #f8ff6b, #d8ff07 100%);
-            background-image: linear-gradient(to bottom, #f2fa90, #f8ff6b, #d8ff07 100%);
-
-        }
-
-        .checkbox:after {
-            transition: background 0.4s ease;
-            height: 60px;
-            width: 117px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            content: '';
-            z-index: 9999;
-            -moz-border-radius: 35px 0 0 35px;
-            -webkit-border-radius: 35px;
-            border-radius: 35px 0 0 35px;
-            -moz-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-            -webkit-box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-            box-shadow: inset 0px 9px 15px rgba(0, 0, 0, 0.53), inset 0 -8px 10px rgba(0, 0, 0, 0.14);
-            background-color: #718d99;
-            *zoom: 1;
-            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFB1DD00', endColorstr='#FF84AD00');
-            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2IxZGQwMCIvPjxzdG9wIG9mZnNldD0iNjclIiBzdG9wLWNvbG9yPSIjN2VhZjAwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjODRhZDAwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-            background-size: 100%;
-            background: linear-gradient(to top, #718d99 0%, #718d83 67%, #848890 100%);
-            background-image: -webkit-linear-gradient(to top, #718d99 0%, #718d83 67%, #848890 100%);
-            background: linear-gradient(to bottom, #718d99 0%, #718d83 67%, #848890 100%);
-            animation: switchan6 1s infinite;
-        }
-
-        .control {
-            height: 73px;
-            width: 138px;
-            outline: 0;
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            z-index: 10001;
-            appearance: none;
-            -moz-border-radius: 36.5px;
-            -webkit-border-radius: 36.5px;
-            border-radius: 36.5px;
-            -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.55), inset 0 2px 0 #fafafa, inset 0 -2px 0 #ada39d;
-            -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.55), inset 0 2px 0 #fafafa, inset 0 -2px 0 #ada39d;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.55), inset 0 2px 0 #fafafa, inset 0 -2px 0 #ada39d;
-            background-color: #efefef;
-            *zoom: 1;
-            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEFEFEF', endColorstr='#FFBCB9B8');
-            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIzMiUiIHN0b3AtY29sb3I9IiNlZmVmZWYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiY2I5YjgiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
-            background-size: 100%;
-            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(32%, #efefef), color-stop(100%, #bcb9b8));
-            background-image: -moz-linear-gradient(top, #efefef 32%, #bcb9b8 100%);
-            background-image: -webkit-linear-gradient(top, #efefef 32%, #bcb9b8 100%);
-            background-image: linear-gradient(to bottom, #efefef 32%, #bcb9b8 100%);
-            -moz-transition: all 0.2s ease-in-out;
-            -o-transition: all 0.2s ease-in-out;
-            -webkit-transition: all 0.2s ease-in-out;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .control:checked {
-            left: 91px;
-        }
-
-        .control:after {
-            height: 40px;
-            width: 40px;
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            content: '';
-            z-index: 10001;
-            -moz-border-radius: 50%;
-            -webkit-border-radius: 50%;
-            border-radius: 50%;
-            background-color: #c2c0be;
-            *zoom: 1;
-            filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFC2C0BE', endColorstr='#FFD7D7D7');
-            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2MyYzBiZSIvPjxzdG9wIG9mZnNldD0iNzIlIiBzdG9wLWNvbG9yPSIjZDdkN2Q3Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-            background-size: 100%;
-            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c2c0be), color-stop(72%, #d7d7d7));
-            background-image: -moz-linear-gradient(top, #c2c0be 0%, #d7d7d7 72%);
-            background-image: -webkit-linear-gradient(top, #c2c0be 0%, #d7d7d7 72%);
-            background-image: linear-gradient(to bottom, #c2c0be 0%, #d7d7d7 72%);
-        }
-
-        #movecommand1 {
-            background: var(--dark);
-            color: #ecf;
-        }
-
-        #movecommand1 input {
-            background: var(--dark);
-            color: #ecf;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .hehehe1 {
-                height: 385px;
-                width: 400px;
-                overflow: scroll;
+            100% {
+                height: 50%;
             }
         }
     </style>
 </head>
 
 <body>
-    <div id="body734" style="width: 100%;height: 2000px;">
-        <a href="/aass/docs/pages/films.html">올해 신작 영화들</a>
-        <h1>colou<span onclick="this.style.color='blue';">rgrey-b</span>ot L4</h1>
-        <h2 onclick="this.classList.add('merong8989')" role="button">눌러보시면 무지개가 빤짝빤짝!!!<br>April Fools' Day!!!오늘은
-            만우절입니다. <br>만우절 장난을 견디지 못해 지친 컬그봇이 고장났다고 합니다.<br> 낚시인거 아시죠???</h2>
-        <div class="mb-3">
-            <select id="boardthemeselect">
-                <option value="default" selected>default board theme</option>
-                <option value="classic">board theme:classic</option>
-                <option value="chocolate">board theme:chocolate</option>
-                <option value="bnw">board theme:black and white</option>
-                <option value="green">board theme in colour:green</option>
-                <option value="purple">board theme in colour:purple</option>
-                <option value="blue">board theme in colour:blue</option>
-                <option value="brown">board theme in colour:brown</option>
-                <option value="orange">board theme in colour:orange</option>
-                <option value="marble">board theme in texture:marble</option>
-                <option value="goldsilver">board theme in texture:gold and silver</option>
-                <option value="walnut">board theme in texture:walnut</option>
-                <option value="wood">board theme in texture:wood</option>
-                <option value="neowood">board theme in texture:neo-wood</option>
-                <option value="ivory">board theme in texture:ivory and ebony wood</option>
-            </select>
-            <button type="button" class="btn btn-primary" onclick="colourchangeff1()" id="colourchange1">change board
-                theme</button>
-        </div>
-        <div class="mb-3">
-            <select id="piecethemes1">
-                <option value="wikipedia" selected>default chess pieces(wikipedia)</option>
-                <option value="fromchesscom/alpha">alpha(from chess.com)</option>
-                <option value="fromchesscom/marble">marble(from chess.com)</option>
-                <option value="fromchesscom/wood">wood(from chess.com)</option>
-                <option value="fromchesscom/neo">neo(from chess.com)</option>
-                <option value="fromchesscom/neo-wood">neo-wood(from chess.com)</option>
-                <option value="colourgrey-style-pieces">custom(colourgrey)</option>
-            </select>
-            <h5><b style="color: #ff0060;text-decoration: underline wavy;">주의:컬러그레이봇과 경기 중에는 <br> 기물테마(piece theme)를 바꾸지
-                    마세요.<br>지금까지 뒀던 포지션이 초기화됩니다.</b><br><b>그리고 레벨을 '고수' 이상으로 설정하시면 매우 느려집니다.</b></h5>
-            <div class="boardinner123">
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-                    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-                    crossorigin="anonymous"></script>
-                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-                <div>
-                    <div class="hehehe1">
-                        <div id="myBoard" style="width: 400px"></div>
-                    </div>
+    <p>
+        MartyBot L5
+    </p>
+    <colourchange></colourchange>
+    <div class="text-center" style="width: 400px">
+        <div class="row align-items-start">
+            <div class="col">
+                MartyBot L5
+            </div>
+            <div class="col">
+                <!--One of three columns-->
+            </div>
+            <div class="col">
+                <!--One of three columns-->
+            </div>
+            <div class="container" style="position: relative;">
+                <div class="chessprogressbar">
+                    <ul>
+                        <li style="left: 0px;">
+                            <span class="progressbar" style="left: 0px;height: 50%;height: 49.6%;" progress="49.6"
+                                id="chessprogressbar">-0.08</span>
+                        </li>
+                    </ul>
                 </div>
-                <div>
-                    <p contenteditable="true" id="loadpgn123">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-                    </p>
-
-
-                </div>
-
-                <div class="card">
-                    <div id="scoreblock">
-                        <h3><span style="color:var(--green);">W</span>:<span id="scorew"></span></h3>
-                        <h3><span style="color:var(--nred);">L</span>:<span id="scorel"></span></h3>
-                    </div>
-                    <div class="card-body" id="MartySay">
-                        <div id="MartySay1"></div>
-                        <small class="license">license:developer:colourgrey-urobot2011chess공동개발,<br>오픈 소스(출처 명시
-                            필수)<br>(디자인-colourgrey,봇
-                            인공지능-urobot2011chess)</small>
-                    </div>
-                    <div id="movecommand1">
-                        <div id="movecommand2">
-                            your new move...
+                <div id="myBoard" style="width: 100%;position: relative;left: 30px;">
+                    <div style="width: 400px; height: 400px;"><svg width="100%" height="100%"
+                            class="cm-chessboard border-type-frame green" role="img" alt="W: Ke1 Qd1 Ra1 Rh1 Bc1 Bf1 Nb1 Ng1 a2 b2 c2 d2 f2 g2 h2 e4
+B: Ke8 Qd8 Ra8 Rh8 Bc8 Bf8 Nf6 Nb8 a7 b7 c7 d7 e7 f7 g7 h7">
+                            <g class="board input-enabled">
+                                <rect width="400" height="400" class="border"></rect>
+                                <rect x="16" y="16" width="368" height="368" class="border-inner"></rect>
+                                <rect x="16" y="338" width="46" height="46" class="square black" data-square="a1">
+                                </rect>
+                                <rect x="62" y="338" width="46" height="46" class="square white" data-square="b1">
+                                </rect>
+                                <rect x="108" y="338" width="46" height="46" class="square black" data-square="c1">
+                                </rect>
+                                <rect x="154" y="338" width="46" height="46" class="square white" data-square="d1">
+                                </rect>
+                                <rect x="200" y="338" width="46" height="46" class="square black" data-square="e1">
+                                </rect>
+                                <rect x="246" y="338" width="46" height="46" class="square white" data-square="f1">
+                                </rect>
+                                <rect x="292" y="338" width="46" height="46" class="square black" data-square="g1">
+                                </rect>
+                                <rect x="338" y="338" width="46" height="46" class="square white" data-square="h1">
+                                </rect>
+                                <rect x="16" y="292" width="46" height="46" class="square white" data-square="a2">
+                                </rect>
+                                <rect x="62" y="292" width="46" height="46" class="square black" data-square="b2">
+                                </rect>
+                                <rect x="108" y="292" width="46" height="46" class="square white" data-square="c2">
+                                </rect>
+                                <rect x="154" y="292" width="46" height="46" class="square black" data-square="d2">
+                                </rect>
+                                <rect x="200" y="292" width="46" height="46" class="square white" data-square="e2">
+                                </rect>
+                                <rect x="246" y="292" width="46" height="46" class="square black" data-square="f2">
+                                </rect>
+                                <rect x="292" y="292" width="46" height="46" class="square white" data-square="g2">
+                                </rect>
+                                <rect x="338" y="292" width="46" height="46" class="square black" data-square="h2">
+                                </rect>
+                                <rect x="16" y="246" width="46" height="46" class="square black" data-square="a3">
+                                </rect>
+                                <rect x="62" y="246" width="46" height="46" class="square white" data-square="b3">
+                                </rect>
+                                <rect x="108" y="246" width="46" height="46" class="square black" data-square="c3">
+                                </rect>
+                                <rect x="154" y="246" width="46" height="46" class="square white" data-square="d3">
+                                </rect>
+                                <rect x="200" y="246" width="46" height="46" class="square black" data-square="e3">
+                                </rect>
+                                <rect x="246" y="246" width="46" height="46" class="square white" data-square="f3">
+                                </rect>
+                                <rect x="292" y="246" width="46" height="46" class="square black" data-square="g3">
+                                </rect>
+                                <rect x="338" y="246" width="46" height="46" class="square white" data-square="h3">
+                                </rect>
+                                <rect x="16" y="200" width="46" height="46" class="square white" data-square="a4">
+                                </rect>
+                                <rect x="62" y="200" width="46" height="46" class="square black" data-square="b4">
+                                </rect>
+                                <rect x="108" y="200" width="46" height="46" class="square white" data-square="c4">
+                                </rect>
+                                <rect x="154" y="200" width="46" height="46" class="square black" data-square="d4">
+                                </rect>
+                                <rect x="200" y="200" width="46" height="46" class="square white" data-square="e4">
+                                </rect>
+                                <rect x="246" y="200" width="46" height="46" class="square black" data-square="f4">
+                                </rect>
+                                <rect x="292" y="200" width="46" height="46" class="square white" data-square="g4">
+                                </rect>
+                                <rect x="338" y="200" width="46" height="46" class="square black" data-square="h4">
+                                </rect>
+                                <rect x="16" y="154" width="46" height="46" class="square black" data-square="a5">
+                                </rect>
+                                <rect x="62" y="154" width="46" height="46" class="square white" data-square="b5">
+                                </rect>
+                                <rect x="108" y="154" width="46" height="46" class="square black" data-square="c5">
+                                </rect>
+                                <rect x="154" y="154" width="46" height="46" class="square white" data-square="d5">
+                                </rect>
+                                <rect x="200" y="154" width="46" height="46" class="square black" data-square="e5">
+                                </rect>
+                                <rect x="246" y="154" width="46" height="46" class="square white" data-square="f5">
+                                </rect>
+                                <rect x="292" y="154" width="46" height="46" class="square black" data-square="g5">
+                                </rect>
+                                <rect x="338" y="154" width="46" height="46" class="square white" data-square="h5">
+                                </rect>
+                                <rect x="16" y="108" width="46" height="46" class="square white" data-square="a6">
+                                </rect>
+                                <rect x="62" y="108" width="46" height="46" class="square black" data-square="b6">
+                                </rect>
+                                <rect x="108" y="108" width="46" height="46" class="square white" data-square="c6">
+                                </rect>
+                                <rect x="154" y="108" width="46" height="46" class="square black" data-square="d6">
+                                </rect>
+                                <rect x="200" y="108" width="46" height="46" class="square white" data-square="e6">
+                                </rect>
+                                <rect x="246" y="108" width="46" height="46" class="square black" data-square="f6">
+                                </rect>
+                                <rect x="292" y="108" width="46" height="46" class="square white" data-square="g6">
+                                </rect>
+                                <rect x="338" y="108" width="46" height="46" class="square black" data-square="h6">
+                                </rect>
+                                <rect x="16" y="62" width="46" height="46" class="square black" data-square="a7"></rect>
+                                <rect x="62" y="62" width="46" height="46" class="square white" data-square="b7"></rect>
+                                <rect x="108" y="62" width="46" height="46" class="square black" data-square="c7">
+                                </rect>
+                                <rect x="154" y="62" width="46" height="46" class="square white" data-square="d7">
+                                </rect>
+                                <rect x="200" y="62" width="46" height="46" class="square black" data-square="e7">
+                                </rect>
+                                <rect x="246" y="62" width="46" height="46" class="square white" data-square="f7">
+                                </rect>
+                                <rect x="292" y="62" width="46" height="46" class="square black" data-square="g7">
+                                </rect>
+                                <rect x="338" y="62" width="46" height="46" class="square white" data-square="h7">
+                                </rect>
+                                <rect x="16" y="16" width="46" height="46" class="square white" data-square="a8"></rect>
+                                <rect x="62" y="16" width="46" height="46" class="square black" data-square="b8"></rect>
+                                <rect x="108" y="16" width="46" height="46" class="square white" data-square="c8">
+                                </rect>
+                                <rect x="154" y="16" width="46" height="46" class="square black" data-square="d8">
+                                </rect>
+                                <rect x="200" y="16" width="46" height="46" class="square white" data-square="e8">
+                                </rect>
+                                <rect x="246" y="16" width="46" height="46" class="square black" data-square="f8">
+                                </rect>
+                                <rect x="292" y="16" width="46" height="46" class="square white" data-square="g8">
+                                </rect>
+                                <rect x="338" y="16" width="46" height="46" class="square black" data-square="h8">
+                                </rect>
+                            </g>
+                            <g class="coordinates" aria-hidden="true"><text class="coordinate file" x="35.55"
+                                    y="395.975" style="font-size: 11.5px">a</text><text class="coordinate file"
+                                    x="81.55" y="395.975" style="font-size: 11.5px">b</text><text
+                                    class="coordinate file" x="127.55" y="395.975"
+                                    style="font-size: 11.5px">c</text><text class="coordinate file"
+                                    x="173.54999999999998" y="395.975" style="font-size: 11.5px">d</text><text
+                                    class="coordinate file" x="219.54999999999998" y="395.975"
+                                    style="font-size: 11.5px">e</text><text class="coordinate file"
+                                    x="265.54999999999995" y="395.975" style="font-size: 11.5px">f</text><text
+                                    class="coordinate file" x="311.54999999999995" y="395.975"
+                                    style="font-size: 11.5px">g</text><text class="coordinate file"
+                                    x="357.54999999999995" y="395.975" style="font-size: 11.5px">h</text><text
+                                    class="coordinate rank" x="4.324324324324324" y="44.75"
+                                    style="font-size: 11.5px">8</text><text class="coordinate rank"
+                                    x="4.324324324324324" y="90.75" style="font-size: 11.5px">7</text><text
+                                    class="coordinate rank" x="4.324324324324324" y="136.75"
+                                    style="font-size: 11.5px">6</text><text class="coordinate rank"
+                                    x="4.324324324324324" y="182.75" style="font-size: 11.5px">5</text><text
+                                    class="coordinate rank" x="4.324324324324324" y="228.75"
+                                    style="font-size: 11.5px">4</text><text class="coordinate rank"
+                                    x="4.324324324324324" y="274.75" style="font-size: 11.5px">3</text><text
+                                    class="coordinate rank" x="4.324324324324324" y="320.75"
+                                    style="font-size: 11.5px">2</text><text class="coordinate rank"
+                                    x="4.324324324324324" y="366.75" style="font-size: 11.5px">1</text></g>
+                            <g class="markers-layer">
+                                <g class="markers"></g>
+                            </g>
+                            <g class="pieces-layer">
+                                <g class="pieces">
+                                    <g data-piece="wr" data-square="a1" transform="translate(16 338)">
+                                        <use href="#wr" class="piece" xlink:href="#wr"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wn" data-square="b1" transform="translate(62 338)">
+                                        <use href="#wn" class="piece" xlink:href="#wn"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wb" data-square="c1" transform="translate(108 338)">
+                                        <use href="#wb" class="piece" xlink:href="#wb"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wq" data-square="d1" transform="translate(154 338)">
+                                        <use href="#wq" class="piece" xlink:href="#wq"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wk" data-square="e1" transform="translate(200 338)">
+                                        <use href="#wk" class="piece" xlink:href="#wk"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wb" data-square="f1" transform="translate(246 338)">
+                                        <use href="#wb" class="piece" xlink:href="#wb"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wn" data-square="g1" transform="translate(292 338)">
+                                        <use href="#wn" class="piece" xlink:href="#wn"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wr" data-square="h1" transform="translate(338 338)">
+                                        <use href="#wr" class="piece" xlink:href="#wr"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="a2" transform="translate(16 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="b2" transform="translate(62 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="c2" transform="translate(108 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="d2" transform="translate(154 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="f2" transform="translate(246 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="g2" transform="translate(292 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="h2" transform="translate(338 292)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="wp" data-square="e4" transform="translate(200 200)">
+                                        <use href="#wp" class="piece" xlink:href="#wp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bn" data-square="f6" transform="translate(246 108)">
+                                        <use href="#bn" class="piece" xlink:href="#bn"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="a7" transform="translate(16 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="b7" transform="translate(62 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="c7" transform="translate(108 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="d7" transform="translate(154 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="e7" transform="translate(200 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="f7" transform="translate(246 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="g7" transform="translate(292 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bp" data-square="h7" transform="translate(338 62)">
+                                        <use href="#bp" class="piece" xlink:href="#bp"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="br" data-square="a8" transform="translate(16 16)">
+                                        <use href="#br" class="piece" xlink:href="#br"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bn" data-square="b8" transform="translate(62 16)">
+                                        <use href="#bn" class="piece" xlink:href="#bn"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bb" data-square="c8" transform="translate(108 16)">
+                                        <use href="#bb" class="piece" xlink:href="#bb"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bq" data-square="d8" transform="translate(154 16)">
+                                        <use href="#bq" class="piece" xlink:href="#bq"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bk" data-square="e8" transform="translate(200 16)">
+                                        <use href="#bk" class="piece" xlink:href="#bk"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="bb" data-square="f8" transform="translate(246 16)">
+                                        <use href="#bb" class="piece" xlink:href="#bb"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                    <g data-piece="br" data-square="h8" transform="translate(338 16)">
+                                        <use href="#br" class="piece" xlink:href="#br"
+                                            transform="translate(0 0) scale(1.15 1.15)"></use>
+                                    </g>
+                                </g>
+                            </g>
+                            <g class="markers-top-layer">
+                                <g class="markers"></g>
+                                <g class="arrows"></g>
+                                <g class="promotion-dialog-group"></g>
+                            </g>
+                        </svg></div>
+                    <div class="cm-chessboard-accessibility visually-hidden">
+                        <div>
+                            <h3 id="hl_form_pbygpq">Move piece</h3>
+                            <form aria-labelledby="hl_form_pbygpq">
+                                <label for="move_piece_input_from_pbygpq">Move from</label>
+                                <input class="input-from" type="text" size="2" id="move_piece_input_from_pbygpq">
+                                <label for="move_piece_input_to_pbygpq">Move to</label>
+                                <input class="input-to" type="text" size="2" id="move_piece_input_to_pbygpq">
+                                <button type="submit" class="button-move">Make move</button>
+                            </form>
                         </div>
-                        <input type="text" id="inputmovecommand1" placeholder="당신이 둘 수를 기보표기법대로 입력하세요"
-                            onkeydown="movecommandmove1(event)">
+                        <div>
+                            <h3 id="hl_table_pbygpq">Chessboard as table</h3>
+                            <div class="table">
+                                <table aria-labelledby="hl_table_pbygpq">
+                                    <tbody>
+                                        <tr>
+                                            <th></th>
+                                            <th scope="col">a</th>
+                                            <th scope="col">b</th>
+                                            <th scope="col">c</th>
+                                            <th scope="col">d</th>
+                                            <th scope="col">e</th>
+                                            <th scope="col">f</th>
+                                            <th scope="col">g</th>
+                                            <th scope="col">h</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">8</th>
+                                            <td>Rook Black</td>
+                                            <td>Knight Black</td>
+                                            <td>Bishop Black</td>
+                                            <td>Queen Black</td>
+                                            <td>King Black</td>
+                                            <td>Bishop Black</td>
+                                            <td></td>
+                                            <td>Rook Black</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">7</th>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                            <td>Pawn Black</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">6</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Knight Black</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">5</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">4</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Pawn White</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td></td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                            <td>Pawn White</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Rook White</td>
+                                            <td>Knight White</td>
+                                            <td>Bishop White</td>
+                                            <td>Queen White</td>
+                                            <td>King White</td>
+                                            <td>Bishop White</td>
+                                            <td>Knight White</td>
+                                            <td>Rook White</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 id="hl_lists_pbygpq">Pieces lists</h3>
+                            <div class="list">
+                                <h4 id="white_pbygpq">Pieces White</h4>
+                                <ul aria-labelledby="white_pbygpq" class="list-inline">
+                                    <li class="list-inline-item">King e1</li>
+                                    <li class="list-inline-item">Queen d1</li>
+                                    <li class="list-inline-item">Rook a1</li>
+                                    <li class="list-inline-item">Rook h1</li>
+                                    <li class="list-inline-item">Bishop c1</li>
+                                    <li class="list-inline-item">Bishop f1</li>
+                                    <li class="list-inline-item">Knight b1</li>
+                                    <li class="list-inline-item">Knight g1</li>
+                                    <li class="list-inline-item">Pawn a2</li>
+                                    <li class="list-inline-item">Pawn b2</li>
+                                    <li class="list-inline-item">Pawn c2</li>
+                                    <li class="list-inline-item">Pawn d2</li>
+                                    <li class="list-inline-item">Pawn f2</li>
+                                    <li class="list-inline-item">Pawn g2</li>
+                                    <li class="list-inline-item">Pawn h2</li>
+                                    <li class="list-inline-item">Pawn e4</li>
+                                </ul>
+                                <h4 id="black_pbygpq">Pieces Black</h4>
+                                <ul aria-labelledby="black_pbygpq" class="list-inline">
+                                    <li class="list-inline-item">King e8</li>
+                                    <li class="list-inline-item">Queen d8</li>
+                                    <li class="list-inline-item">Rook a8</li>
+                                    <li class="list-inline-item">Rook h8</li>
+                                    <li class="list-inline-item">Bishop c8</li>
+                                    <li class="list-inline-item">Bishop f8</li>
+                                    <li class="list-inline-item">Knight f6</li>
+                                    <li class="list-inline-item">Knight b8</li>
+                                    <li class="list-inline-item">Pawn a7</li>
+                                    <li class="list-inline-item">Pawn b7</li>
+                                    <li class="list-inline-item">Pawn c7</li>
+                                    <li class="list-inline-item">Pawn d7</li>
+                                    <li class="list-inline-item">Pawn e7</li>
+                                    <li class="list-inline-item">Pawn f7</li>
+                                    <li class="list-inline-item">Pawn g7</li>
+                                    <li class="list-inline-item">Pawn h7</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="wn" class="form-label">백 이름</label>
-                <input type="text" class="form-control" id="wn" placeholder="사용할 별명">
+            <div class="col">
+                <!--One of three columns-->
             </div>
-            <div class="mb-3">
-                <select class="form-select" aria-label="봇의 색" id="martycolor">
-                    <option selected value="b">봇의 색상(기본 흑)</option>
-                    <option value="w">백</option>
-                    <option value="b">흑</option>
-                    <input type="hidden" id="chesspiecesxxx">
-                </select>
+            <div class="col">
+                <!--One of three columns-->
             </div>
-            <div class="mb-3">
-                <h3>your chess skill level</h3>
-                <select id="userlevel">
-                    <option value="grandmaster">그랜드마스터</option>
-                    <option value="advance">고수</option>
-                    <option value="middle" selected>중수</option>
-                    <option value="hasu">하수</option>
-                    <option value="pyongsin">체스 병신</option>
-                </select>
+            <div class="col">
+                <!--One of three columns-->
             </div>
-            <div class="mb-3">
-                <button type="button" class="btn btn-primary" id="start">start<cgreyico1 type="lol.gif"></cgreyico1>
-                </button>
-                <button id="resignBtn" class="btn btn-primary" onclick="checkforgameover1 = true;">resign</button>
-
-            </div>
-
-            <label>FEN:</label>
-            <div id="fen"></div>
-            <label>PGN:</label>
-            <div id="pgn"></div>
-            <div class="nukebomb" onclick="alert('hello!');
-      for (n=0;n<190;n++) {
-        alert((190-n)+'hello!')
-      }
-      alert('0hello!')">
-                <p><button type="button">_</button></p>
-            </div>
-            <script
-                src="http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/Chessboard.js"></script>
-            <script type="module">
-                import { INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/Chessboard.js";
-                import { MARKER_TYPE, Markers } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/markers/Markers.js";
-                import { ARROW_TYPE, Arrows } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/arrows/Arrows.js"
-                import { PromotionDialog } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/promotion-dialog/PromotionDialog.js";
-                import { Accessibility } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/accessibility/Accessibility.js";
-                var CHESSBOARD = {
-                    INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE,
-                    MARKER_TYPE, Markers,
-                    ARROW_TYPE, Arrows,
-                    PromotionDialog,
-                    Accessibility
-                };
-                window['CHESSBOARD'] = CHESSBOARD;
-            </script>
-            <script src="/aass/docs/chess/martycopy1_files/popper.min.js"
-                integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-                crossorigin="anonymous"></script>
-            <script src="./src/MartyEngine.js"></script>
-            <script src="https://urobot2011.github.io/SaveMartin/MartyBot/chess/chess.js"></script>
-            <script>
-
-
-                var board;
-                var game;
-                var Marty;
-                var $board = $('#myBoard');
-                var $start = $('#start');
-                var $fen = $('#fen');
-                var $pgn = $('#pgn');
-                var $wn = $('#wname');
-                var $martycolor = $('#martycolor');
-                var $ratingUp = $('#ratingUp');
-                var martycolor = "b";
-                var mycolor = 'white';
-                var start_bool = 0;
-                var MakeMove;
-                window.onload = function () {
-                    var { INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE,
-                        MARKER_TYPE, Markers,
-                        ARROW_TYPE, Arrows,
-                        PromotionDialog,
-                        Accessibility
-                    } = window['CHESSBOARD'];
-                    game = new Chess();
-                    Marty = new MartyEngine();
-
-                    $martycolor.change(function () {
-                        martycolor = $(this).val();
-                        mycolor = martycolor == 'b' ? 'white' : 'black';
-                    });
-
-                    function MartySay(say) {
-                        var $MartySay = $('MartySay');
-                        $MartySay.html(say);
-                    }
-
-                    MartySay('Hello? I am Marty. Would you like to play with me?');
-
-                    function chessprogressbar() {
-                        $('.chessprogressbar .progressbar').each(function (index, item) {
-                            $(item).attr("style", $(item).attr("style") + "height: " + $(item).attr("progress") + "%;");
-                        });
-                    }
-
-                    function makeEngineMove(chessboard = null) {
-                        board.setPosition(game.fen(), true);
-                        setTimeout(() => {
-                            MartySay('Hmm....');
-                            updateStatus();
-                            var possibleMoves = game.moves();
-
-                            if (game.game_over() === true ||
-                                game.in_draw() === true ||
-                                possibleMoves.length === 0) return;
-                            var bestMove = getBestMove(game);
-                            game.move(bestMove);
-                            board.setPosition(game.fen(), true);
-                            board.enableMoveInput(inputHandler, COLOR[mycolor]);
-                            updateStatus();
-                        }, 500);
-                    }
-                    MakeMove = makeEngineMove;
-
-                    function inputHandler(event) {
-                        event.chessboard.removeMarkers(MARKER_TYPE.dot)
-                        event.chessboard.removeMarkers(MARKER_TYPE.bevel)
-                        if (event.type === INPUT_EVENT_TYPE.moveInputStarted) {
-                            const moves = game.moves({ square: event.square, verbose: true })
-                            for (const move of moves) { // draw dots on possible squares
-                                if (move.promotion && move.promotion !== "q") {
-                                    continue
-                                }
-                                if (event.chessboard.getPiece(move.to)) {
-                                    event.chessboard.addMarker(MARKER_TYPE.bevel, move.to)
-                                } else {
-                                    event.chessboard.addMarker(MARKER_TYPE.dot, move.to)
-                                }
-                            }
-                            return moves.length > 0
-                        } else if (event.type === INPUT_EVENT_TYPE.validateMoveInput) {
-                            const move = { from: event.squareFrom, to: event.squareTo, promotion: event.promotion }
-                            const result = game.move(move)
-                            if (result) {
-                                event.chessboard.disableMoveInput()
-                                this.chessboard.state.moveInputProcess.then(() => { // wait for the move input process has finished
-                                    this.chessboard.setPosition(game.fen(), true).then(() => { // update position, maybe castled and wait for animation has finished
-                                        makeEngineMove(event.chessboard);
-                                    })
-                                })
-                            } else {
-                                // promotion?
-                                let possibleMoves = game.moves({ square: event.squareFrom, verbose: true })
-                                for (const possibleMove of possibleMoves) {
-                                    if (possibleMove.promotion && possibleMove.to === event.squareTo) {
-                                        event.chessboard.showPromotionDialog(event.squareTo, COLOR[mycolor], (result) => {
-                                            console.log("promotion result", result);
-                                            if (result) {
-                                                game.move({ from: event.squareFrom, to: event.squareTo, promotion: result.piece.charAt(1) })
-                                                event.chessboard.setPosition(game.fen(), true)
-                                                makeEngineMove(event.chessboard)
-                                            } else {
-                                                event.chessboard.setPosition(game.fen(), true)
-                                                event.chessboard.enableMoveInput(inputHandler, COLOR[mycolor])
-                                            }
-                                        })
-                                        return true
-                                    }
-                                }
-                            }
-                            return result
-                        }
-                    }
-
-                    board = new Chessboard(document.getElementById("myBoard"), {
-                        position: game.fen(),
-                        assetsUrl: "./lib/cm-chessboard/assets/",
-                        style: {
-                            cssClass: "green",
-                            borderType: BORDER_TYPE.frame,
-                            pieces: {
-                                file: "staunty.svg"
-                            }
-                        },
-                        orientation: COLOR.white,
-                        extensions: [{
-                            class: Markers,
-                            props: {
-                                autoMarkers: MARKER_TYPE.square
-                            }
-                        }, {
-                            class: Arrows
-                        }, {
-                            class: PromotionDialog
-                        }, {
-                            class: Accessibility,
-                            props: {
-                                visuallyHidden: true
-                            }
-                        }]
-                    });
-                    board.enableMoveInput(inputHandler, COLOR[mycolor]);
-
-                    $start.click(function () {
-                        setTimeout(() => {
-                            start_bool = 1;
-                            game.load("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-                            board.setPosition("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-                            $fen.html("");
-                            $pgn.html("");
-                            board.setOrientation(mycolor.charAt(0));
-                            board.enableMoveInput(inputHandler, COLOR[mycolor]);
-                            if (martycolor == "b") {
-                                game.header('White', $wn.val());
-                                game.header('Black', 'MartyBot L5');
-                            } else {
-                                game.header('Black', $wn.val());
-                                game.header('White', 'MartyBot L5');
-                                window.setTimeout(makeEngineMove, 250);
-                            }
-                            updateStatus();
-                        }, 500);
-                    });
-
-                    function getBestMove(game) {
-                        Marty.load(game.fen())
-                        var bestMove = Marty.Engine($ratingUp.is(":checked") ? 8 : 2);
-                        return bestMove;
-                    }
-                    function evaluateScore(score) {
-                        if (score.includes('M')) {
-                            return Math.abs(parseFloat(score)) == parseFloat(score) ? 0 : 100;
-                        } else {
-                            return Math.max(0, Math.min(100, (parseFloat(score) + 10) * 5));
-                        }
-                    }
-
-                    function updateStatus() {
-                        if (start_bool == 0) {
-                            if (martycolor == "b") {
-                                game.header('White', $wn.val());
-                                game.header('Black', 'MartyBot L5');
-                            } else if (martycolor == "w") {
-                                game.header('Black', $wn.val());
-                                game.header('White', 'MartyBot L5');
-                            }
-                        }
-                        var moveColor = 'White';
-                        if (game.turn() === 'b') {
-                            moveColor = 'Black';
-                        }
-                        if (game.in_checkmate()) {
-                            status = 'Game over, ' + moveColor + ' is in checkmate.';
-                            if (martycolor == game.turn()) {
-                                MartySay('Checkmate! Whoops, I lost. Would you like another round?');
-                            } else {
-                                MartySay('Checkmate! Oops, you lost.');
-                            }
-                        } else if (game.in_draw()) {
-                            status = 'Game over, drawn position';
-                            MartySay('Oh, it`s a draw. Would you like another round?');
-                        } else {
-                            status = moveColor + ' to move';
-                            if (game.in_check()) {
-                                status += ', ' + moveColor + ' is in check';
-                                if (martycolor == game.turn()) {
-                                    MartySay('Hmm, I`ve been checked.');
-                                } else {
-                                    MartySay('You`ve been checked. i like check!');
-                                }
-                            }
-                        }
-                        $fen.html(game.fen());
-                        $pgn.html(game.pgn());
-                        var $chessprogressbar = $("#chessprogressbar");
-                        var score = evaluateScore(Marty.chess.engine.sea.scoreText || '0.00');//Math.abs(Marty.chess.engine.sea.score) > Marty.chess.const.MATE - Marty.chess.const.MAXDEPTH ? (Math.abs(Marty.chess.engine.sea.score) == Marty.chess.engine.sea.score ? 100 : 0) : 100-(50+Marty.chess.engine.sea.score);
-                        $chessprogressbar.attr("progress", score);
-                        $chessprogressbar.html(Marty.chess.engine.sea.scoreText);
-                        chessprogressbar();
-                    }
-                };
-
-
-
-
-            </script>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="225"
-                    height="150" viewBox="-36 -24 72 48">
-                    <path fill="#fff" d="M-36-24h72v48h-72z" />
-                    <g transform="rotate(-56.31)">
-                        <g id="b">
-                            <path id="a" stroke="#000" stroke-width="2" d="M-6-25H6m-12 3H6m-12 3H6" />
-                            <use xlink:href="#a" y="44" />
-                        </g>
-                        <path stroke="#fff" d="M0 17v10" />
-                        <circle r="12">
-                            <animate attributeType="CSS" attributeName="fill" from="#cd2e3a" to="#0047a0" dur="2s"
-                                repeatCount="indefinite" />
-                        </circle>
-
-                        <path d="M0-12A6 6 0 0 0 0 0a6 6 0 0 1 0 12 12 12 0 0 1 0-24Z">
-                            <animate attributeType="CSS" attributeName="fill" from="#0047a0" to="#cd2e3a" dur="2s"
-                                repeatCount="indefinite" />
-                        </path>
-
-                    </g>
-                    <g transform="rotate(-123.69)">
-                        <use xlink:href="#b" />
-                        <path stroke="#fff" d="M0-23.5v3M0 17v3.5m0 3v3" />
-                    </g>
-                </svg>
-                <div style="position: fixed;right: 120px;bottom: 40px;border-radius: 81%;height: 50px;">
-                    <p class="yagwang9" onclick="darkmode99(event)">
-                    <div class="switch" onclick="darkmode99(event)">
-                        <input type="checkbox" id="control" class="control">
-                        <label for="control" class="checkbox"></label>
-                    </div>
-                    <script>
-
-                    </script>
-                    </p>
-                </div>
-            </div>
-            <script src="https://chonggi-tokhu.github.io/aass/docs/colourgrey-styles-1.0/js/icon.css-1-0.js"></script>
-            <div class="footer">
-                <p class="license">sources of images:chess.com,pixabay</p>
-                <p class="license">javascript chess board powered by <a
-                        href="http://www.chessboardjs.com/">chessboardjs</a></p>
-
-            </div>
-            <img src="/aass/docs/chess/martycopy1_files/wP.png" id="b6a5-1ff7-4510-421c-edf5-73b9-43be-8002" alt=""
-                class="piece-417db" data-piece="wP" style="width: 49px; height: 49px; display: none;">
-
         </div>
+    </div>
 
+    <div class="card">
+        <div class="card-body">
+            <martysay>Hmm....</martysay>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="wname" class="form-label">백 이름</label>
+        <input type="text" class="form-control" id="wname" placeholder="이름(아이디)" value="seoha">
+        <!--<label for="bn" class="form-label">흑 이름</label>
+  <input type="text" class="form-control" id="bn" placeholder="name@example.com">-->
+    </div>
+    <div class="mb-3">
+        <label for="martycolor" class="form-label">봇의 색</label>
+        <select class="form-select" aria-label="봇의 색" id="martycolor">
+            <option selected="" value="b">흑</option>
+            <option value="w">백</option>
+        </select>
+    </div>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="ratingUp">
+        <label class="form-check-label" for="ratingUp">Rating Up(8초 걸림)</label>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-primary" id="start">start</button>
+    </div>
+    <label>FEN:</label>
+    <div id="fen">rnbqkb1r/pppppppp/5n2/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 1 2</div>
+    <label>PGN:</label>
+    <div id="pgn">[White "seoha"]
+        [Black "MartyBot L5"]
+
+        1. e4 Nf6</div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://urobot2011.github.io/SaveMartin/MartyBot/chess/chess.js"></script>
+    <script src="http://urobot2011.iptime.org/Marty/MartyEngine-main/MartyEngine-main/MartyL5.js"></script>
+    <script type="module">
+        import { INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/Chessboard.js";
+        import { MARKER_TYPE, Markers } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/markers/Markers.js";
+        import { ARROW_TYPE, Arrows } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/arrows/Arrows.js"
+        import { PromotionDialog } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/promotion-dialog/PromotionDialog.js";
+        import { Accessibility } from "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/src/cm-chessboard/extensions/accessibility/Accessibility.js";
+        var CHESSBOARD = {
+            INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE,
+            MARKER_TYPE, Markers,
+            ARROW_TYPE, Arrows,
+            PromotionDialog,
+            Accessibility
+        };
+        window['CHESSBOARD'] = CHESSBOARD;
+    </script>
+    <script>
+        var board;
+        var game;
+        var Marty;
+        var $board = $('#myBoard');
+        var $start = $('#start');
+        var $fen = $('#fen');
+        var $pgn = $('#pgn');
+        var $wn = $('#wname');
+        var $martycolor = $('#martycolor');
+        var $ratingUp = $('#ratingUp');
+        var martycolor = "b";
+        var mycolor = 'white';
+        var start_bool = 0;
+        var MakeMove;
+        window.onload = function () {
+            var { INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE,
+                MARKER_TYPE, Markers,
+                ARROW_TYPE, Arrows,
+                PromotionDialog,
+                Accessibility
+            } = window['CHESSBOARD'];
+            game = new Chess();
+            Marty = new MartyEngine();
+
+            $martycolor.change(function () {
+                martycolor = $(this).val();
+                mycolor = martycolor == 'b' ? 'white' : 'black';
+            });
+
+            function MartySay(say) {
+                var $MartySay = $('MartySay');
+                $MartySay.html(say);
+            }
+
+            MartySay('Hello? I am Marty. Would you like to play with me?');
+
+            function chessprogressbar() {
+                $('.chessprogressbar .progressbar').each(function (index, item) {
+                    $(item).attr("style", $(item).attr("style") + "height: " + $(item).attr("progress") + "%;");
+                });
+            }
+
+            function makeEngineMove(chessboard = null) {
+                board.setPosition(game.fen(), true);
+                setTimeout(() => {
+                    MartySay('Hmm....');
+                    updateStatus();
+                    var possibleMoves = game.moves();
+
+                    if (game.game_over() === true ||
+                        game.in_draw() === true ||
+                        possibleMoves.length === 0) return;
+                    var bestMove = getBestMove(game);
+                    game.move(bestMove);
+                    board.setPosition(game.fen(), true);
+                    board.enableMoveInput(inputHandler, COLOR[mycolor]);
+                    updateStatus();
+                }, 500);
+            }
+            MakeMove = makeEngineMove;
+
+            function inputHandler(event) {
+                event.chessboard.removeMarkers(MARKER_TYPE.dot)
+                event.chessboard.removeMarkers(MARKER_TYPE.bevel)
+                if (event.type === INPUT_EVENT_TYPE.moveInputStarted) {
+                    const moves = game.moves({ square: event.square, verbose: true })
+                    for (const move of moves) { // draw dots on possible squares
+                        if (move.promotion && move.promotion !== "q") {
+                            continue
+                        }
+                        if (event.chessboard.getPiece(move.to)) {
+                            event.chessboard.addMarker(MARKER_TYPE.bevel, move.to)
+                        } else {
+                            event.chessboard.addMarker(MARKER_TYPE.dot, move.to)
+                        }
+                    }
+                    return moves.length > 0
+                } else if (event.type === INPUT_EVENT_TYPE.validateMoveInput) {
+                    const move = { from: event.squareFrom, to: event.squareTo, promotion: event.promotion }
+                    const result = game.move(move)
+                    if (result) {
+                        event.chessboard.disableMoveInput()
+                        this.chessboard.state.moveInputProcess.then(() => { // wait for the move input process has finished
+                            this.chessboard.setPosition(game.fen(), true).then(() => { // update position, maybe castled and wait for animation has finished
+                                makeEngineMove(event.chessboard);
+                            })
+                        })
+                    } else {
+                        // promotion?
+                        let possibleMoves = game.moves({ square: event.squareFrom, verbose: true })
+                        for (const possibleMove of possibleMoves) {
+                            if (possibleMove.promotion && possibleMove.to === event.squareTo) {
+                                event.chessboard.showPromotionDialog(event.squareTo, COLOR[mycolor], (result) => {
+                                    console.log("promotion result", result);
+                                    if (result) {
+                                        game.move({ from: event.squareFrom, to: event.squareTo, promotion: result.piece.charAt(1) })
+                                        event.chessboard.setPosition(game.fen(), true)
+                                        makeEngineMove(event.chessboard)
+                                    } else {
+                                        event.chessboard.setPosition(game.fen(), true)
+                                        event.chessboard.enableMoveInput(inputHandler, COLOR[mycolor])
+                                    }
+                                })
+                                return true
+                            }
+                        }
+                    }
+                    return result
+                }
+            }
+
+            board = new Chessboard(document.getElementById("myBoard"), {
+                position: game.fen(),
+                assetsUrl: "http://urobot2011.iptime.org/Marty/SaveMartin-main/MartyBotL5/lib/cm-chessboard/assets/",
+                style: {
+                    cssClass: "green",
+                    borderType: BORDER_TYPE.frame,
+                    pieces: {
+                        file: "staunty.svg"
+                    }
+                },
+                orientation: COLOR.white,
+                extensions: [{
+                    class: Markers,
+                    props: {
+                        autoMarkers: MARKER_TYPE.square
+                    }
+                }, {
+                    class: Arrows
+                }, {
+                    class: PromotionDialog
+                }, {
+                    class: Accessibility,
+                    props: {
+                        visuallyHidden: true
+                    }
+                }]
+            });
+            board.enableMoveInput(inputHandler, COLOR[mycolor]);
+
+            $start.click(function () {
+                setTimeout(() => {
+                    start_bool = 1;
+                    game.load("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+                    board.setPosition("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+                    $fen.html("");
+                    $pgn.html("");
+                    board.setOrientation(mycolor.charAt(0));
+                    board.enableMoveInput(inputHandler, COLOR[mycolor]);
+                    if (martycolor == "b") {
+                        game.header('White', $wn.val());
+                        game.header('Black', 'MartyBot L5');
+                    } else {
+                        game.header('Black', $wn.val());
+                        game.header('White', 'MartyBot L5');
+                        window.setTimeout(makeEngineMove, 250);
+                    }
+                    updateStatus();
+                }, 500);
+            });
+
+            function getBestMove(game) {
+                Marty.load(game.fen())
+                var bestMove = Marty.Engine($ratingUp.is(":checked") ? 8 : 2);
+                return bestMove;
+            }
+            function evaluateScore(score) {
+                if (score.includes('M')) {
+                    return Math.abs(parseFloat(score)) == parseFloat(score) ? 0 : 100;
+                } else {
+                    return Math.max(0, Math.min(100, (parseFloat(score) + 10) * 5));
+                }
+            }
+
+            function updateStatus() {
+                if (start_bool == 0) {
+                    if (martycolor == "b") {
+                        game.header('White', $wn.val());
+                        game.header('Black', 'MartyBot L5');
+                    } else if (martycolor == "w") {
+                        game.header('Black', $wn.val());
+                        game.header('White', 'MartyBot L5');
+                    }
+                }
+                var moveColor = 'White';
+                if (game.turn() === 'b') {
+                    moveColor = 'Black';
+                }
+                if (game.in_checkmate()) {
+                    status = 'Game over, ' + moveColor + ' is in checkmate.';
+                    if (martycolor == game.turn()) {
+                        MartySay('Checkmate! Whoops, I lost. Would you like another round?');
+                    } else {
+                        MartySay('Checkmate! Oops, you lost.');
+                    }
+                } else if (game.in_draw()) {
+                    status = 'Game over, drawn position';
+                    MartySay('Oh, it`s a draw. Would you like another round?');
+                } else {
+                    status = moveColor + ' to move';
+                    if (game.in_check()) {
+                        status += ', ' + moveColor + ' is in check';
+                        if (martycolor == game.turn()) {
+                            MartySay('Hmm, I`ve been checked.');
+                        } else {
+                            MartySay('You`ve been checked. i like check!');
+                        }
+                    }
+                }
+                $fen.html(game.fen());
+                $pgn.html(game.pgn());
+                var $chessprogressbar = $("#chessprogressbar");
+                var score = evaluateScore(Marty.chess.engine.sea.scoreText || '0.00');//Math.abs(Marty.chess.engine.sea.score) > Marty.chess.const.MATE - Marty.chess.const.MAXDEPTH ? (Math.abs(Marty.chess.engine.sea.score) == Marty.chess.engine.sea.score ? 100 : 0) : 100-(50+Marty.chess.engine.sea.score);
+                $chessprogressbar.attr("progress", score);
+                $chessprogressbar.html(Marty.chess.engine.sea.scoreText);
+                chessprogressbar();
+            }
+        };
+    </script>
+
+
+    <div id="cm-chessboard-sprite" style="display: none;">
+        <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+        <!--
+The lila Staunty pieces set from
+https://github.com/ornicar/lila/tree/master/public/piece/staunty
+modified by shaack (https://shaack.com) for the usage in cm-chessboard.
+https://github.com/shaack/cm-chessboard
+
+License: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+See also: https://github.com/ornicar/lila/blob/master/COPYING.md
+-->
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+            <title>cm-chessboard Staunty pieces and markers sprite</title>
+            <g id="wk" transform="matrix(0.78030303,0,0,0.78030303,0.99250091,1.3663636)">
+                <path
+                    d="m 27.67,15.225 v -3.544 h 4.44 V 7.252 H 27.175 V 3.36 H 22.81 v 3.893 h -4.934 v 4.43 h 4.44 v 3.543"
+                    fill="#f0f0f0" stroke-linecap="round" stroke-width="1.2" stroke="#1e1e1e" id="path1542"></path>
+                <rect x="20.299" y="14.215" width="9.3979998" height="2.7869999" ry="1.3940001" fill="#f0f0f0"
+                    stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e" id="rect1544"></rect>
+                <path
+                    d="m 26.416,14.215 c 0.725,0 1.308,0.621 1.308,1.393 0,0.773 -0.583,1.394 -1.308,1.394 h 1.974 c 0.724,0 1.308,-0.621 1.308,-1.393 0,-0.773 -0.584,-1.394 -1.308,-1.394 z"
+                    opacity="0.15" id="path1546"></path>
+                <path
+                    d="m 21.631,14.842 c -0.402,0 -0.725,0.345 -0.725,0.773 0,0.427 0.323,0.772 0.725,0.772 h 0.874 c -0.402,0 -0.725,-0.345 -0.725,-0.772 0,-0.428 0.323,-0.773 0.725,-0.773 z"
+                    fill="#ffffff" id="path1548"></path>
+                <path
+                    d="m 33.635,36.986 c 0,0 7.776,-13.318 6.613,-15.916 -1.164,-2.596 -8.48,-4.497 -15.248,-4.497 -6.768,0 -14.084,1.9 -15.248,4.497 -1.164,2.597 6.612,15.916 6.612,15.916 z"
+                    fill="#f0f0f0" stroke-linecap="round" stroke-width="1.2" stroke="#1e1e1e" id="path1550"></path>
+                <path
+                    d="m 24.996,16.576 c 15.938,2.622 12.573,9.354 6.64,22.543 l 2.028,-1.729 c 0,0 7.747,-13.723 6.584,-16.32 -1.545,-2.833 -7.503,-4.159 -15.252,-4.494 z"
+                    opacity="0.15" id="path1552"></path>
+                <path
+                    d="m 23.765,17.295 c -3.904,-0.184 -14.621,1.801 -13.503,5.017 0.817,3.727 2.754,7.244 4.508,10.504 C 9.083,22.481 8.828,19.042 23.765,17.295 Z M 23.391,3.997 23.375,7.309 h 0.546 l 0.016,-3.312 z m -4.931,3.87 -0.008,3.208 h 0.774 l 0.007,-3.208 z m 4.413,3.213 0.025,2.486 h 0.52 L 23.393,11.08 Z"
+                    fill="#ffffff" id="path1554"></path>
+                <path
+                    d="m 26.189,3.358 v 3.894 h 0.987 V 3.358 Z m 4.441,3.894 v 4.945 h 1.48 V 7.252 Z m -4.44,4.429 v 2.492 h 1.48 v -2.492 z"
+                    opacity="0.15" id="path1556"></path>
+                <path
+                    d="m 25,36.457 c 0,0 -9.13,0.048 -11.691,1.62 -1.727,1.06 -2.135,3.65 -1.9,6.323 h 27.182 c 0.235,-2.672 -0.172,-5.264 -1.9,-6.324 -2.56,-1.57 -11.69,-1.619 -11.69,-1.619 z"
+                    fill="#f0f0f0" stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e" id="path1558"></path>
+                <path
+                    d="m 25,37.147 c 0,0 -8.712,-0.137 -11.624,1.666 -0.37,0.229 -0.7,0.84 -0.954,1.39 0.261,-0.331 0.503,-0.613 0.887,-0.849 2.56,-1.571 11.691,-1.62 11.691,-1.62 0,0 9.132,0.049 11.692,1.62 0.391,0.24 0.592,0.532 0.856,0.87 0.025,-0.076 -0.409,-1.158 -1.144,-1.596 C 33.648,37.136 25,37.148 25,37.148 Z"
+                    fill="#ffffff" id="path1560"></path>
+            </g>
+            <g id="wq" transform="matrix(0.81370661,0,0,0.81370661,0.1573347,-0.13679755)">
+                <path
+                    d="m 24.959,5.094 a 2.958,3.316 90 0 0 -3.316,2.958 2.958,3.316 90 0 0 3.316,2.959 2.958,3.316 90 0 0 3.316,-2.959 2.958,3.316 90 0 0 -3.316,-2.958 z"
+                    fill="#f0f0f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e"
+                    id="path1856"></path>
+                <path
+                    d="M 24.836,5.732 C 24.46,5.522 21.112,6.538 22.651,9.308 22.416,7.763 23.089,6.105 24.836,5.732 Z"
+                    fill="#ffffff" id="path1858"></path>
+                <path
+                    d="m 24.959,11.011 c -6.507,0 -9.595,5.884 -9.595,10.358 h 19.263 c 0,-4.474 -3.16,-10.358 -9.668,-10.358 z"
+                    fill="#f0f0f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e"
+                    id="path1860"></path>
+                <path d="m 18.161,14.977 c 1.042,-1.478 2.92,-3.22 6.84,-3.38 -0.31,0.277 -4.788,1.138 -6.84,3.38 z"
+                    fill="#ffffff" id="path1862"></path>
+                <path
+                    d="m 24.836,5.007 c 0,0 0.046,0.238 0,0 2.48,1.129 2.05,3.847 0.817,5.547 7.354,3.803 2.213,8.669 2.212,8.668 h 2.701 c 1.762,1.287 7.209,-2.741 -3.835,-8.67 3.528,-3.115 0.097,-5.606 -1.895,-5.546 z"
+                    opacity="0.15" id="path1864"></path>
+                <path
+                    d="m 25,15.225 c -1.971,0 -2.348,2.65 -4.137,2.86 -1.82,0.213 -3.381,-2.312 -5.25,-1.737 -1.495,0.46 -0.778,2.6 -1.805,3.175 -1.402,0.785 -3.185,-1.832 -5.29,-0.298 6.838,8.829 8.085,12.377 7.983,18.819 h 16.998 c -0.103,-6.443 1.144,-9.99 7.983,-18.82 -2.106,-1.533 -3.889,1.084 -5.29,0.3 -1.027,-0.576 -0.311,-2.716 -1.806,-3.176 -1.868,-0.575 -3.429,1.95 -5.25,1.736 -1.789,-0.21 -2.166,-2.86 -4.137,-2.86 z"
+                    fill="#f0f0f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e"
+                    id="path1866"></path>
+                <path
+                    d="m 9.895,19.34 c -0.136,-0.01 -0.331,0.056 -0.458,0.085 3.081,4.1 6.575,9.537 7.099,12.417 -1.407,-4.933 -3.267,-9.562 -6.14,-12.472 z"
+                    fill="#ffffff" id="path1868"></path>
+                <path
+                    d="M 39.974,18.735 C 30.489,28.738 30.05,36.72 23.033,38.045 h 10.476 c -0.103,-6.443 1.145,-9.99 7.983,-18.819 0,0 -0.688,-0.756 -1.518,-0.491 z"
+                    opacity="0.15" id="path1870"></path>
+                <path
+                    d="m 14.912,18.945 c 0.203,-0.088 1.184,-1.808 1.98,-1.95 -1.42,-0.346 -1.618,-0.046 -1.98,1.95 z m 7.599,-1.069 c 0.953,-0.847 1.633,-2.655 3.238,-1.845 -0.798,-0.23 -2.215,1.04 -3.238,1.845 z m 8.609,0.257 c 0.21,0.07 2.176,-1.642 2.862,-1.218 0,0 -1.43,1.12 -2.862,1.218 z"
+                    fill="#ffffff" id="path1872"></path>
+                <path
+                    d="m 25,36.457 c 0,0 -9.13,0.048 -11.691,1.62 -1.727,1.06 -2.135,3.65 -1.9,6.323 h 27.182 c 0.235,-2.672 -0.172,-5.264 -1.9,-6.324 -2.56,-1.571 -11.69,-1.62 -11.69,-1.62 z"
+                    fill="#f0f0f0" stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e" id="path1874"></path>
+                <path
+                    d="m 25,37.147 c 0,0 -8.712,-0.137 -11.624,1.666 -0.37,0.229 -0.7,0.84 -0.954,1.39 0.261,-0.331 0.502,-0.613 0.887,-0.849 2.56,-1.571 11.691,-1.62 11.691,-1.62 0,0 9.132,0.049 11.692,1.62 0.391,0.24 0.593,0.532 0.856,0.87 0.026,-0.076 -0.409,-1.158 -1.144,-1.596 C 33.648,37.136 25,37.147 25,37.147 Z"
+                    fill="#ffffff" id="path1876"></path>
+            </g>
+            <g id="wb" transform="matrix(0.77573871,0,0,0.77573871,1.1065042,1.5417581)">
+                <path
+                    d="m 25,5.767 c -2.106,0 -3.812,0.879 -3.812,1.963 l 1.517,2.65 C 6.655,24.47 16.998,37.516 16.998,37.516 h 16.005 c 0,0 7.05,-8.672 0.763,-19.51 l -2.99,4.827 c -0.67,1.084 -1.962,1.49 -2.897,0.911 -0.935,-0.578 -1.147,-1.917 -0.477,-3 l 3.887,-6.277 a 35.382,35.382 0 0 0 -3.993,-4.086 l 1.517,-2.65 c 0,-1.085 -1.707,-1.964 -3.812,-1.964 z"
+                    fill="#f0f0f0" stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e" id="path1449"></path>
+                <path
+                    d="m 25,5.767 c -0.816,0 -1.571,0.134 -2.191,0.358 4.338,0.848 4.976,1.12 2.56,4.351 l 3.246,3.567 c -3.657,8.24 -1.604,7.991 -1.604,7.991 0,0 0.696,-2.648 4.112,-7.768 A 35.696,35.696 0 0 0 27.296,10.38 L 28.812,7.73 C 28.812,6.646 27.106,5.767 25,5.767 Z m 8.765,12.238 -1.009,1.513 c 3.737,8.413 -4.134,17.997 -4.134,17.997 h 4.381 c 0.158,0.034 6.958,-8.844 0.762,-19.51 z"
+                    opacity="0.15" id="path1451"></path>
+                <path
+                    d="M 15.145,31.721 C 14.925,31.69 11.722,21.935 20.899,12.97 18.597,14.865 13.764,26.133 15.145,31.721 Z M 23.292,10.196 21.815,7.602 c 0,0 0.242,-0.722 1.78,-1.048 -1.726,1.35 -0.987,1.663 -0.303,3.642 z"
+                    fill="#ffffff" id="path1453"></path>
+                <path
+                    d="m 25,36.457 c 0,0 -9.13,0.048 -11.691,1.62 -1.727,1.06 -2.135,3.65 -1.9,6.323 h 27.182 c 0.235,-2.672 -0.172,-5.264 -1.9,-6.324 -2.56,-1.57 -11.69,-1.619 -11.69,-1.619 z"
+                    fill="#f0f0f0" stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e" id="path1455"></path>
+                <path
+                    d="m 25,37.147 c 0,0 -8.712,-0.137 -11.624,1.666 -0.37,0.229 -0.7,0.84 -0.954,1.39 0.261,-0.331 0.502,-0.613 0.887,-0.85 C 15.869,37.784 25,37.736 25,37.736 c 0,0 9.132,0.048 11.692,1.619 0.391,0.24 0.592,0.532 0.856,0.87 0.026,-0.076 -0.409,-1.158 -1.144,-1.596 C 33.648,37.136 25,37.147 25,37.147 Z"
+                    fill="#ffffff" id="path1457"></path>
+            </g>
+            <g id="wn" transform="matrix(0.7833885,0,0,0.78330159,1.0320312,1.1996996)">
+                <path
+                    d="m 25.192,23.015 c -0.165,6.967 -11.758,5.219 -11.516,18.104 l 22.86,0.118 C 34.442,34.795 46.226,16.077 24.605,8.979 v 0 c 0,0 -2.438,-2.6 -5.965,-2.823 l 0.222,3.534 -4.558,4.582 c -2.63,3.145 -8.735,8.378 -7.751,9.611 3.115,5.304 6.33,4.432 6.33,4.432 4.242,-4.544 5.82,-2.09 12.31,-5.3 z"
+                    fill="#f0f0f0" stroke="#1e1e1e" stroke-linejoin="round" stroke-width="1.2" id="path1668"></path>
+                <path
+                    d="m 19.32,14.694 c -0.776,0.86 -0.69,1.116 -0.814,2.15 0.806,0.123 1.507,0.24 2.249,0.066 2.38,-1.262 0.075,-3.403 -1.435,-2.216 z"
+                    opacity="0.35" id="path1670"></path>
+                <path d="m 9.192,22.166 c -0.85,0.408 -0.999,0.96 -1.057,1.475 0.729,0.419 1.877,-0.125 2.041,-1.431 z"
+                    opacity="0.3" id="path1672"></path>
+                <path
+                    d="m 8.19,25.15 c 0,0 0.653,1.137 -1.101,-1.641 0.659,-1.977 8.263,-9.08 12.438,-13.534 L 19.343,6.889 c 0,0 1.069,1.69 1.248,3.468 C 16.2,14.747 8.37,21.19 7.767,23.57 c 0.023,0.674 0.24,1.028 0.423,1.58 z"
+                    fill="#ffffff" id="path1674"></path>
+                <path
+                    d="m 13.26,28.257 c 2.03,-3.337 8.391,-3.224 11.932,-5.242 0.323,0.102 0.13,1.37 0.24,1.23 0.847,-1.09 2.926,-3.28 0.868,-6.875 0.522,5.958 -13.718,5.591 -15.89,10.305 -0.2,0.436 2.182,0.793 2.85,0.582 z"
+                    opacity="0.15" id="path1676"></path>
+                <path
+                    d="M 25.8,23.781 C 24.787,29.594 16.255,29.898 14.812,36.422 17.645,30.016 25.574,30.708 25.8,23.781 Z"
+                    fill="#ffffff" id="path1678"></path>
+                <path
+                    d="m 18.64,6.156 c 0,0 3.051,0.738 4.904,3.982 20.5,7.154 7.642,27.937 5.789,31.073 l 7.203,0.026 C 34.55,37.994 46.084,15.64 24.606,8.98 22.83,7.91 21.837,6.37 18.64,6.155 Z"
+                    opacity="0.15" id="path1680"></path>
+                <path
+                    d="m 25,36.457 c 0,0 -9.13,0.048 -11.691,1.62 -1.727,1.06 -2.135,3.65 -1.9,6.323 h 27.182 c 0.235,-2.672 -0.172,-5.264 -1.9,-6.324 -2.56,-1.57 -11.69,-1.619 -11.69,-1.619 z"
+                    fill="#f0f0f0" stroke="#1e1e1e" stroke-linejoin="round" stroke-width="1.2" id="path1682"></path>
+                <path
+                    d="m 25,37.147 c 0,0 -8.712,-0.137 -11.624,1.666 -0.37,0.229 -0.7,0.84 -0.954,1.39 0.261,-0.331 0.503,-0.613 0.887,-0.849 C 15.87,37.783 25,37.734 25,37.734 c 0,0 9.132,0.049 11.692,1.62 0.391,0.24 0.592,0.532 0.856,0.87 0.026,-0.076 -0.409,-1.158 -1.144,-1.596 C 33.648,37.136 25,37.148 25,37.148 Z"
+                    fill="#ffffff" id="path1684"></path>
+            </g>
+            <g id="wr" transform="matrix(0.84246687,0,0,0.84246687,-1.0662673,-1.4610091)">
+                <path
+                    d="m 17.932,20.414 c 4.906,-0.74 9.579,-0.578 14.136,0 M 14.183,9.662 c -1.06,8.767 1.103,10.677 3.748,10.752 L 14.616,38.573 H 35.383 L 32.067,20.414 c 2.645,-0.074 4.808,-1.985 3.749,-10.752 l -3.608,-0.53 -1.073,3.644 -3.142,-0.1 -0.522,-3.754 h -4.945 l -0.52,3.754 -3.143,0.1 -1.073,-3.643 z"
+                    fill="#f0f0f0" stroke-width="1.2" stroke="#1e1e1e" id="path1983"></path>
+                <path
+                    d="m 17.932,20.414 c 6.828,0 13.118,0.408 14.948,16.572 l 2.319,0.386 -3.131,-16.428 C 32.036,20.636 25.98,19.121 17.932,20.414 Z"
+                    opacity="0.15" id="path1985"></path>
+                <path
+                    d="m 14.777,10.219 2.277,-0.286 c -1.914,0.312 -2.313,5.296 -2.313,5.296 -0.238,-0.177 -0.188,-4.903 0.036,-5.01 z M 25.276,9.55 c -1.648,0 -2.52,2.748 -2.52,2.748 l 0.338,-2.729 z m 7.395,0.266 0.934,0.118 c -0.785,0.5 -1.59,1.989 -1.59,1.989 z m -14.199,11.148 2.62,-0.293 c -2.62,0.293 -4.888,13.113 -4.888,13.113 z"
+                    fill="#ffffff" id="path1987"></path>
+                <path
+                    d="m 34.013,9.398 c 0.357,6.363 -1.95,10.603 -8.041,10.536 l 4.777,0.563 c 7.523,0.31 5.101,-10.806 5.068,-10.835 z"
+                    opacity="0.15" id="path1989"></path>
+                <path
+                    d="m 25,36.457 c 0,0 -9.13,0.048 -11.691,1.62 -1.727,1.06 -2.135,3.65 -1.9,6.323 h 27.182 c 0.235,-2.672 -0.172,-5.264 -1.9,-6.324 -2.56,-1.57 -11.69,-1.619 -11.69,-1.619 z"
+                    fill="#f0f0f0" stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e" id="path1991"></path>
+                <path
+                    d="m 25,37.146 c 0,0 -8.712,-0.137 -11.624,1.666 -0.37,0.229 -0.7,0.84 -0.954,1.39 0.261,-0.331 0.503,-0.613 0.887,-0.849 C 15.87,37.782 25,37.733 25,37.733 c 0,0 9.132,0.049 11.692,1.62 0.391,0.24 0.592,0.532 0.856,0.87 0.025,-0.076 -0.409,-1.158 -1.144,-1.596 C 33.648,37.135 25,37.147 25,37.147 Z"
+                    fill="#ffffff" id="path1993"></path>
+            </g>
+            <g id="wp" transform="matrix(0.82029849,0,0,0.82029849,-0.5120331,-0.50721691)">
+                <path
+                    d="m 21.503,27.594 h 6.994 M 19,17.508 c 0,1.732 0.712,3.387 1.966,4.587 l -3.65,2.1 0.43,3.399 h 4.306 c -0.794,3.559 -2.755,7.33 -5.062,8.617 -2.307,1.287 -5.3,3.097 -4.843,8.189 h 25.706 c 0.457,-5.092 -2.535,-6.902 -4.842,-8.189 -2.307,-1.286 -4.268,-5.058 -5.062,-8.617 h 4.306 l 0.43,-3.4 -3.65,-2.099 a 6.352,6.352 0 0 0 1.966,-4.587 c 0,-3.367 -2.628,-5.912 -6,-5.912 -3.373,0 -6.002,2.545 -6.001,5.912 z"
+                    fill="#f0f0f0" stroke-linejoin="round" stroke-width="1.2" stroke="#1e1e1e" id="path1775"></path>
+                <path
+                    d="m 24.962,11.537 c 1.17,-0.459 9.527,5.906 0.647,10.773 l 4.512,2.1 -0.562,3.125 h 2.659 l 0.428,-3.399 -3.65,-2.1 c 1.253,-1.2 1.962,-2.58 1.964,-4.312 -0.468,-5.416 -5.998,-6.186 -5.998,-6.186 z m -2.949,15.998 c 4.503,7.934 9.47,9.994 13.074,9.965 L 32.972,36.153 C 30.897,34.663 28.24,31.295 27.91,27.535 Z"
+                    opacity="0.15" id="path1777"></path>
+                <path
+                    d="m 21.983,22.213 -1.647,2.347 -2.356,-0.014 4.013,-2.324 z m 2.324,-9.946 c -2.542,0.138 -5.73,3.173 -4.385,6.918 l 0.199,0.643 c -0.33,-3.489 2.127,-7.116 4.186,-7.561 z m -6.444,25.358 c -3.984,2.305 -5.117,6.14 -5.117,6.14 -0.01,0 -0.548,-4.175 3.956,-6.654 4.504,-2.479 4.822,-6.15 5.86,-8.893 -0.636,3.704 -0.715,7.102 -4.699,9.407 z"
+                    fill="#ffffff" id="path1779"></path>
+            </g>
+            <g id="bk" transform="matrix(0.78030303,0,0,0.78030303,0.4879357,1.3663636)">
+                <path
+                    d="m 27.67,15.225 v -3.544 h 4.44 V 7.252 H 27.175 V 3.36 H 22.81 v 3.893 h -4.934 v 4.43 h 4.44 v 3.543"
+                    fill="#5f5955" stroke-linecap="round" stroke-width="1.2" stroke="#010101" id="path848"></path>
+                <rect x="20.299" y="14.215" width="9.3979998" height="2.7869999" ry="1.3940001" fill="#5f5955"
+                    stroke-linejoin="round" stroke-width="1.2" stroke="#010101" id="rect850"></rect>
+                <path
+                    d="m 26.416,14.215 c 0.725,0 1.308,0.621 1.308,1.393 0,0.773 -0.583,1.394 -1.308,1.394 h 1.974 c 0.724,0 1.308,-0.621 1.308,-1.393 0,-0.773 -0.584,-1.394 -1.308,-1.394 z"
+                    opacity="0.18" id="path852"></path>
+                <path
+                    d="m 21.631,14.842 c -0.402,0 -0.725,0.345 -0.725,0.773 0,0.427 0.323,0.772 0.725,0.772 h 0.874 c -0.402,0 -0.725,-0.345 -0.725,-0.772 0,-0.428 0.323,-0.773 0.725,-0.773 z"
+                    fill="#ffffff" opacity="0.25" id="path854"></path>
+                <path
+                    d="m 33.635,36.986 c 0,0 7.776,-13.318 6.613,-15.916 -1.164,-2.596 -8.48,-4.497 -15.248,-4.497 -6.768,0 -14.084,1.9 -15.248,4.497 -1.164,2.597 6.612,15.916 6.612,15.916 z"
+                    fill="#5f5955" stroke-linecap="round" stroke-width="1.2" stroke="#010101" id="path856"></path>
+                <path
+                    d="m 24.996,16.576 c 15.938,2.622 12.573,9.354 6.64,22.543 l 2.028,-1.729 c 0,0 7.747,-13.723 6.584,-16.32 -1.545,-2.833 -7.503,-4.159 -15.252,-4.494 z"
+                    opacity="0.18" id="path858"></path>
+                <path
+                    d="m 23.765,17.295 c -3.904,-0.184 -14.621,1.801 -13.503,5.017 0.817,3.727 2.754,7.244 4.508,10.504 C 9.083,22.481 8.828,19.042 23.765,17.295 Z M 23.391,3.997 23.375,7.309 h 0.546 l 0.016,-3.312 z m -4.931,3.87 -0.008,3.208 h 0.774 l 0.007,-3.208 z m 4.413,3.213 0.025,2.486 h 0.52 L 23.393,11.08 Z"
+                    fill="#ffffff" opacity="0.25" id="path860"></path>
+                <path
+                    d="m 26.189,3.358 v 3.894 h 0.987 V 3.358 Z m 4.441,3.894 v 4.945 h 1.48 V 7.252 Z m -4.44,4.429 v 2.492 h 1.48 v -2.492 z"
+                    opacity="0.18" id="path862"></path>
+                <path
+                    d="m 25,36.457 c 0,0 -9.13,0.048 -11.691,1.62 -1.727,1.06 -2.135,3.65 -1.9,6.323 h 27.182 c 0.235,-2.672 -0.172,-5.264 -1.9,-6.324 -2.56,-1.57 -11.69,-1.619 -11.69,-1.619 z"
+                    fill="#5f5955" stroke-linejoin="round" stroke-width="1.2" stroke="#010101" id="path864"></path>
+                <path
+                    d="m 25,37.147 c 0,0 -8.712,-0.137 -11.624,1.666 -0.37,0.229 -0.7,0.84 -0.954,1.39 0.261,-0.331 0.503,-0.613 0.887,-0.849 2.56,-1.571 11.691,-1.62 11.691,-1.62 0,0 9.132,0.049 11.692,1.62 0.391,0.24 0.592,0.532 0.856,0.87 0.025,-0.076 -0.409,-1.158 -1.144,-1.596 C 33.648,37.136 25,37.148 25,37.148 Z"
+                    fill="#ffffff" opacity="0.25" id="path866"></path>
+            </g>
+            <g id="bq" transform="matrix(0.81370661,0,0,0.81370661,-0.34679558,-0.13679747)">
+                <path
+                    d="m 24.959,5.094 a 2.958,3.316 90 0 0 -3.316,2.958 2.958,3.316 90 0 0 3.316,2.959 2.958,3.316 90 0 0 3.316,-2.959 2.958,3.316 90 0 0 -3.316,-2.958 z"
+                    fill="#5f5955" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" stroke="#010101"
+                    id="path1232"></path>
+                <path
+                    d="M 24.836,5.732 C 24.46,5.522 21.112,6.538 22.651,9.308 22.416,7.763 23.089,6.105 24.836,5.732 Z"
+                    fill="#ffffff" opacity="0.25" id="path1234"></path>
+                <path
+                    d="m 24.959,11.011 c -6.507,0 -9.595,5.884 -9.595,10.358 h 19.263 c 0,-4.474 -3.16,-10.358 -9.668,-10.358 z"
+                    fill="#5f5955" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" stroke="#010101"
+                    id="path1236"></path>
+                <path d="m 18.161,14.977 c 1.042,-1.478 2.92,-3.22 6.84,-3.38 -0.31,0.277 -4.788,1.138 -6.84,3.38 z"
+                    fill="#ffffff" opacity="0.25" id="path1238"></path>
+                <path
+                    d="m 24.836,5.007 c 0,0 0.046,0.238 0,0 2.48,1.129 2.05,3.847 0.817,5.547 7.354,3.803 2.213,8.669 2.212,8.668 h 2.701 c 1.762,1.287 7.209,-2.741 -3.835,-8.67 3.528,-3.115 0.097,-5.606 -1.895,-5.546 z"
+                    opacity="0.18" id="path1240"></path>
+                <path
+                    d="m 25,15.225 c -1.971,0 -2.348,2.65 -4.137,2.86 -1.82,0.213 -3.381,-2.312 -5.25,-1.737 -1.495,0.46 -0.778,2.6 -1.805,3.175 -1.402,0.785 -3.185,-1.832 -5.29,-0.298 6.838,8.829 8.085,12.377 7.983,18.819 h 16.998 c -0.103,-6.443 1.144,-9.99 7.983,-18.82 -2.106,-1.533 -3.889,1.084 -5.29,0.3 -1.027,-0.576 -0.311,-2.716 -1.806,-3.176 -1.868,-0.575 -3.429,1.95 -5.25,1.736 -1.789,-0.21 -2.166,-2.86 -4.137,-2.86 z"
+                    fill="#5f5955" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" stroke="#010101"
+                    id="path1242"></path>
+                <path
+                    d="m 9.895,19.34 c -0.136,-0.01 -0.331,0.056 -0.458,0.085 3.081,4.1 6.575,9.537 7.099,12.417 -1.407,-4.933 -3.267,-9.562 -6.14,-12.472 z"
+                    fill="#ffffff" opacity="0.25" id="path1244"></path>
+                <path
+                    d="M 39.974,18.735 C 30.489,28.738 30.05,36.72 23.033,38.045 h 10.476 c -0.103,-6.443 1.145,-9.99 7.983,-18.819 0,0 -0.688,-0.756 -1.518,-0.491 z"
+                    opacity="0.18" id="path1246"></path>
+                <path
+                    d="m 14.912,18.945 c 0.203,-0.088 1.184,-1.808 1.98,-1.95 -1.42,-0.346 -1.618,-0.046 -1.98,1.95 z m 7.599,-1.069 c 0.953,-0.847 1.633,-2.655 3.238,-1.845 -0.798,-0.23 -2.215,1.04 -3.238,1.845 z m 8.609,0.257 c 0.21,0.07 2.176,-1.642 2.862,-1.218 0,0 -1.43,1.12 -2.862,1.218 z"
+                    fill="#ffffff" opacity="0.25" id="path1248"></path>
+                <path
+                    d="m 25,36.457 c 0,0 -9.13,0.048 -11.691,1.62 -1.727,1.06 -2.135,3.65 -1.9,6.323 h 27.182 c 0.235,-2.672 -0.172,-5.264 -1.9,-6.324 -2.56,-1.571 -11.69,-1.62 -11.69,-1.62 z"
+                    fill="#5f5955" stroke-linejoin="round" stroke-width="1.2" stroke="#010101" id="path1250"></path>
+                <path
+                    d="m 25,37.147 c 0,0 -8.712,-0.137 -11.624,1.666 -0.37,0.229 -0.7,0.84 -0.954,1.39 0.261,-0.331 0.502,-0.613 0.887,-0.849 2.56,-1.571 11.691,-1.62 11.691,-1.62 0,0 9.132,0.049 11.692,1.62 0.391,0.24 0.593,0.532 0.856,0.87 0.026,-0.076 -0.409,-1.158 -1.144,-1.596 C 33.648,37.136 25,37.147 25,37.147 Z"
+                    fill="#ffffff" opacity="0.25" id="path1252"></path>
+            </g>
+            <g id="bb" transform="matrix(0.20524753,0,0,0.20524753,-31.754618,-4.5982875)">
+                <path
+                    d="m 252.1347,51.711857 c -7.95969,0 -14.40756,3.322204 -14.40756,7.419212 l 5.73354,10.015748 C 182.79927,122.40036 221.89092,171.70808 221.89092,171.70808 h 60.49134 c 0,0 26.64567,-32.77606 2.88378,-73.738585 l -11.30079,18.243775 c -2.53228,4.09701 -7.41543,5.6315 -10.94929,3.44315 -3.53386,-2.18456 -4.33512,-7.24535 -1.80283,-11.33858 L 275.90415,84.593747 A 133.72725,133.72725 0 0 0 260.8125,69.150597 l 5.73354,-10.015748 c 0,-4.100788 -6.45165,-7.422992 -14.40756,-7.422992 z"
+                    fill="#5f5955" stroke-linejoin="round" stroke-width="4.53543" stroke="#010101" id="path666"></path>
+                <path
+                    d="m 252.1347,51.711857 c -3.08409,0 -5.93764,0.506456 -8.28094,1.353071 16.39559,3.205039 18.80692,4.23307 9.67559,16.444724 l 12.26834,13.481575 c -13.82173,31.143303 -6.06236,30.202203 -6.06236,30.202203 0,0 2.63055,-10.00819 15.54142,-29.359368 A 134.91402,134.91402 0 0 0 260.8125,69.146817 l 5.72976,-10.015748 c 0,-4.097008 -6.44787,-7.419212 -14.40756,-7.419212 z m 33.12756,46.253858 -3.81354,5.718425 c 14.12409,31.79717 -15.62457,68.02016 -15.62457,68.02016 h 16.55811 c 0.59716,0.1285 26.29795,-33.42614 2.88,-73.738585 z"
+                    opacity="0.18" id="path668" style="stroke-width:3.77953"></path>
+                <path
+                    d="m 214.88746,149.80572 c -0.8315,-0.11717 -12.93733,-36.98646 21.7474,-70.869926 -8.70048,7.162205 -26.96693,49.749926 -21.7474,70.869926 z M 245.67927,68.451384 240.0969,58.64729 c 0,0 0.91465,-2.728819 6.72756,-3.960945 -6.52346,5.102362 -3.73039,6.285354 -1.14519,13.765039 z"
+                    fill="#ffffff" opacity="0.25" id="path670" style="stroke-width:3.77953"></path>
+                <path
+                    d="m 252.1347,167.70556 c 0,0 -34.50709,0.18142 -44.18646,6.12283 -6.52724,4.0063 -8.06929,13.79528 -7.1811,23.89796 h 102.73512 c 0.88819,-10.0989 -0.65008,-19.89544 -7.1811,-23.90174 -9.67559,-5.93385 -44.18268,-6.11905 -44.18268,-6.11905 z"
+                    fill="#5f5955" stroke-linejoin="round" stroke-width="4.53543" stroke="#010101" id="path672"></path>
+                <path
+                    d="m 252.1347,170.31343 c 0,0 -32.92724,-0.51779 -43.93323,6.2967 -1.39842,0.86551 -2.64567,3.1748 -3.60567,5.25354 0.98646,-1.25102 1.89732,-2.31685 3.35244,-3.2126 9.67559,-5.93008 44.18646,-6.1115 44.18646,-6.1115 0,0 34.51465,0.18142 44.19024,6.11906 1.47779,0.90709 2.23748,2.01071 3.23527,3.28819 0.0983,-0.28725 -1.54582,-4.37669 -4.32378,-6.03213 -10.41638,-5.64283 -43.10173,-5.60126 -43.10173,-5.60126 z"
+                    fill="#ffffff" opacity="0.25" id="path674" style="stroke-width:3.77953"></path>
+            </g>
+            <g id="bn" transform="matrix(0.78338919,0,0,0.78338919,0.92902684,1.1976777)">
+                <path
+                    d="m 25.192,23.015 c -0.165,6.967 -11.758,5.219 -11.516,18.104 l 22.86,0.118 C 34.442,34.795 46.226,16.077 24.605,8.979 v 0 c 0,0 -2.438,-2.6 -5.965,-2.823 l 0.222,3.534 -4.558,4.582 c -2.63,3.145 -8.735,8.378 -7.751,9.611 3.115,5.304 6.33,4.432 6.33,4.432 4.242,-4.544 5.82,-2.09 12.31,-5.3 z"
+                    fill="#5f5955" stroke="#010101" stroke-linejoin="round" stroke-width="1.2" id="path974"></path>
+                <path
+                    d="m 19.32,14.694 c -0.776,0.86 -0.69,1.116 -0.814,2.15 0.806,0.123 1.507,0.24 2.249,0.066 2.38,-1.262 0.075,-3.403 -1.435,-2.216 z"
+                    opacity="0.4" id="path976"></path>
+                <path d="m 9.192,22.166 c -0.85,0.408 -0.999,0.96 -1.057,1.475 0.729,0.419 1.877,-0.125 2.041,-1.431 z"
+                    opacity="0.35" id="path978"></path>
+                <path
+                    d="m 8.19,25.15 c 0,0 0.653,1.137 -1.101,-1.641 0.659,-1.977 8.263,-9.08 12.438,-13.534 L 19.343,6.889 c 0,0 1.069,1.69 1.248,3.468 C 16.2,14.747 8.37,21.19 7.767,23.57 c 0.023,0.674 0.24,1.028 0.423,1.58 z"
+                    fill="#ffffff" opacity="0.25" id="path980"></path>
+                <path
+                    d="m 13.26,28.257 c 2.03,-3.337 8.391,-3.224 11.932,-5.242 0.323,0.102 0.13,1.37 0.24,1.23 0.847,-1.09 2.926,-3.28 0.868,-6.875 0.522,5.958 -13.718,5.591 -15.89,10.305 -0.2,0.436 2.182,0.793 2.85,0.582 z"
+                    opacity="0.18" id="path982"></path>
+                <path
+                    d="M 25.8,23.781 C 24.787,29.594 16.255,29.898 14.812,36.422 17.645,30.016 25.574,30.708 25.8,23.781 Z"
+                    fill="#ffffff" opacity="0.25" id="path984"></path>
+                <path
+                    d="m 18.64,6.156 c 0,0 3.051,0.738 4.904,3.982 20.5,7.154 7.642,27.937 5.789,31.073 l 7.203,0.026 C 34.55,37.994 46.084,15.64 24.606,8.98 22.83,7.91 21.837,6.37 18.64,6.155 Z"
+                    opacity="0.18" id="path986"></path>
+                <path
+                    d="m 25,36.457 c 0,0 -9.13,0.048 -11.691,1.62 -1.727,1.06 -2.135,3.65 -1.9,6.323 h 27.182 c 0.235,-2.672 -0.172,-5.264 -1.9,-6.324 -2.56,-1.57 -11.69,-1.619 -11.69,-1.619 z"
+                    fill="#5f5955" stroke="#010101" stroke-linejoin="round" stroke-width="1.2" id="path988"></path>
+                <path
+                    d="m 25,37.147 c 0,0 -8.712,-0.137 -11.624,1.666 -0.37,0.229 -0.7,0.84 -0.954,1.39 0.261,-0.331 0.503,-0.613 0.887,-0.849 C 15.87,37.783 25,37.734 25,37.734 c 0,0 9.132,0.049 11.692,1.62 0.391,0.24 0.592,0.532 0.856,0.87 0.026,-0.076 -0.409,-1.158 -1.144,-1.596 C 33.648,37.136 25,37.148 25,37.148 Z"
+                    fill="#ffffff" opacity="0.25" id="path990"></path>
+            </g>
+            <g id="br" transform="matrix(0.84246687,0,0,0.84246687,-1.1177673,-1.4608179)">
+                <path
+                    d="m 17.932,20.414 c 4.906,-0.74 9.579,-0.578 14.136,0 M 14.183,9.662 c -1.06,8.767 1.103,10.677 3.748,10.752 L 14.616,38.573 H 35.383 L 32.067,20.414 c 2.645,-0.074 4.808,-1.985 3.749,-10.752 l -3.608,-0.53 -1.073,3.644 -3.142,-0.1 -0.522,-3.754 h -4.945 l -0.52,3.754 -3.143,0.1 -1.073,-3.643 z"
+                    fill="#5f5955" stroke-width="1.2" stroke="#010101" id="path1359"></path>
+                <path
+                    d="m 17.932,20.414 c 6.828,0 13.118,0.408 14.948,16.572 l 2.319,0.386 -3.131,-16.428 C 32.036,20.636 25.98,19.121 17.932,20.414 Z"
+                    opacity="0.18" id="path1361"></path>
+                <path
+                    d="m 14.777,10.219 2.277,-0.286 c -1.914,0.312 -2.313,5.296 -2.313,5.296 -0.238,-0.177 -0.188,-4.903 0.036,-5.01 z M 25.276,9.55 c -1.648,0 -2.52,2.748 -2.52,2.748 l 0.338,-2.729 z m 7.395,0.266 0.934,0.118 c -0.785,0.5 -1.59,1.989 -1.59,1.989 z m -14.199,11.148 2.62,-0.293 c -2.62,0.293 -4.895,13.053 -4.906,13.113 z"
+                    fill="#ffffff" opacity="0.25" id="path1363"></path>
+                <path
+                    d="m 34.013,9.398 c 0.357,6.363 -1.95,10.603 -8.041,10.536 l 4.777,0.563 c 7.523,0.31 5.101,-10.806 5.068,-10.835 z"
+                    opacity="0.18" id="path1365"></path>
+                <path
+                    d="m 25,36.457 c 0,0 -9.13,0.048 -11.691,1.62 -1.727,1.06 -2.135,3.65 -1.9,6.323 h 27.182 c 0.235,-2.672 -0.172,-5.264 -1.9,-6.324 -2.56,-1.57 -11.69,-1.619 -11.69,-1.619 z"
+                    fill="#5f5955" stroke-linejoin="round" stroke-width="1.2" stroke="#010101" id="path1367"></path>
+                <path
+                    d="m 25,37.146 c 0,0 -8.712,-0.137 -11.624,1.666 -0.37,0.229 -0.7,0.84 -0.954,1.39 0.261,-0.331 0.503,-0.613 0.887,-0.849 C 15.87,37.782 25,37.733 25,37.733 c 0,0 9.132,0.049 11.692,1.62 0.391,0.24 0.592,0.532 0.856,0.87 0.025,-0.076 -0.409,-1.158 -1.144,-1.596 C 33.648,37.135 25,37.147 25,37.147 Z"
+                    fill="#ffffff" opacity="0.25" id="path1369"></path>
+            </g>
+            <g id="bp" transform="matrix(0.82029849,0,0,0.82029849,-0.5635331,-0.50702576)">
+                <path
+                    d="m 21.503,27.594 h 6.994 M 19,17.508 c 0,1.732 0.712,3.387 1.966,4.587 l -3.65,2.1 0.43,3.399 h 4.306 c -0.794,3.559 -2.755,7.33 -5.062,8.617 -2.307,1.287 -5.3,3.097 -4.843,8.189 h 25.706 c 0.457,-5.092 -2.535,-6.902 -4.842,-8.189 -2.307,-1.286 -4.268,-5.058 -5.062,-8.617 h 4.306 l 0.43,-3.4 -3.65,-2.099 a 6.352,6.352 0 0 0 1.966,-4.587 c 0,-3.367 -2.628,-5.912 -6,-5.912 -3.373,0 -6.002,2.545 -6.001,5.912 z"
+                    fill="#5f5955" stroke-linejoin="round" stroke-width="1.2" stroke="#010101" id="path1131"></path>
+                <path
+                    d="m 24.962,11.537 c 1.17,-0.459 9.527,5.906 0.647,10.773 l 4.512,2.1 -0.562,3.125 h 2.659 l 0.428,-3.399 -3.65,-2.1 c 1.253,-1.2 1.962,-2.58 1.964,-4.312 -0.468,-5.416 -5.998,-6.186 -5.998,-6.186 z m -2.949,15.998 c 4.503,7.934 9.47,9.994 13.074,9.965 L 32.972,36.153 C 30.897,34.663 28.24,31.295 27.91,27.535 Z"
+                    opacity="0.18" id="path1133"></path>
+                <path
+                    d="m 21.983,22.213 -1.647,2.347 -2.356,-0.014 4.013,-2.324 z m 2.324,-9.946 c -2.542,0.138 -5.73,3.173 -4.385,6.918 l 0.199,0.643 c -0.33,-3.489 2.127,-7.116 4.186,-7.561 z m -6.444,25.358 c -3.984,2.305 -5.117,6.14 -5.117,6.14 -0.01,0 -0.548,-4.175 3.956,-6.654 4.504,-2.479 4.822,-6.15 5.86,-8.893 -0.636,3.704 -0.715,7.102 -4.699,9.407 z"
+                    fill="#ffffff" opacity="0.25" id="path1135"></path>
+            </g>
+        </svg>
+    </div>
+    <div id="cm-chessboard-markers" style="display: none;"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+        <!--
+License: Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Author: shaack (https://shaack.com)
+-->
+
+        <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <title>cm-chessboard markers</title>
+            <desc>Markers for cm-chessboard (https://shaack.com/projekte/cm-chessboard/)</desc>
+            <g id="markerFrame" transform="translate(2.000000, 2.000000)" fill="#000000" fill-opacity="0">
+                <path
+                    d="M2.66453526e-15,10.5882353 L2.66453526e-15,2.11764706 C2.66453526e-15,1.41176471 0.176470588,0.882352941 0.529411765,0.529411765 C0.882352941,0.176470588 1.41176471,-2.84217094e-14 2.11764706,-2.84217094e-14 L10.5882353,-2.84217094e-14"
+                    id="Path"></path>
+                <path
+                    d="M25.4117647,36 L25.4117647,27.5294118 C25.4117647,26.8235294 25.5882353,26.2941176 25.9411765,25.9411765 C26.2941176,25.5882353 26.8235294,25.4117647 27.5294118,25.4117647 L36,25.4117647"
+                    id="Path"
+                    transform="translate(30.705882, 30.705882) rotate(-180.000000) translate(-30.705882, -30.705882) ">
+                </path>
+                <path
+                    d="M0,36 L0,27.5294118 C0,26.8235294 0.176470588,26.2941176 0.529411765,25.9411765 C0.882352941,25.5882353 1.41176471,25.4117647 2.11764706,25.4117647 L10.5882353,25.4117647"
+                    id="Path"
+                    transform="translate(5.294118, 30.705882) rotate(-90.000000) translate(-5.294118, -30.705882) ">
+                </path>
+                <path
+                    d="M25.4117647,10.5882353 L25.4117647,2.11764706 C25.4117647,1.41176471 25.5882353,0.882352941 25.9411765,0.529411765 C26.2941176,0.176470588 26.8235294,0 27.5294118,0 L36,0"
+                    id="Path"
+                    transform="translate(30.705882, 5.294118) rotate(-270.000000) translate(-30.705882, -5.294118) ">
+                </path>
+            </g>
+            <g id="markerCircle" fill="#000000" fill-opacity="0">
+                <circle cx="20" cy="20" r="18"></circle>
+            </g>
+            <g id="markerDot">
+                <circle cx="20" cy="20" r="7"></circle>
+            </g>
+            <g id="markerBevel">
+                <path
+                    d="M-1.77635684e-15,8.8817842e-16 L9,8.8817842e-16 C7.43502116,0.842866191 5.49543951,2.27321471 3.86541703,3.91660579 C2.21006344,5.58553575 0.86967521,7.47275765 -1.77635684e-15,9 L-1.77635684e-15,8.8817842e-16 Z">
+                </path>
+                <path
+                    d="M30.9995741,0.000425886354 L40.0194705,0.000425886354 C38.4510319,0.843292078 36.5071624,2.2736406 34.8735365,3.91703168 C33.2145234,5.58596164 31.8711719,7.47318354 30.9995741,9.00042589 L30.9995741,0.000425886354 Z"
+                    transform="translate(35.509522, 4.500426) rotate(-270.000000) translate(-35.509522, -4.500426) ">
+                </path>
+                <path
+                    d="M30.9995741,31.0004259 L40.0194705,31.0004259 C38.4510319,31.8432921 36.5071624,33.2736406 34.8735365,34.9170317 C33.2145234,36.5859616 31.8711719,38.4731835 30.9995741,40.0004259 L30.9995741,31.0004259 Z"
+                    transform="translate(35.509522, 35.500426) rotate(-180.000000) translate(-35.509522, -35.500426) ">
+                </path>
+                <path
+                    d="M-0.000425886354,31.0004259 L9.01947047,31.0004259 C7.45103192,31.8432921 5.50716243,33.2736406 3.87353645,34.9170317 C2.21452335,36.5859616 0.87117192,38.4731835 -0.000425886354,40.0004259 L-0.000425886354,31.0004259 Z"
+                    transform="translate(4.509522, 35.500426) rotate(-90.000000) translate(-4.509522, -35.500426) ">
+                </path>
+            </g>
+            <g id="markerSquare">
+                <rect x="0" y="0" width="40" height="40"></rect>
+            </g>
+        </svg>
+    </div>
+    <div id="cm-chessboard-arrows" style="display: none;"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+        <!--
+License: Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Author: Barak Michener
+-->
+
+        <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <title>cm-chessboard arrowheads</title>
+            <desc>Arrowheads for cm-chessboard (https://shaack.com/projekte/cm-chessboard/)</desc>
+            <g id="arrowDefault" transform="matrix(5.1931792,0,0,5.1931792,3.5980168,-0.83225447)">
+                <path
+                    d="M 0.535156,0.398438 C 0.398438,0.507812 0.316406,0.671875 0.3125,0.847656 0.316406,1.02344 0.398438,1.1875 0.535156,1.29688 L 3.01172,3.35938 3.72266,4.01563 3.01172,4.64453 0.535156,6.67969 C 0.394531,6.79297 0.3125,6.96094 0.3125,7.13672 c 0,0.17578 0.082031,0.34375 0.222656,0.45703 0.328125,0.25781 0.792974,0.25781 1.117184,0 L 5.45703,4.46094 C 5.59766,4.34766 5.68359,4.17969 5.69141,4 5.69141,3.82031 5.60547,3.65234 5.45703,3.54297 L 1.64453,0.394531 C 1.31641,0.148438 0.859375,0.148438 0.535156,0.398438 Z m 0,0"
+                    class="head-fill"></path>
+            </g>
+            <g id="arrowPointy">
+                <path d="M 20,20 5,5 35,20 5,35 Z" class="head-fill"></path>
+            </g>
+        </svg>
+    </div>
 </body>
 
 </html>
