@@ -146,20 +146,20 @@
     <script src="https://urobot2011.github.io/SaveMartin/MartyBot/chess/chess.js"></script>
     <script src="http://urobot2011.iptime.org/Marty/MartyEngine-main/MartyEngine-main/MartyL5.js"></script>
     <script type="module">
-        import { INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE } from "./src/Chessboardmmm.js";
-        import { MARKER_TYPE, Markers } from "./src/Markersmmm.js";
-        import { ARROW_TYPE, Arrows } from "./src/Arrowsmmm.js"
-        import { PromotionDialog } from "./src/PromotionDialogmmm.js";
-        import { Accessibility } from "./src/Accessibilitymmm.js";
-        var CHESSBOARD = {
-            INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE,
-            MARKER_TYPE, Markers,
-            ARROW_TYPE, Arrows,
-            PromotionDialog,
-            Accessibility
-        };
-        window['CHESSBOARD'] = CHESSBOARD;
-    </script>
+    import {INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE} from "./lib/cm-chessboard/src/cm-chessboard/Chessboard.js";
+    import {MARKER_TYPE, Markers} from "./cm-chessboard/src/cm-chessboard/extensions/markers/Markers.js";
+    import {ARROW_TYPE, Arrows} from "./cm-chessboard/src/cm-chessboard/extensions/arrows/Arrows.js"
+    import {PromotionDialog} from "./cm-chessboard/src/cm-chessboard/extensions/promotion-dialog/PromotionDialog.js";
+    import {Accessibility} from "./cm-chessboard/src/cm-chessboard/extensions/accessibility/Accessibility.js";
+    var CHESSBOARD = {
+        INPUT_EVENT_TYPE, COLOR, Chessboard, BORDER_TYPE, SQUARE_SELECT_TYPE, 
+        MARKER_TYPE, Markers, 
+        ARROW_TYPE, Arrows, 
+        PromotionDialog,
+        Accessibility
+    };
+    window['CHESSBOARD'] = CHESSBOARD;
+</script>
     <script>
         var board;
         var game;
