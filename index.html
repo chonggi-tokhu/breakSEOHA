@@ -343,34 +343,6 @@
     <script>
 
       
-      var checkforgameover1;
-      checkforgameover1 = false;
-      
-      $("#userlevel").change( function () {
-        var kumkum1 = document.getElementById("userlevel").value;
-        if (kumkum1 == "pyongsin") {
-          levelx = 1;
-        }
-        if (kumkum1 == "grandmaster") {
-          levelx = 5;
-        }
-        if (kumkum1 == "hasu") {
-          levelx = 2;
-        }
-        if (kumkum1 == "middle") {
-          levelx = 3;
-        }
-        if (kumkum1 == "advance") {
-          levelx = 4;
-        }
-      });
-      
-      var scorew = 0;
-      var scorel = 0;
-      $("#scoreblock #scorew").html(localStorage.getItem("yourw"));
-      $("#scoreblock #scorel").html(localStorage.getItem("yourl"));
-
-
      
       
 var board;
@@ -397,10 +369,6 @@ window.onload = function(){
     } = window['CHESSBOARD'];
     game = new Chess();
     Marty = new MartyEngine();
-
-    $martycolor.change(function(){
-        martycolor = $(this).val();
-        mycolor = martycolor == 'b' ? 'white' : 'black';
     board = new Chessboard(document.getElementById("myBoard"), {
         position: game.fen(),
         assetsUrl: "./lib/cm-chessboard/assets/",
@@ -427,7 +395,12 @@ window.onload = function(){
                 visuallyHidden: true
             }
         }]
-    });
+    });};
+
+    $martycolor.change(function(){
+        martycolor = $(this).val();
+        mycolor = martycolor == 'b' ? 'white' : 'black';
+    
     });
 
 
