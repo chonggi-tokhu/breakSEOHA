@@ -354,32 +354,7 @@
       $("#scoreblock #scorel").html(localStorage.getItem("yourl"));
 
 
-      function darkmode99(event) {
-        var btag = document.getElementById("body734");
-        var dtag1 = document.getElementById("MartySay");
-        btag.classList.toggle("dark");
-        dtag1.classList.toggle("dark");
-      }
-      window.onclick = function (event) {
-        var btag = document.getElementById("body734");
-        var dtag1 = document.getElementById("MartySay");
-        if (!target.matches(".checkbox")) {
-          var darktheme = document.getElementById("body734");
-          var i;
-          for (i = 0; i < darktheme.length; i++) {
-            var darkthemexxx = darktheme[i];
-            if (darkthemexxx.classList.contains("dark")) {
-              darkthemexxx.classList.remove("dark");
-            }
-          }
-          for (i = 0; i < dtag1.length; i++) {
-            var darkthemexxx2 = dtag1[i];
-            if (darkthemexxx2.classList.contains("dark")) {
-              darkthemexxx2.classList.remove("dark");
-            }
-          }
-        }
-      }
+     
       var board;
       var game = new Chess();
       var $start = $('#start');
